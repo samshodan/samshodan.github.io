@@ -2,7 +2,7 @@
 title: "Cloud Migration Strategy: A Complete Guide to Successful Migration"
 excerpt: "Learn how to plan and execute a successful cloud migration with proven strategies, best practices, and real-world insights from enterprise migrations."
 date: "2024-01-18"
-author: "Michael Rodriguez"
+author: "Samshodan Team"
 category: "Cloud Engineering"
 tags: ["Cloud Migration", "AWS", "Azure", "Cloud Strategy", "Digital Transformation"]
 image: "/images/blog/cloud-migration.jpg"

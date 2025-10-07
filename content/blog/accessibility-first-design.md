@@ -2,7 +2,7 @@
 title: "Building Accessibility-First Digital Experiences: A Complete Guide"
 excerpt: "Learn how to create inclusive digital experiences that work for everyone, with practical tips for implementing accessibility from the ground up."
 date: "2024-02-08"
-author: "Marcus Rodriguez"
+author: "Samshodan Team"
 category: "Experience Transformation"
 tags: ["Accessibility", "Inclusive Design", "WCAG", "User Experience"]
 image: "/images/blog/accessibility-design.jpg"

@@ -2,7 +2,7 @@
 title: "DevOps Automation Best Practices: Streamlining Development and Operations"
 excerpt: "Discover proven DevOps automation strategies that accelerate delivery, improve reliability, and reduce operational overhead in modern software development."
 date: "2024-02-05"
-author: "Robert Chen"
+author: "Samshodan Team"
 category: "Application Management Services"
 tags: ["DevOps", "Automation", "CI/CD", "Infrastructure as Code", "Deployment"]
 image: "/images/blog/devops-automation.jpg"

@@ -2,7 +2,7 @@
 title: "Application Monitoring Strategies: Ensuring Peak Performance and Reliability"
 excerpt: "Learn comprehensive application monitoring strategies that help you detect issues early, optimize performance, and maintain high availability in production environments."
 date: "2024-01-25"
-author: "Jennifer Park"
+author: "Samshodan Team"
 category: "Application Management Services"
 tags: ["Application Monitoring", "Performance", "Observability", "DevOps", "SRE"]
 image: "/images/blog/application-monitoring.jpg"

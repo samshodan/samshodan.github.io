@@ -2,7 +2,7 @@
 title: "E-commerce Conversion Optimization: Strategies That Drive Sales"
 excerpt: "Discover proven strategies to optimize your e-commerce platform for higher conversions, better user experience, and increased revenue."
 date: "2024-01-30"
-author: "Rachel Thompson"
+author: "Samshodan Team"
 category: "Digital Commerce"
 tags: ["E-commerce", "Conversion Optimization", "UX", "Sales", "Digital Marketing"]
 image: "/images/blog/ecommerce-conversion.jpg"

@@ -2,7 +2,7 @@
 title: "Microservices Architecture: A Complete Guide to Modern Software Design"
 excerpt: "Discover how microservices architecture can transform your software development process, improve scalability, and accelerate deployment cycles."
 date: "2024-01-22"
-author: "David Kim"
+author: "Samshodan Team"
 category: "Digital Engineering"
 tags: ["Microservices", "Software Architecture", "Scalability", "DevOps"]
 image: "/images/blog/microservices-architecture.jpg"

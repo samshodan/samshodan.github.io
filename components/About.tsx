@@ -8,7 +8,7 @@ export default function About() {
     const [animatedStats, setAnimatedStats] = useState([0, 0, 0, 0])
     const statsRef = useRef<HTMLDivElement>(null)
 
-    const finalStats = useMemo(() => [10, 500, 50, 25], []) // Final values for animation
+    const finalStats = useMemo(() => [10, 100, 20, 15], []) // Final values for animation
 
     useEffect(() => {
         const animateCounters = () => {
@@ -58,9 +58,9 @@ export default function About() {
     }, [finalStats])
     const stats = [
         { label: 'Years of Experience', value: '10+', icon: Award, animatedValue: animatedStats[0] },
-        { label: 'Successful Projects', value: '500+', icon: TrendingUp, animatedValue: animatedStats[1] },
-        { label: 'Happy Clients', value: '50+', icon: Users, animatedValue: animatedStats[2] },
-        { label: 'Team Members', value: '25+', icon: Target, animatedValue: animatedStats[3] }
+        { label: 'Successful Projects', value: '100+', icon: TrendingUp, animatedValue: animatedStats[1] },
+        { label: 'Happy Clients', value: '20+', icon: Users, animatedValue: animatedStats[2] },
+        { label: 'Team Members', value: '15+', icon: Target, animatedValue: animatedStats[3] }
     ]
 
     const values = [

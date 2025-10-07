@@ -2,7 +2,7 @@
 title: "Kubernetes Best Practices: Production-Ready Container Orchestration"
 excerpt: "Master Kubernetes with proven best practices for security, scalability, and reliability in production environments. Learn from real-world implementations."
 date: "2024-02-12"
-author: "Sarah Kim"
+author: "Samshodan Team"
 category: "Cloud Engineering"
 tags: ["Kubernetes", "Container Orchestration", "DevOps", "Cloud Native", "Microservices"]
 image: "/images/blog/kubernetes-best-practices.jpg"

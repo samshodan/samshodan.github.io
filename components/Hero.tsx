@@ -107,7 +107,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-500 text-sm">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span>500+ Projects Delivered</span>
+                <span>100+ Projects Delivered</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>

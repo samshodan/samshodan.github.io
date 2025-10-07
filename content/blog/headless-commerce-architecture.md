@@ -2,7 +2,7 @@
 title: "Headless Commerce Architecture: The Future of E-commerce Flexibility"
 excerpt: "Explore how headless commerce architecture enables faster development, better performance, and unlimited customization for modern e-commerce experiences."
 date: "2024-02-20"
-author: "Alex Chen"
+author: "Samshodan Team"
 category: "Digital Commerce"
 tags: ["Headless Commerce", "E-commerce Architecture", "API-First", "JAMstack", "Performance"]
 image: "/images/blog/headless-commerce.jpg"

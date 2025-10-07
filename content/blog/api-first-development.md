@@ -2,7 +2,7 @@
 title: "API-First Development: Building Scalable Digital Ecosystems"
 excerpt: "Learn how API-first development accelerates innovation, improves collaboration, and creates more flexible, scalable software architectures."
 date: "2024-02-15"
-author: "Elena Vasquez"
+author: "Samshodan Team"
 category: "Digital Engineering"
 tags: ["API Development", "Software Architecture", "REST", "GraphQL", "API Design"]
 image: "/images/blog/api-first-development.jpg"

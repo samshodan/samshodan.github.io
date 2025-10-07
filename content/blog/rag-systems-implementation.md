@@ -2,7 +2,7 @@
 title: "Building RAG Systems: A Complete Guide to Retrieval Augmented Generation"
 excerpt: "Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications."
 date: "2024-01-12"
-author: "Dr. Lisa Wang"
+author: "Samshodan Team"
 category: "AI Solutions"
 tags: ["RAG", "AI", "LLM", "Vector Databases", "Machine Learning", "NLP"]
 image: "/images/blog/rag-systems.jpg"

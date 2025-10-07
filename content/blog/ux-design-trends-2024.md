@@ -2,7 +2,7 @@
 title: "Top UX Design Trends Shaping Digital Experiences in 2024"
 excerpt: "Discover the latest UX design trends that are transforming how users interact with digital products, from AI-powered personalization to inclusive design practices."
 date: "2024-01-15"
-author: "Sarah Chen"
+author: "Samshodan Team"
 category: "Experience Transformation"
 tags: ["UX Design", "Design Trends", "User Experience", "Digital Design"]
 image: "/images/blog/ux-trends-2024.jpg"
