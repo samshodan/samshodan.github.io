@@ -129,7 +129,7 @@ export default function ExperienceTransformationPage() {
                                     <div className="text-purple-100">Engagement Increase</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-3xl font-bold mb-2">50+</div>
+                                    <div className="text-3xl font-bold mb-2">20+</div>
                                     <div className="text-purple-100">Experiences Transformed</div>
                                 </div>
                                 <div className="text-center">

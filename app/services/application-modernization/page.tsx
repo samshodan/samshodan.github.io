@@ -155,7 +155,7 @@ export default function ApplicationModernizationPage() {
                   <div className="text-orange-100">Uptime Achieved</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">100+</div>
+                  <div className="text-3xl font-bold mb-2">20+</div>
                   <div className="text-orange-100">Apps Modernized</div>
                 </div>
               </div>

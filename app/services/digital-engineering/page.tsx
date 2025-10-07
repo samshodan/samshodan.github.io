@@ -129,7 +129,7 @@ export default function DigitalEngineeringPage() {
                   <div className="text-blue-100">System Uptime</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">100+</div>
+                  <div className="text-3xl font-bold mb-2">25+</div>
                   <div className="text-blue-100">Applications Built</div>
                 </div>
                 <div className="text-center">

@@ -239,7 +239,7 @@ export default function ApplicationDevelopmentPage() {
             <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">50+</div>
+                  <div className="text-3xl font-bold mb-2">25+</div>
                   <div className="text-blue-100">Applications Built</div>
                 </div>
                 <div className="text-center">
@@ -251,7 +251,7 @@ export default function ApplicationDevelopmentPage() {
                   <div className="text-blue-100">Support Available</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">5+</div>
+                  <div className="text-3xl font-bold mb-2">10+</div>
                   <div className="text-blue-100">Years Experience</div>
                 </div>
               </div>

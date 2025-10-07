@@ -137,7 +137,7 @@ export default function CloudEngineeringPage() {
                   <div className="text-cyan-100">Faster Scaling</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">200+</div>
+                  <div className="text-3xl font-bold mb-2">10+</div>
                   <div className="text-cyan-100">Cloud Migrations</div>
                 </div>
               </div>

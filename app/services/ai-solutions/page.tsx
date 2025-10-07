@@ -129,7 +129,7 @@ export default function AISolutionsPage() {
                   <div className="text-indigo-100">Efficiency Increase</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">100+</div>
+                  <div className="text-3xl font-bold mb-2">10+</div>
                   <div className="text-indigo-100">AI Models Deployed</div>
                 </div>
                 <div className="text-center">

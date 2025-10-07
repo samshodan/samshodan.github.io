@@ -129,7 +129,7 @@ export default function DigitalCommercePage() {
                   <div className="text-green-100">Sales Increase</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">50+</div>
+                  <div className="text-3xl font-bold mb-2">20+</div>
                   <div className="text-green-100">Commerce Platforms</div>
                 </div>
                 <div className="text-center">
