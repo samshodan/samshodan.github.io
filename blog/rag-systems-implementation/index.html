@@ -1,0 +1,1294 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/d5dbd49fb37d0aa9.css" crossorigin="" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-79118b234858d99b.js" crossorigin=""/><script src="/_next/static/chunks/fd9d1056-276a3de5a921843c.js" async="" crossorigin=""></script><script src="/_next/static/chunks/472-9368d87a6d5647fa.js" async="" crossorigin=""></script><script src="/_next/static/chunks/main-app-faac3d6bb451447a.js" async="" crossorigin=""></script><script src="/_next/static/chunks/350-ce2a8f3d46727efe.js" async=""></script><script src="/_next/static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js" async=""></script><title>Building RAG Systems: A Complete Guide to Retrieval Augmented Generation | Samshodan Blog</title><meta name="description" content="Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications."/><meta name="author" content="Samshodan"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="keywords" content="RAG, AI, LLM, Vector Databases, Machine Learning, NLP"/><meta name="robots" content="index, follow"/><link rel="canonical" href="/blog/rag-systems-implementation"/><meta property="og:title" content="Building RAG Systems: A Complete Guide to Retrieval Augmented Generation"/><meta property="og:description" content="Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications."/><meta property="og:type" content="article"/><meta property="article:published_time" content="2024-01-12"/><meta property="article:author" content="Samshodan Team"/><meta property="article:tag" content="RAG"/><meta property="article:tag" content="AI"/><meta property="article:tag" content="LLM"/><meta property="article:tag" content="Vector Databases"/><meta property="article:tag" content="Machine Learning"/><meta property="article:tag" content="NLP"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Samshodan - AI Products &amp; Developer Tools"/><meta name="twitter:description" content="We create innovative AI-powered products and developer tools that enhance productivity and drive innovation."/><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Samshodan","description":"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.","url":"https://yourusername.github.io/samshodan-website","logo":"https://yourusername.github.io/samshodan-website/logo.png","contactPoint":{"@type":"ContactPoint","telephone":"+1-555-123-4567","contactType":"customer service","email":"hello@samshodan.com"},"address":{"@type":"PostalAddress","addressLocality":"Global","addressCountry":"Remote"},"sameAs":["https://linkedin.com/company/samshodan","https://github.com/samshodan"],"foundingDate":"2014","numberOfEmployees":"25-50","industry":"Information Technology","services":["AI Chatbot Development","API Portal Development","Application Development","AI Chatbot Development","API Portal Solutions","Developer Tools"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Samshodan","url":"https://yourusername.github.io/samshodan-website","description":"Next-Generation Solutions for Modern Business","publisher":{"@type":"Organization","name":"Samshodan"},"potentialAction":{"@type":"SearchAction","target":"https://yourusername.github.io/samshodan-website/search?q={search_term_string}","query-input":"required name=search_term_string"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Ultron AI Chatbot","description":"Intelligent conversational AI powered by RAG agents with configurable backend LLM models including AWS Bedrock, OpenAI, and ChatGPT.","url":"https://yourusername.github.io/samshodan-website/products/ultron","applicationCategory":"BusinessApplication","operatingSystem":"Web-based","offers":{"@type":"Offer","price":"Contact for pricing","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"Samshodan"},"featureList":["RAG (Retrieval-Augmented Generation) agents","Multi-LLM backend support","Configurable conversation flows","Real-time analytics","Enterprise security"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Specly API Portal","description":"Comprehensive developer portal for cataloging APIs, managing teams, and organizing development resources in structured folders.","url":"https://yourusername.github.io/samshodan-website/products/specly","applicationCategory":"DeveloperApplication","operatingSystem":"Web-based","offers":{"@type":"Offer","price":"Contact for pricing","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"Samshodan"},"featureList":["API specification management","Team collaboration tools","Interactive documentation","Version control","Code generation"]}</script><script src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js" crossorigin="" noModule=""></script></head><body class="antialiased"><main><header class="fixed w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50"><nav class="container-max px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center py-4"><div class="flex items-center"><a class="text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors duration-200" href="/">Samshodan</a></div><div class="hidden md:flex items-center space-x-8"><div class="relative group"><a href="/" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Home</a></div><div class="relative group"><a href="/products" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Products</a><div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"><div class="py-2"><a href="/products/ultron" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200 whitespace-nowrap">Ultron AI Chatbot</a><a href="/products/specly" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200 whitespace-nowrap">Specly API Portal</a></div></div></div><div class="relative group"><a href="/blog" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Blog</a></div><div class="relative group"><a href="/about" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">About</a></div><div class="relative group"><a href="/contact" class="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200">Contact</a></div><a class="btn-primary" href="/contact/">Get Started</a></div><div class="md:hidden"><button class="text-gray-700 hover:text-primary-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button></div></div></nav></header><article class="pt-32 pb-16"><div class="container-max px-4 sm:px-6 lg:px-8"><nav class="mb-8"><a class="inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors" href="/blog/"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to Blog</a></nav><header class="max-w-4xl mx-auto text-center mb-12"><div class="mb-4"><span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">AI Solutions</span></div><h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Building RAG Systems: A Complete Guide to Retrieval Augmented Generation</h1><p class="text-xl text-gray-600 mb-8">Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications.</p><div class="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Samshodan Team</span></div><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span>January 11, 2024</span></div><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><span>5 min read</span></div></div></header><div class="max-w-4xl mx-auto"><div class="prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h1:text-3xl prose-h1:mb-6 prose-h1:mt-8 prose-h2:text-2xl prose-h2:mb-4 prose-h2:mt-10 prose-h3:text-xl prose-h3:mb-3 prose-h3:mt-8 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-700 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:my-6 prose-ol:my-6 prose-ul:pl-6 prose-ol:pl-6 prose-li:text-gray-700 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:pl-6 prose-blockquote:italic prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto prose-pre:my-6">
+<h1 class="text-3xl font-bold text-gray-900 mb-6 mt-8">Building RAG Systems: A Complete Guide to Retrieval Augmented Generation</h1>
+
+<p class="text-gray-700 leading-relaxed mb-4">Retrieval Augmented Generation (RAG) has emerged as one of the most powerful patterns for building AI applications that need to work with proprietary or up-to-date information. By combining the reasoning capabilities of large language models with the precision of information retrieval, RAG systems enable organizations to build AI applications that are both knowledgeable and grounded in factual data.</p>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Understanding RAG Architecture</h2>
+
+<p class="text-gray-700 leading-relaxed mb-4">RAG systems work by retrieving relevant information from a knowledge base and using that information to augment the context provided to a language model, resulting in more accurate and contextually relevant responses.</p>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-mermaid">
+graph TB
+    A[User Query] --> B[Query Processing]
+    B --> C[Vector Search]
+    C --> D[Knowledge Base]
+    D --> E[Retrieved Documents]
+    E --> F[Context Assembly]
+    F --> G[LLM Processing]
+    G --> H[Generated Response]
+    
+    I[Document Ingestion] --> J[Text Chunking]
+    J --> K[Embedding Generation]
+    K --> L[Vector Storage]
+    L --> D
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Core Components of RAG Systems</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Document Processing and Ingestion</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">The foundation of any RAG system is a well-structured knowledge base. Here's how to build an effective document processing pipeline:</p>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-python">
+# document_processor.py
+import asyncio
+import hashlib
+from typing import List, Dict, Optional
+from dataclasses import dataclass
+from pathlib import Path
+import tiktoken
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import (
+    PyPDFLoader, 
+    UnstructuredMarkdownLoader,
+    TextLoader,
+    CSVLoader
+)
+
+@dataclass
+class Document:
+    content: str
+    metadata: Dict
+    source: str
+    chunk_id: str
+    embedding: Optional[List[float]] = None
+
+class DocumentProcessor:
+    def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            length_function=len,
+            separators=["\n\n", "\n", " ", ""]
+        )
+        self.tokenizer = tiktoken.get_encoding("cl100k_base")
+    
+    async def process_file(self, file_path: Path) -> List[Document]:
+        """Process a single file and return chunked documents"""
+        
+        # Load document based on file type
+        loader = self._get_loader(file_path)
+        raw_documents = loader.load()
+        
+        processed_docs = []
+        
+        for doc in raw_documents:
+            # Clean and preprocess text
+            cleaned_content = self._clean_text(doc.page_content)
+            
+            # Split into chunks
+            chunks = self.text_splitter.split_text(cleaned_content)
+            
+            for i, chunk in enumerate(chunks):
+                # Generate unique chunk ID
+                chunk_id = self._generate_chunk_id(file_path, i, chunk)
+                
+                # Create document with metadata
+                processed_doc = Document(
+                    content=chunk,
+                    metadata={
+                        **doc.metadata,
+                        'source_file': str(file_path),
+                        'chunk_index': i,
+                        'total_chunks': len(chunks),
+                        'token_count': len(self.tokenizer.encode(chunk)),
+                        'processed_at': datetime.utcnow().isoformat()
+                    },
+                    source=str(file_path),
+                    chunk_id=chunk_id
+                )
+                
+                processed_docs.append(processed_doc)
+        
+        return processed_docs
+    
+    def _get_loader(self, file_path: Path):
+        """Get appropriate document loader based on file extension"""
+        suffix = file_path.suffix.lower()
+        
+        loaders = {
+            '.pdf': PyPDFLoader,
+            '.md': UnstructuredMarkdownLoader,
+            '.txt': TextLoader,
+            '.csv': CSVLoader
+        }
+        
+        if suffix not in loaders:
+            raise ValueError(f"Unsupported file type: {suffix}")
+        
+        return loaders[suffix](str(file_path))
+    
+    def _clean_text(self, text: str) -> str:
+        """Clean and normalize text content"""
+        import re
+        
+        # Remove excessive whitespace
+        text = re.sub(r'\s+', ' ', text)
+        
+        # Remove special characters that might interfere with processing
+        text = re.sub(r'[^\w\s\-.,!?;:()\[\]{}"\']', '', text)
+        
+        # Normalize quotes
+        text = text.replace('"', '"').replace('"', '"')
+        text = text.replace(''', "'").replace(''', "'")
+        
+        return text.strip()
+    
+    def _generate_chunk_id(self, file_path: Path, chunk_index: int, content: str) -> str:
+        """Generate unique identifier for document chunk"""
+        source_hash = hashlib.md5(str(file_path).encode()).hexdigest()[:8]
+        content_hash = hashlib.md5(content.encode()).hexdigest()[:8]
+        return f"{source_hash}_{chunk_index}_{content_hash}"
+
+# Advanced document processing with metadata extraction
+class AdvancedDocumentProcessor(DocumentProcessor):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.metadata_extractors = {
+            'entities': self._extract_entities,
+            'keywords': self._extract_keywords,
+            'summary': self._generate_summary
+        }
+    
+    async def process_file_with_metadata(self, file_path: Path) -> List[Document]:
+        """Process file with enhanced metadata extraction"""
+        documents = await self.process_file(file_path)
+        
+        # Enhance documents with extracted metadata
+        for doc in documents:
+            for extractor_name, extractor_func in self.metadata_extractors.items():
+                try:
+                    extracted_data = await extractor_func(doc.content)
+                    doc.metadata[extractor_name] = extracted_data
+                except Exception as e:
+                    print(f"Failed to extract {extractor_name}: {e}")
+        
+        return documents
+    
+    async def _extract_entities(self, text: str) -> List[Dict]:
+        """Extract named entities from text"""
+        import spacy
+        
+        # Load spaCy model (install with: python -m spacy download en_core_web_sm)
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(text)
+        
+        entities = []
+        for ent in doc.ents:
+            entities.append({
+                'text': ent.text,
+                'label': ent.label_,
+                'start': ent.start_char,
+                'end': ent.end_char
+            })
+        
+        return entities
+    
+    async def _extract_keywords(self, text: str) -> List[str]:
+        """Extract keywords using TF-IDF"""
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        import numpy as np
+        
+        # Simple keyword extraction using TF-IDF
+        vectorizer = TfidfVectorizer(
+            max_features=10,
+            stop_words='english',
+            ngram_range=(1, 2)
+        )
+        
+        try:
+            tfidf_matrix = vectorizer.fit_transform([text])
+            feature_names = vectorizer.get_feature_names_out()
+            scores = tfidf_matrix.toarray()[0]
+            
+            # Get top keywords
+            top_indices = np.argsort(scores)[-5:][::-1]
+            keywords = [feature_names[i] for i in top_indices if scores[i] > 0]
+            
+            return keywords
+        except:
+            return []
+    
+    async def _generate_summary(self, text: str) -> str:
+        """Generate summary of the text chunk"""
+        # Simple extractive summarization
+        sentences = text.split('.')
+        if len(sentences) <= 2:
+            return text
+        
+        # Return first two sentences as summary
+        return '. '.join(sentences[:2]) + '.'
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Embedding Generation and Vector Storage</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-python">
+# embedding_service.py
+import asyncio
+import numpy as np
+from typing import List, Dict, Optional
+import openai
+from sentence_transformers import SentenceTransformer
+import pinecone
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, VectorParams, PointStruct
+
+class EmbeddingService:
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+        self.model_name = model_name
+        self.model = SentenceTransformer(model_name)
+        self.dimension = self.model.get_sentence_embedding_dimension()
+    
+    async def generate_embeddings(self, texts: List[str]) -> List[List[float]]:
+        """Generate embeddings for a list of texts"""
+        # Use sentence-transformers for local embedding generation
+        embeddings = self.model.encode(texts, convert_to_tensor=False)
+        return embeddings.tolist()
+    
+    async def generate_single_embedding(self, text: str) -> List[float]:
+        """Generate embedding for a single text"""
+        embedding = self.model.encode([text], convert_to_tensor=False)
+        return embedding[0].tolist()
+
+class OpenAIEmbeddingService(EmbeddingService):
+    def __init__(self, api_key: str, model: str = "text-embedding-ada-002"):
+        self.client = openai.OpenAI(api_key=api_key)
+        self.model = model
+        self.dimension = 1536  # Ada-002 dimension
+    
+    async def generate_embeddings(self, texts: List[str]) -> List[List[float]]:
+        """Generate embeddings using OpenAI API"""
+        response = await self.client.embeddings.create(
+            model=self.model,
+            input=texts
+        )
+        
+        return [embedding.embedding for embedding in response.data]
+    
+    async def generate_single_embedding(self, text: str) -> List[float]:
+        """Generate single embedding using OpenAI API"""
+        embeddings = await self.generate_embeddings([text])
+        return embeddings[0]
+
+# Vector database implementations
+class VectorStore:
+    async def add_documents(self, documents: List[Document]) -> None:
+        raise NotImplementedError
+    
+    async def search(self, query_embedding: List[float], top_k: int = 5) -> List[Dict]:
+        raise NotImplementedError
+    
+    async def delete_documents(self, document_ids: List[str]) -> None:
+        raise NotImplementedError
+
+class QdrantVectorStore(VectorStore):
+    def __init__(self, host: str = "localhost", port: int = 6333, collection_name: str = "documents"):
+        self.client = QdrantClient(host=host, port=port)
+        self.collection_name = collection_name
+        self.dimension = None
+    
+    async def initialize_collection(self, dimension: int):
+        """Initialize Qdrant collection"""
+        self.dimension = dimension
+        
+        try:
+            self.client.create_collection(
+                collection_name=self.collection_name,
+                vectors_config=VectorParams(
+                    size=dimension,
+                    distance=Distance.COSINE
+                )
+            )
+        except Exception as e:
+            print(f"Collection might already exist: {e}")
+    
+    async def add_documents(self, documents: List[Document]) -> None:
+        """Add documents to Qdrant collection"""
+        points = []
+        
+        for doc in documents:
+            if doc.embedding is None:
+                raise ValueError(f"Document {doc.chunk_id} has no embedding")
+            
+            point = PointStruct(
+                id=doc.chunk_id,
+                vector=doc.embedding,
+                payload={
+                    "content": doc.content,
+                    "metadata": doc.metadata,
+                    "source": doc.source
+                }
+            )
+            points.append(point)
+        
+        self.client.upsert(
+            collection_name=self.collection_name,
+            points=points
+        )
+    
+    async def search(self, query_embedding: List[float], top_k: int = 5, filter_dict: Optional[Dict] = None) -> List[Dict]:
+        """Search for similar documents"""
+        search_result = self.client.search(
+            collection_name=self.collection_name,
+            query_vector=query_embedding,
+            limit=top_k,
+            query_filter=filter_dict
+        )
+        
+        results = []
+        for hit in search_result:
+            results.append({
+                "id": hit.id,
+                "score": hit.score,
+                "content": hit.payload["content"],
+                "metadata": hit.payload["metadata"],
+                "source": hit.payload["source"]
+            })
+        
+        return results
+
+class PineconeVectorStore(VectorStore):
+    def __init__(self, api_key: str, environment: str, index_name: str):
+        pinecone.init(api_key=api_key, environment=environment)
+        self.index_name = index_name
+        self.index = pinecone.Index(index_name)
+    
+    async def add_documents(self, documents: List[Document]) -> None:
+        """Add documents to Pinecone index"""
+        vectors = []
+        
+        for doc in documents:
+            if doc.embedding is None:
+                raise ValueError(f"Document {doc.chunk_id} has no embedding")
+            
+            vector = {
+                "id": doc.chunk_id,
+                "values": doc.embedding,
+                "metadata": {
+                    "content": doc.content[:40000],  # Pinecone metadata limit
+                    "source": doc.source,
+                    **{k: v for k, v in doc.metadata.items() if isinstance(v, (str, int, float, bool))}
+                }
+            }
+            vectors.append(vector)
+        
+        # Upsert in batches
+        batch_size = 100
+        for i in range(0, len(vectors), batch_size):
+            batch = vectors[i:i + batch_size]
+            self.index.upsert(vectors=batch)
+    
+    async def search(self, query_embedding: List[float], top_k: int = 5, filter_dict: Optional[Dict] = None) -> List[Dict]:
+        """Search for similar documents in Pinecone"""
+        search_result = self.index.query(
+            vector=query_embedding,
+            top_k=top_k,
+            filter=filter_dict,
+            include_metadata=True
+        )
+        
+        results = []
+        for match in search_result.matches:
+            results.append({
+                "id": match.id,
+                "score": match.score,
+                "content": match.metadata.get("content", ""),
+                "metadata": match.metadata,
+                "source": match.metadata.get("source", "")
+            })
+        
+        return results
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Query Processing and Retrieval</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-python">
+# retrieval_service.py
+import asyncio
+from typing import List, Dict, Optional, Tuple
+from dataclasses import dataclass
+import re
+
+@dataclass
+class RetrievalResult:
+    content: str
+    score: float
+    source: str
+    metadata: Dict
+    chunk_id: str
+
+class QueryProcessor:
+    def __init__(self):
+        self.query_transformations = [
+            self._expand_acronyms,
+            self._add_synonyms,
+            self._extract_entities
+        ]
+    
+    async def process_query(self, query: str) -> Dict:
+        """Process and enhance the user query"""
+        processed_query = {
+            'original': query,
+            'cleaned': self._clean_query(query),
+            'entities': [],
+            'intent': self._classify_intent(query),
+            'keywords': self._extract_keywords(query)
+        }
+        
+        # Apply query transformations
+        for transformation in self.query_transformations:
+            try:
+                processed_query = await transformation(processed_query)
+            except Exception as e:
+                print(f"Query transformation failed: {e}")
+        
+        return processed_query
+    
+    def _clean_query(self, query: str) -> str:
+        """Clean and normalize the query"""
+        # Remove extra whitespace
+        query = re.sub(r'\s+', ' ', query.strip())
+        
+        # Handle common query patterns
+        query = re.sub(r'^(what is|what are|how to|explain)', '', query, flags=re.IGNORECASE)
+        
+        return query
+    
+    def _classify_intent(self, query: str) -> str:
+        """Classify the intent of the query"""
+        query_lower = query.lower()
+        
+        if any(word in query_lower for word in ['how', 'steps', 'process', 'procedure']):
+            return 'how_to'
+        elif any(word in query_lower for word in ['what', 'define', 'definition', 'explain']):
+            return 'definition'
+        elif any(word in query_lower for word in ['compare', 'difference', 'vs', 'versus']):
+            return 'comparison'
+        elif any(word in query_lower for word in ['list', 'examples', 'types']):
+            return 'enumeration'
+        else:
+            return 'general'
+    
+    def _extract_keywords(self, query: str) -> List[str]:
+        """Extract important keywords from the query"""
+        # Simple keyword extraction - in production, use more sophisticated NLP
+        stop_words = {'the', 'is', 'at', 'which', 'on', 'a', 'an', 'and', 'or', 'but', 'in', 'with', 'to', 'for', 'of', 'as', 'by'}
+        words = query.lower().split()
+        keywords = [word for word in words if word not in stop_words and len(word) > 2]
+        return keywords
+    
+    async def _expand_acronyms(self, processed_query: Dict) -> Dict:
+        """Expand known acronyms in the query"""
+        acronym_map = {
+            'ai': 'artificial intelligence',
+            'ml': 'machine learning',
+            'nlp': 'natural language processing',
+            'api': 'application programming interface',
+            'ui': 'user interface',
+            'ux': 'user experience'
+        }
+        
+        expanded_query = processed_query['cleaned']
+        for acronym, expansion in acronym_map.items():
+            expanded_query = re.sub(rf'\b{acronym}\b', f"{acronym} {expansion}", expanded_query, flags=re.IGNORECASE)
+        
+        processed_query['expanded'] = expanded_query
+        return processed_query
+    
+    async def _add_synonyms(self, processed_query: Dict) -> Dict:
+        """Add synonyms to improve retrieval"""
+        # In production, use a proper thesaurus or word embedding similarity
+        synonym_map = {
+            'build': ['create', 'develop', 'construct'],
+            'implement': ['build', 'create', 'develop'],
+            'optimize': ['improve', 'enhance', 'tune'],
+            'issue': ['problem', 'error', 'bug']
+        }
+        
+        synonyms = []
+        for keyword in processed_query.get('keywords', []):
+            if keyword in synonym_map:
+                synonyms.extend(synonym_map[keyword])
+        
+        processed_query['synonyms'] = synonyms
+        return processed_query
+    
+    async def _extract_entities(self, processed_query: Dict) -> Dict:
+        """Extract entities from the query"""
+        # Simple entity extraction - in production, use NER models
+        query = processed_query['cleaned']
+        
+        # Extract potential technology names (capitalized words)
+        tech_entities = re.findall(r'\b[A-Z][a-z]+(?:[A-Z][a-z]+)*\b', query)
+        
+        processed_query['entities'] = tech_entities
+        return processed_query
+
+class HybridRetriever:
+    def __init__(self, vector_store: VectorStore, embedding_service: EmbeddingService):
+        self.vector_store = vector_store
+        self.embedding_service = embedding_service
+        self.query_processor = QueryProcessor()
+    
+    async def retrieve(self, query: str, top_k: int = 5, filters: Optional[Dict] = None) -> List[RetrievalResult]:
+        """Retrieve relevant documents using hybrid approach"""
+        
+        # Process the query
+        processed_query = await self.query_processor.process_query(query)
+        
+        # Generate query embedding
+        query_embedding = await self.embedding_service.generate_single_embedding(query)
+        
+        # Perform vector search
+        vector_results = await self.vector_store.search(
+            query_embedding=query_embedding,
+            top_k=top_k * 2,  # Get more results for reranking
+            filter_dict=filters
+        )
+        
+        # Convert to RetrievalResult objects
+        results = []
+        for result in vector_results:
+            retrieval_result = RetrievalResult(
+                content=result['content'],
+                score=result['score'],
+                source=result['source'],
+                metadata=result['metadata'],
+                chunk_id=result['id']
+            )
+            results.append(retrieval_result)
+        
+        # Rerank results based on query intent and keywords
+        reranked_results = await self._rerank_results(results, processed_query)
+        
+        return reranked_results[:top_k]
+    
+    async def _rerank_results(self, results: List[RetrievalResult], processed_query: Dict) -> List[RetrievalResult]:
+        """Rerank results based on additional criteria"""
+        
+        # Simple reranking based on keyword matching
+        keywords = processed_query.get('keywords', [])
+        entities = processed_query.get('entities', [])
+        
+        for result in results:
+            content_lower = result.content.lower()
+            
+            # Boost score for keyword matches
+            keyword_matches = sum(1 for keyword in keywords if keyword in content_lower)
+            entity_matches = sum(1 for entity in entities if entity.lower() in content_lower)
+            
+            # Adjust score based on matches
+            boost_factor = 1 + (keyword_matches * 0.1) + (entity_matches * 0.15)
+            result.score *= boost_factor
+        
+        # Sort by adjusted score
+        results.sort(key=lambda x: x.score, reverse=True)
+        
+        return results
+
+# Advanced retrieval with query expansion
+class AdvancedRetriever(HybridRetriever):
+    def __init__(self, vector_store: VectorStore, embedding_service: EmbeddingService, llm_client):
+        super().__init__(vector_store, embedding_service)
+        self.llm_client = llm_client
+    
+    async def retrieve_with_expansion(self, query: str, top_k: int = 5) -> List[RetrievalResult]:
+        """Retrieve with LLM-powered query expansion"""
+        
+        # Generate multiple query variations using LLM
+        expanded_queries = await self._generate_query_variations(query)
+        
+        all_results = []
+        
+        # Retrieve for each query variation
+        for expanded_query in expanded_queries:
+            results = await self.retrieve(expanded_query, top_k=top_k//2)
+            all_results.extend(results)
+        
+        # Deduplicate and rerank
+        unique_results = self._deduplicate_results(all_results)
+        
+        return unique_results[:top_k]
+    
+    async def _generate_query_variations(self, query: str) -> List[str]:
+        """Generate query variations using LLM"""
+        prompt = f"""
+        Given the following query, generate 3 alternative ways to ask the same question.
+        Focus on different phrasings and synonyms while maintaining the same intent.
+        
+        Original query: {query}
+        
+        Alternative queries:
+        1.
+        2.
+        3.
+        """
+        
+        response = await self.llm_client.generate(prompt, max_tokens=200)
+        
+        # Parse the response to extract alternative queries
+        lines = response.strip().split('\n')
+        variations = [query]  # Include original query
+        
+        for line in lines:
+            if line.strip() and any(line.startswith(f"{i}.") for i in range(1, 4)):
+                variation = line.split('.', 1)[1].strip()
+                if variation:
+                    variations.append(variation)
+        
+        return variations
+    
+    def _deduplicate_results(self, results: List[RetrievalResult]) -> List[RetrievalResult]:
+        """Remove duplicate results based on chunk_id"""
+        seen_ids = set()
+        unique_results = []
+        
+        for result in results:
+            if result.chunk_id not in seen_ids:
+                seen_ids.add(result.chunk_id)
+                unique_results.append(result)
+        
+        # Sort by score
+        unique_results.sort(key=lambda x: x.score, reverse=True)
+        
+        return unique_results
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">4. Context Assembly and LLM Integration</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-python">
+# rag_system.py
+import asyncio
+from typing import List, Dict, Optional, Tuple
+from dataclasses import dataclass
+import openai
+from datetime import datetime
+
+@dataclass
+class RAGResponse:
+    answer: str
+    sources: List[Dict]
+    confidence: float
+    query: str
+    timestamp: datetime
+
+class ContextAssembler:
+    def __init__(self, max_context_length: int = 4000):
+        self.max_context_length = max_context_length
+    
+    def assemble_context(self, query: str, retrieved_docs: List[RetrievalResult]) -> str:
+        """Assemble context from retrieved documents"""
+        
+        context_parts = []
+        current_length = 0
+        
+        # Add query context
+        query_context = f"User Question: {query}\n\nRelevant Information:\n\n"
+        context_parts.append(query_context)
+        current_length += len(query_context)
+        
+        # Add retrieved documents
+        for i, doc in enumerate(retrieved_docs):
+            doc_context = f"Source {i+1} (Score: {doc.score:.3f}):\n{doc.content}\n\n"
+            
+            if current_length + len(doc_context) > self.max_context_length:
+                break
+            
+            context_parts.append(doc_context)
+            current_length += len(doc_context)
+        
+        return "".join(context_parts)
+    
+    def create_system_prompt(self, domain: str = "general") -> str:
+        """Create system prompt for the RAG system"""
+        
+        base_prompt = """You are a helpful AI assistant that answers questions based on the provided context. 
+
+Instructions:
+1. Answer the question using ONLY the information provided in the context
+2. If the context doesn't contain enough information to answer the question, say so clearly
+3. Cite specific sources when making claims
+4. Be concise but comprehensive
+5. If there are conflicting information in the sources, acknowledge this
+6. Maintain a professional and helpful tone
+
+Format your response as follows:
+- Provide a direct answer to the question
+- Include relevant details from the sources
+- End with a "Sources:" section listing the source numbers you referenced
+"""
+        
+        domain_prompts = {
+            "technical": base_prompt + "\n\nFocus on technical accuracy and provide implementation details when relevant.",
+            "business": base_prompt + "\n\nFocus on business implications and strategic considerations.",
+            "medical": base_prompt + "\n\nEmphasize accuracy and include appropriate disclaimers about medical advice."
+        }
+        
+        return domain_prompts.get(domain, base_prompt)
+
+class LLMClient:
+    def __init__(self, api_key: str, model: str = "gpt-3.5-turbo"):
+        self.client = openai.OpenAI(api_key=api_key)
+        self.model = model
+    
+    async def generate_response(self, system_prompt: str, user_prompt: str, temperature: float = 0.1) -> str:
+        """Generate response using OpenAI API"""
+        
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+        
+        response = await self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=1000
+        )
+        
+        return response.choices[0].message.content
+
+class RAGSystem:
+    def __init__(
+        self,
+        retriever: HybridRetriever,
+        llm_client: LLMClient,
+        context_assembler: Optional[ContextAssembler] = None,
+        domain: str = "general"
+    ):
+        self.retriever = retriever
+        self.llm_client = llm_client
+        self.context_assembler = context_assembler or ContextAssembler()
+        self.domain = domain
+        self.conversation_history = []
+    
+    async def query(self, question: str, filters: Optional[Dict] = None, top_k: int = 5) -> RAGResponse:
+        """Process a query through the RAG system"""
+        
+        start_time = datetime.now()
+        
+        # Retrieve relevant documents
+        retrieved_docs = await self.retriever.retrieve(
+            query=question,
+            top_k=top_k,
+            filters=filters
+        )
+        
+        if not retrieved_docs:
+            return RAGResponse(
+                answer="I couldn't find any relevant information to answer your question.",
+                sources=[],
+                confidence=0.0,
+                query=question,
+                timestamp=start_time
+            )
+        
+        # Assemble context
+        context = self.context_assembler.assemble_context(question, retrieved_docs)
+        
+        # Generate system prompt
+        system_prompt = self.context_assembler.create_system_prompt(self.domain)
+        
+        # Generate response
+        response = await self.llm_client.generate_response(
+            system_prompt=system_prompt,
+            user_prompt=context
+        )
+        
+        # Calculate confidence based on retrieval scores
+        avg_score = sum(doc.score for doc in retrieved_docs) / len(retrieved_docs)
+        confidence = min(avg_score * 2, 1.0)  # Normalize to 0-1 range
+        
+        # Prepare sources
+        sources = []
+        for i, doc in enumerate(retrieved_docs):
+            sources.append({
+                "id": i + 1,
+                "content": doc.content[:200] + "..." if len(doc.content) > 200 else doc.content,
+                "source": doc.source,
+                "score": doc.score,
+                "metadata": doc.metadata
+            })
+        
+        rag_response = RAGResponse(
+            answer=response,
+            sources=sources,
+            confidence=confidence,
+            query=question,
+            timestamp=start_time
+        )
+        
+        # Store in conversation history
+        self.conversation_history.append({
+            "query": question,
+            "response": rag_response,
+            "timestamp": start_time
+        })
+        
+        return rag_response
+    
+    async def conversational_query(self, question: str, **kwargs) -> RAGResponse:
+        """Handle conversational queries with context from previous interactions"""
+        
+        # Enhance query with conversation context
+        if self.conversation_history:
+            recent_context = self._get_recent_context()
+            enhanced_question = f"Previous context: {recent_context}\n\nCurrent question: {question}"
+        else:
+            enhanced_question = question
+        
+        return await self.query(enhanced_question, **kwargs)
+    
+    def _get_recent_context(self, max_history: int = 3) -> str:
+        """Get recent conversation context"""
+        recent_history = self.conversation_history[-max_history:]
+        
+        context_parts = []
+        for item in recent_history:
+            context_parts.append(f"Q: {item['query']}\nA: {item['response'].answer[:100]}...")
+        
+        return "\n\n".join(context_parts)
+    
+    def clear_history(self):
+        """Clear conversation history"""
+        self.conversation_history = []
+
+# Advanced RAG with self-reflection
+class SelfReflectiveRAG(RAGSystem):
+    async def query_with_reflection(self, question: str, **kwargs) -> RAGResponse:
+        """Query with self-reflection to improve answer quality"""
+        
+        # Initial response
+        initial_response = await self.query(question, **kwargs)
+        
+        # Self-reflection prompt
+        reflection_prompt = f"""
+        Question: {question}
+        
+        Initial Answer: {initial_response.answer}
+        
+        Please evaluate this answer and consider:
+        1. Is the answer complete and accurate based on the sources?
+        2. Are there any important aspects missing?
+        3. Could the answer be clearer or more helpful?
+        
+        If improvements are needed, provide a better answer. If the answer is good as-is, respond with "APPROVED".
+        """
+        
+        reflection = await self.llm_client.generate_response(
+            system_prompt="You are an expert reviewer evaluating AI-generated answers for quality and completeness.",
+            user_prompt=reflection_prompt
+        )
+        
+        if reflection.strip() != "APPROVED":
+            # Use reflection as improved answer
+            initial_response.answer = reflection
+            initial_response.confidence *= 0.9  # Slightly reduce confidence for reflected answers
+        
+        return initial_response
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">5. Evaluation and Optimization</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-python">
+# evaluation.py
+import asyncio
+import json
+from typing import List, Dict, Tuple
+from dataclasses import dataclass
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+@dataclass
+class EvaluationMetric:
+    name: str
+    score: float
+    details: Dict
+
+class RAGEvaluator:
+    def __init__(self, rag_system: RAGSystem, embedding_service: EmbeddingService):
+        self.rag_system = rag_system
+        self.embedding_service = embedding_service
+    
+    async def evaluate_retrieval(self, test_queries: List[Dict]) -> List[EvaluationMetric]:
+        """Evaluate retrieval quality"""
+        
+        metrics = []
+        
+        for test_case in test_queries:
+            query = test_case['query']
+            expected_docs = test_case.get('relevant_docs', [])
+            
+            # Retrieve documents
+            retrieved_docs = await self.rag_system.retriever.retrieve(query, top_k=10)
+            retrieved_ids = [doc.chunk_id for doc in retrieved_docs]
+            
+            # Calculate precision@k and recall@k
+            for k in [1, 3, 5]:
+                precision_k = self._calculate_precision_at_k(retrieved_ids[:k], expected_docs)
+                recall_k = self._calculate_recall_at_k(retrieved_ids[:k], expected_docs)
+                
+                metrics.append(EvaluationMetric(
+                    name=f"precision@{k}",
+                    score=precision_k,
+                    details={"query": query, "k": k}
+                ))
+                
+                metrics.append(EvaluationMetric(
+                    name=f"recall@{k}",
+                    score=recall_k,
+                    details={"query": query, "k": k}
+                ))
+        
+        return metrics
+    
+    async def evaluate_generation(self, test_queries: List[Dict]) -> List[EvaluationMetric]:
+        """Evaluate generation quality"""
+        
+        metrics = []
+        
+        for test_case in test_queries:
+            query = test_case['query']
+            expected_answer = test_case.get('expected_answer', '')
+            
+            # Generate response
+            response = await self.rag_system.query(query)
+            
+            # Calculate semantic similarity
+            if expected_answer:
+                similarity = await self._calculate_semantic_similarity(
+                    response.answer, expected_answer
+                )
+                
+                metrics.append(EvaluationMetric(
+                    name="semantic_similarity",
+                    score=similarity,
+                    details={"query": query, "generated": response.answer, "expected": expected_answer}
+                ))
+            
+            # Calculate faithfulness (how well the answer is grounded in sources)
+            faithfulness = await self._calculate_faithfulness(response)
+            
+            metrics.append(EvaluationMetric(
+                name="faithfulness",
+                score=faithfulness,
+                details={"query": query, "answer": response.answer}
+            ))
+        
+        return metrics
+    
+    def _calculate_precision_at_k(self, retrieved: List[str], relevant: List[str]) -> float:
+        """Calculate precision@k"""
+        if not retrieved:
+            return 0.0
+        
+        relevant_retrieved = len(set(retrieved) & set(relevant))
+        return relevant_retrieved / len(retrieved)
+    
+    def _calculate_recall_at_k(self, retrieved: List[str], relevant: List[str]) -> float:
+        """Calculate recall@k"""
+        if not relevant:
+            return 0.0
+        
+        relevant_retrieved = len(set(retrieved) & set(relevant))
+        return relevant_retrieved / len(relevant)
+    
+    async def _calculate_semantic_similarity(self, text1: str, text2: str) -> float:
+        """Calculate semantic similarity between two texts"""
+        embeddings = await self.embedding_service.generate_embeddings([text1, text2])
+        
+        similarity = cosine_similarity([embeddings[0]], [embeddings[1]])[0][0]
+        return float(similarity)
+    
+    async def _calculate_faithfulness(self, response: RAGResponse) -> float:
+        """Calculate how faithful the answer is to the sources"""
+        if not response.sources:
+            return 0.0
+        
+        # Simple faithfulness calculation based on content overlap
+        answer_words = set(response.answer.lower().split())
+        source_words = set()
+        
+        for source in response.sources:
+            source_words.update(source['content'].lower().split())
+        
+        if not answer_words:
+            return 0.0
+        
+        overlap = len(answer_words & source_words)
+        faithfulness = overlap / len(answer_words)
+        
+        return min(faithfulness, 1.0)
+
+# Performance optimization
+class RAGOptimizer:
+    def __init__(self, rag_system: RAGSystem):
+        self.rag_system = rag_system
+    
+    async def optimize_chunk_size(self, test_queries: List[Dict], chunk_sizes: List[int]) -> int:
+        """Find optimal chunk size through evaluation"""
+        
+        best_chunk_size = chunk_sizes[0]
+        best_score = 0.0
+        
+        for chunk_size in chunk_sizes:
+            # Recreate document processor with new chunk size
+            # This would require reprocessing documents
+            print(f"Testing chunk size: {chunk_size}")
+            
+            # Evaluate with current chunk size
+            evaluator = RAGEvaluator(self.rag_system, self.rag_system.retriever.embedding_service)
+            metrics = await evaluator.evaluate_generation(test_queries)
+            
+            # Calculate average score
+            avg_score = np.mean([m.score for m in metrics if m.name == "semantic_similarity"])
+            
+            if avg_score > best_score:
+                best_score = avg_score
+                best_chunk_size = chunk_size
+        
+        return best_chunk_size
+    
+    async def optimize_retrieval_parameters(self, test_queries: List[Dict]) -> Dict:
+        """Optimize retrieval parameters"""
+        
+        best_params = {"top_k": 5}
+        best_score = 0.0
+        
+        # Test different top_k values
+        for top_k in [3, 5, 7, 10]:
+            total_score = 0.0
+            
+            for test_case in test_queries:
+                response = await self.rag_system.query(test_case['query'], top_k=top_k)
+                # Use confidence as proxy for quality
+                total_score += response.confidence
+            
+            avg_score = total_score / len(test_queries)
+            
+            if avg_score > best_score:
+                best_score = avg_score
+                best_params["top_k"] = top_k
+        
+        return best_params
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Production Deployment</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. API Service Implementation</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-python">
+# api_service.py
+from fastapi import FastAPI, HTTPException, Depends
+from pydantic import BaseModel
+from typing import List, Optional, Dict
+import asyncio
+import logging
+
+app = FastAPI(title="RAG System API", version="1.0.0")
+
+class QueryRequest(BaseModel):
+    question: str
+    filters: Optional[Dict] = None
+    top_k: int = 5
+    domain: str = "general"
+
+class QueryResponse(BaseModel):
+    answer: str
+    sources: List[Dict]
+    confidence: float
+    query: str
+    timestamp: str
+
+class DocumentUpload(BaseModel):
+    content: str
+    metadata: Dict
+    source: str
+
+# Global RAG system instance
+rag_system = None
+
+@app.on_event("startup")
+async def startup_event():
+    global rag_system
+    
+    # Initialize RAG system components
+    embedding_service = EmbeddingService()
+    vector_store = QdrantVectorStore()
+    await vector_store.initialize_collection(dimension=384)
+    
+    retriever = HybridRetriever(vector_store, embedding_service)
+    llm_client = LLMClient(api_key="your-openai-key")
+    
+    rag_system = RAGSystem(retriever, llm_client)
+    
+    logging.info("RAG system initialized successfully")
+
+@app.post("/query", response_model=QueryResponse)
+async def query_endpoint(request: QueryRequest):
+    """Query the RAG system"""
+    try:
+        response = await rag_system.query(
+            question=request.question,
+            filters=request.filters,
+            top_k=request.top_k
+        )
+        
+        return QueryResponse(
+            answer=response.answer,
+            sources=response.sources,
+            confidence=response.confidence,
+            query=response.query,
+            timestamp=response.timestamp.isoformat()
+        )
+    
+    except Exception as e:
+        logging.error(f"Query failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/documents")
+async def upload_document(document: DocumentUpload):
+    """Upload a new document to the knowledge base"""
+    try:
+        # Process document
+        processor = DocumentProcessor()
+        doc = Document(
+            content=document.content,
+            metadata=document.metadata,
+            source=document.source,
+            chunk_id=processor._generate_chunk_id(Path(document.source), 0, document.content)
+        )
+        
+        # Generate embedding
+        embedding = await rag_system.retriever.embedding_service.generate_single_embedding(doc.content)
+        doc.embedding = embedding
+        
+        # Store in vector database
+        await rag_system.retriever.vector_store.add_documents([doc])
+        
+        return {"message": "Document uploaded successfully", "chunk_id": doc.chunk_id}
+    
+    except Exception as e:
+        logging.error(f"Document upload failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Docker Deployment</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-dockerfile">
+# Dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Download spaCy model
+RUN python -m spacy download en_core_web_sm
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Run the application
+CMD ["uvicorn", "api_service:app", "--host", "0.0.0.0", "--port", "8000"]
+</code></pre>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# docker-compose.yml
+version: '3.8'
+
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+    depends_on:
+      - qdrant
+    volumes:
+      - ./data:/app/data
+
+  qdrant:
+    image: qdrant/qdrant:v1.7.0
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - rag-api
+
+volumes:
+  qdrant_data:
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Conclusion</h2>
+
+<p class="text-gray-700 leading-relaxed mb-4">Building effective RAG systems requires careful attention to each component of the pipeline, from document processing and embedding generation to retrieval optimization and response generation. The implementation outlined in this guide provides a solid foundation for creating production-ready RAG applications.</p>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Key Success Factors:</strong></p>
+
+<ol class="list-decimal pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Quality Document Processing</strong> - Proper chunking and metadata extraction</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Effective Retrieval</strong> - Hybrid approaches combining vector and keyword search</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Context Assembly</strong> - Intelligent context construction within token limits</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Continuous Evaluation</strong> - Regular assessment and optimization of system performance</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Production Readiness</strong> - Scalable deployment with monitoring and error handling</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Expected Benefits:</strong></p>
+
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">70-90% accuracy in domain-specific question answering</li>
+<li class="text-gray-700">Significant reduction in hallucination compared to standalone LLMs</li>
+<li class="text-gray-700">Ability to work with proprietary and up-to-date information</li>
+<li class="text-gray-700">Transparent and traceable AI responses with source citations</li>
+<li class="text-gray-700">Scalable architecture supporting thousands of concurrent users</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Common Challenges and Solutions:</strong></p>
+
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Chunk Size Optimization</strong> - Use evaluation-driven optimization</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Retrieval Quality</strong> - Implement hybrid retrieval with reranking</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Context Length Limits</strong> - Smart context assembly and summarization</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Latency Optimization</strong> - Caching, async processing, and efficient vector search</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Accuracy Validation</strong> - Comprehensive evaluation frameworks</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">RAG systems represent a powerful approach to building AI applications that are both knowledgeable and grounded in factual information. With proper implementation and optimization, they can provide significant value across a wide range of use cases.</p>
+
+<p class="text-gray-700 leading-relaxed mb-4">---</p>
+
+<p class="text-gray-700 leading-relaxed mb-4"><em class="italic">Ready to build your own RAG system? Our AI solutions experts can help you design and implement a custom RAG system tailored to your specific needs and data. <a href="/contact" class="text-primary-600 hover:text-primary-700 transition-colors underline">Contact us</a> to get started.</em></p></div></div><div class="max-w-4xl mx-auto mt-12 pt-8 border-t border-gray-200"><div class="flex flex-wrap gap-2"><a class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors" href="/blog/?tag=RAG"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>RAG</a><a class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors" href="/blog/?tag=AI"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>AI</a><a class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors" href="/blog/?tag=LLM"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>LLM</a><a class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors" href="/blog/?tag=Vector%20Databases"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>Vector Databases</a><a class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors" href="/blog/?tag=Machine%20Learning"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>Machine Learning</a><a class="inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors" href="/blog/?tag=NLP"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>NLP</a></div></div></div></article><section class="py-16 bg-gray-50"><div class="container-max px-4 sm:px-6 lg:px-8"><h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Related Articles</h2><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"><div class="h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative"><div class="text-white text-4xl">📝</div><div class="absolute top-4 left-4"><span class="bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium">AI Engineering</span></div></div><div class="p-6"><h3 class="text-xl font-bold text-gray-900 mb-3"><a class="hover:text-primary-600 transition-colors" href="/blog/2024-03-15-future-of-ai-in-enterprise-applications/">The Future of AI in Enterprise Applications</a></h3><p class="text-gray-600 mb-4 line-clamp-3">Exploring how artificial intelligence is transforming business processes and creating new opportunities for innovation across various industries.</p><div class="flex items-center justify-between text-sm text-gray-500 mb-4"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span>3/14/2024</span></div><span>5 min read</span></div><a class="text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors" href="/blog/2024-03-15-future-of-ai-in-enterprise-applications/">Read More <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></div></article><article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"><div class="h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative"><div class="text-white text-4xl">📝</div><div class="absolute top-4 left-4"><span class="bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium">AI Engineering</span></div></div><div class="p-6"><h3 class="text-xl font-bold text-gray-900 mb-3"><a class="hover:text-primary-600 transition-colors" href="/blog/2024-02-28-rag-systems-enhancing-ai-real-time-data/">RAG Systems: Enhancing AI with Real-time Data</a></h3><p class="text-gray-600 mb-4 line-clamp-3">Understanding Retrieval Augmented Generation and how it can improve AI applications by incorporating up-to-date information.</p><div class="flex items-center justify-between text-sm text-gray-500 mb-4"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span>2/27/2024</span></div><span>8 min read</span></div><a class="text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors" href="/blog/2024-02-28-rag-systems-enhancing-ai-real-time-data/">Read More <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></div></article></div></div></section><footer class="bg-gray-900 text-white"><div class="container-max section-padding"><div class="grid lg:grid-cols-3 gap-8 mb-12"><div class="lg:col-span-1"><h3 class="text-2xl font-bold mb-4">Samshodan</h3><p class="text-gray-300 mb-6 leading-relaxed">Next-generation AI-powered products for modern business. We create innovative technology solutions and developer tools that enhance productivity and drive innovation.</p><div class="space-y-3"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-primary-400"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><a href="mailto:hello@samshodan.com" class="text-gray-300 hover:text-white transition-colors">hello@samshodan.com</a></div><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-primary-400"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span class="text-gray-300">Global Remote Team</span></div></div></div><div><h4 class="text-lg font-semibold mb-4">Products</h4><ul class="space-y-3"><li><a href="/products/ultron" class="text-gray-300 hover:text-white transition-colors">Ultron AI Chatbot</a></li><li><a href="/products/specly" class="text-gray-300 hover:text-white transition-colors">Specly API Portal</a></li></ul></div><div><h4 class="text-lg font-semibold mb-4">Company</h4><ul class="space-y-3 mb-6"><li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About Us</a></li><li><a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a></li><li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li><li><a href="/privacy" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="/terms" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li></ul><div class="flex space-x-4"><a href="#" class="bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="#" class="bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a></div></div></div><div class="border-t border-gray-800 pt-8"><div class="flex flex-col md:flex-row justify-between items-center"><p class="text-gray-400 text-sm">© <!-- -->2025<!-- --> Samshodan. All rights reserved.</p><p class="text-gray-400 text-sm mt-4 md:mt-0">Built with ❤️ for modern business</p></div></div></div></footer></main><script src="/_next/static/chunks/webpack-79118b234858d99b.js" crossorigin="" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/css/d5dbd49fb37d0aa9.css\",\"style\",{\"crossOrigin\":\"\"}]\n0:\"$L2\"\n"])</script><script>self.__next_f.push([1,"3:I[3728,[],\"\"]\n5:I[9928,[],\"\"]\n6:I[6954,[],\"\"]\n7:I[7264,[],\"\"]\n9:I[3827,[\"350\",\"static/chunks/350-ce2a8f3d46727efe.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js\"],\"\"]\na:I[8326,[\"350\",\"static/chunks/350-ce2a8f3d46727efe.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js\"],\"\"]\nb:Tc02e,"])</script><script>self.__next_f.push([1,"\n\u003ch1 class=\"text-3xl font-bold text-gray-900 mb-6 mt-8\"\u003eBuilding RAG Systems: A Complete Guide to Retrieval Augmented Generation\u003c/h1\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003eRetrieval Augmented Generation (RAG) has emerged as one of the most powerful patterns for building AI applications that need to work with proprietary or up-to-date information. By combining the reasoning capabilities of large language models with the precision of information retrieval, RAG systems enable organizations to build AI applications that are both knowledgeable and grounded in factual data.\u003c/p\u003e\n\n\u003ch2 class=\"text-2xl font-bold text-gray-900 mb-4 mt-10\"\u003eUnderstanding RAG Architecture\u003c/h2\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003eRAG systems work by retrieving relevant information from a knowledge base and using that information to augment the context provided to a language model, resulting in more accurate and contextually relevant responses.\u003c/p\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-mermaid\"\u003e\ngraph TB\n    A[User Query] --\u003e B[Query Processing]\n    B --\u003e C[Vector Search]\n    C --\u003e D[Knowledge Base]\n    D --\u003e E[Retrieved Documents]\n    E --\u003e F[Context Assembly]\n    F --\u003e G[LLM Processing]\n    G --\u003e H[Generated Response]\n    \n    I[Document Ingestion] --\u003e J[Text Chunking]\n    J --\u003e K[Embedding Generation]\n    K --\u003e L[Vector Storage]\n    L --\u003e D\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2 class=\"text-2xl font-bold text-gray-900 mb-4 mt-10\"\u003eCore Components of RAG Systems\u003c/h2\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e1. Document Processing and Ingestion\u003c/h3\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003eThe foundation of any RAG system is a well-structured knowledge base. Here's how to build an effective document processing pipeline:\u003c/p\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-python\"\u003e\n# document_processor.py\nimport asyncio\nimport hashlib\nfrom typing import List, Dict, Optional\nfrom dataclasses import dataclass\nfrom pathlib import Path\nimport tiktoken\nfrom langchain.text_splitter import RecursiveCharacterTextSplitter\nfrom langchain.document_loaders import (\n    PyPDFLoader, \n    UnstructuredMarkdownLoader,\n    TextLoader,\n    CSVLoader\n)\n\n@dataclass\nclass Document:\n    content: str\n    metadata: Dict\n    source: str\n    chunk_id: str\n    embedding: Optional[List[float]] = None\n\nclass DocumentProcessor:\n    def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):\n        self.chunk_size = chunk_size\n        self.chunk_overlap = chunk_overlap\n        self.text_splitter = RecursiveCharacterTextSplitter(\n            chunk_size=chunk_size,\n            chunk_overlap=chunk_overlap,\n            length_function=len,\n            separators=[\"\\n\\n\", \"\\n\", \" \", \"\"]\n        )\n        self.tokenizer = tiktoken.get_encoding(\"cl100k_base\")\n    \n    async def process_file(self, file_path: Path) -\u003e List[Document]:\n        \"\"\"Process a single file and return chunked documents\"\"\"\n        \n        # Load document based on file type\n        loader = self._get_loader(file_path)\n        raw_documents = loader.load()\n        \n        processed_docs = []\n        \n        for doc in raw_documents:\n            # Clean and preprocess text\n            cleaned_content = self._clean_text(doc.page_content)\n            \n            # Split into chunks\n            chunks = self.text_splitter.split_text(cleaned_content)\n            \n            for i, chunk in enumerate(chunks):\n                # Generate unique chunk ID\n                chunk_id = self._generate_chunk_id(file_path, i, chunk)\n                \n                # Create document with metadata\n                processed_doc = Document(\n                    content=chunk,\n                    metadata={\n                        **doc.metadata,\n                        'source_file': str(file_path),\n                        'chunk_index': i,\n                        'total_chunks': len(chunks),\n                        'token_count': len(self.tokenizer.encode(chunk)),\n                        'processed_at': datetime.utcnow().isoformat()\n                    },\n                    source=str(file_path),\n                    chunk_id=chunk_id\n                )\n                \n                processed_docs.append(processed_doc)\n        \n        return processed_docs\n    \n    def _get_loader(self, file_path: Path):\n        \"\"\"Get appropriate document loader based on file extension\"\"\"\n        suffix = file_path.suffix.lower()\n        \n        loaders = {\n            '.pdf': PyPDFLoader,\n            '.md': UnstructuredMarkdownLoader,\n            '.txt': TextLoader,\n            '.csv': CSVLoader\n        }\n        \n        if suffix not in loaders:\n            raise ValueError(f\"Unsupported file type: {suffix}\")\n        \n        return loaders[suffix](str(file_path))\n    \n    def _clean_text(self, text: str) -\u003e str:\n        \"\"\"Clean and normalize text content\"\"\"\n        import re\n        \n        # Remove excessive whitespace\n        text = re.sub(r'\\s+', ' ', text)\n        \n        # Remove special characters that might interfere with processing\n        text = re.sub(r'[^\\w\\s\\-.,!?;:()\\[\\]{}\"\\']', '', text)\n        \n        # Normalize quotes\n        text = text.replace('\"', '\"').replace('\"', '\"')\n        text = text.replace(''', \"'\").replace(''', \"'\")\n        \n        return text.strip()\n    \n    def _generate_chunk_id(self, file_path: Path, chunk_index: int, content: str) -\u003e str:\n        \"\"\"Generate unique identifier for document chunk\"\"\"\n        source_hash = hashlib.md5(str(file_path).encode()).hexdigest()[:8]\n        content_hash = hashlib.md5(content.encode()).hexdigest()[:8]\n        return f\"{source_hash}_{chunk_index}_{content_hash}\"\n\n# Advanced document processing with metadata extraction\nclass AdvancedDocumentProcessor(DocumentProcessor):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.metadata_extractors = {\n            'entities': self._extract_entities,\n            'keywords': self._extract_keywords,\n            'summary': self._generate_summary\n        }\n    \n    async def process_file_with_metadata(self, file_path: Path) -\u003e List[Document]:\n        \"\"\"Process file with enhanced metadata extraction\"\"\"\n        documents = await self.process_file(file_path)\n        \n        # Enhance documents with extracted metadata\n        for doc in documents:\n            for extractor_name, extractor_func in self.metadata_extractors.items():\n                try:\n                    extracted_data = await extractor_func(doc.content)\n                    doc.metadata[extractor_name] = extracted_data\n                except Exception as e:\n                    print(f\"Failed to extract {extractor_name}: {e}\")\n        \n        return documents\n    \n    async def _extract_entities(self, text: str) -\u003e List[Dict]:\n        \"\"\"Extract named entities from text\"\"\"\n        import spacy\n        \n        # Load spaCy model (install with: python -m spacy download en_core_web_sm)\n        nlp = spacy.load(\"en_core_web_sm\")\n        doc = nlp(text)\n        \n        entities = []\n        for ent in doc.ents:\n            entities.append({\n                'text': ent.text,\n                'label': ent.label_,\n                'start': ent.start_char,\n                'end': ent.end_char\n            })\n        \n        return entities\n    \n    async def _extract_keywords(self, text: str) -\u003e List[str]:\n        \"\"\"Extract keywords using TF-IDF\"\"\"\n        from sklearn.feature_extraction.text import TfidfVectorizer\n        import numpy as np\n        \n        # Simple keyword extraction using TF-IDF\n        vectorizer = TfidfVectorizer(\n            max_features=10,\n            stop_words='english',\n            ngram_range=(1, 2)\n        )\n        \n        try:\n            tfidf_matrix = vectorizer.fit_transform([text])\n            feature_names = vectorizer.get_feature_names_out()\n            scores = tfidf_matrix.toarray()[0]\n            \n            # Get top keywords\n            top_indices = np.argsort(scores)[-5:][::-1]\n            keywords = [feature_names[i] for i in top_indices if scores[i] \u003e 0]\n            \n            return keywords\n        except:\n            return []\n    \n    async def _generate_summary(self, text: str) -\u003e str:\n        \"\"\"Generate summary of the text chunk\"\"\"\n        # Simple extractive summarization\n        sentences = text.split('.')\n        if len(sentences) \u003c= 2:\n            return text\n        \n        # Return first two sentences as summary\n        return '. '.join(sentences[:2]) + '.'\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e2. Embedding Generation and Vector Storage\u003c/h3\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-python\"\u003e\n# embedding_service.py\nimport asyncio\nimport numpy as np\nfrom typing import List, Dict, Optional\nimport openai\nfrom sentence_transformers import SentenceTransformer\nimport pinecone\nfrom qdrant_client import QdrantClient\nfrom qdrant_client.models import Distance, VectorParams, PointStruct\n\nclass EmbeddingService:\n    def __init__(self, model_name: str = \"all-MiniLM-L6-v2\"):\n        self.model_name = model_name\n        self.model = SentenceTransformer(model_name)\n        self.dimension = self.model.get_sentence_embedding_dimension()\n    \n    async def generate_embeddings(self, texts: List[str]) -\u003e List[List[float]]:\n        \"\"\"Generate embeddings for a list of texts\"\"\"\n        # Use sentence-transformers for local embedding generation\n        embeddings = self.model.encode(texts, convert_to_tensor=False)\n        return embeddings.tolist()\n    \n    async def generate_single_embedding(self, text: str) -\u003e List[float]:\n        \"\"\"Generate embedding for a single text\"\"\"\n        embedding = self.model.encode([text], convert_to_tensor=False)\n        return embedding[0].tolist()\n\nclass OpenAIEmbeddingService(EmbeddingService):\n    def __init__(self, api_key: str, model: str = \"text-embedding-ada-002\"):\n        self.client = openai.OpenAI(api_key=api_key)\n        self.model = model\n        self.dimension = 1536  # Ada-002 dimension\n    \n    async def generate_embeddings(self, texts: List[str]) -\u003e List[List[float]]:\n        \"\"\"Generate embeddings using OpenAI API\"\"\"\n        response = await self.client.embeddings.create(\n            model=self.model,\n            input=texts\n        )\n        \n        return [embedding.embedding for embedding in response.data]\n    \n    async def generate_single_embedding(self, text: str) -\u003e List[float]:\n        \"\"\"Generate single embedding using OpenAI API\"\"\"\n        embeddings = await self.generate_embeddings([text])\n        return embeddings[0]\n\n# Vector database implementations\nclass VectorStore:\n    async def add_documents(self, documents: List[Document]) -\u003e None:\n        raise NotImplementedError\n    \n    async def search(self, query_embedding: List[float], top_k: int = 5) -\u003e List[Dict]:\n        raise NotImplementedError\n    \n    async def delete_documents(self, document_ids: List[str]) -\u003e None:\n        raise NotImplementedError\n\nclass QdrantVectorStore(VectorStore):\n    def __init__(self, host: str = \"localhost\", port: int = 6333, collection_name: str = \"documents\"):\n        self.client = QdrantClient(host=host, port=port)\n        self.collection_name = collection_name\n        self.dimension = None\n    \n    async def initialize_collection(self, dimension: int):\n        \"\"\"Initialize Qdrant collection\"\"\"\n        self.dimension = dimension\n        \n        try:\n            self.client.create_collection(\n                collection_name=self.collection_name,\n                vectors_config=VectorParams(\n                    size=dimension,\n                    distance=Distance.COSINE\n                )\n            )\n        except Exception as e:\n            print(f\"Collection might already exist: {e}\")\n    \n    async def add_documents(self, documents: List[Document]) -\u003e None:\n        \"\"\"Add documents to Qdrant collection\"\"\"\n        points = []\n        \n        for doc in documents:\n            if doc.embedding is None:\n                raise ValueError(f\"Document {doc.chunk_id} has no embedding\")\n            \n            point = PointStruct(\n                id=doc.chunk_id,\n                vector=doc.embedding,\n                payload={\n                    \"content\": doc.content,\n                    \"metadata\": doc.metadata,\n                    \"source\": doc.source\n                }\n            )\n            points.append(point)\n        \n        self.client.upsert(\n            collection_name=self.collection_name,\n            points=points\n        )\n    \n    async def search(self, query_embedding: List[float], top_k: int = 5, filter_dict: Optional[Dict] = None) -\u003e List[Dict]:\n        \"\"\"Search for similar documents\"\"\"\n        search_result = self.client.search(\n            collection_name=self.collection_name,\n            query_vector=query_embedding,\n            limit=top_k,\n            query_filter=filter_dict\n        )\n        \n        results = []\n        for hit in search_result:\n            results.append({\n                \"id\": hit.id,\n                \"score\": hit.score,\n                \"content\": hit.payload[\"content\"],\n                \"metadata\": hit.payload[\"metadata\"],\n                \"source\": hit.payload[\"source\"]\n            })\n        \n        return results\n\nclass PineconeVectorStore(VectorStore):\n    def __init__(self, api_key: str, environment: str, index_name: str):\n        pinecone.init(api_key=api_key, environment=environment)\n        self.index_name = index_name\n        self.index = pinecone.Index(index_name)\n    \n    async def add_documents(self, documents: List[Document]) -\u003e None:\n        \"\"\"Add documents to Pinecone index\"\"\"\n        vectors = []\n        \n        for doc in documents:\n            if doc.embedding is None:\n                raise ValueError(f\"Document {doc.chunk_id} has no embedding\")\n            \n            vector = {\n                \"id\": doc.chunk_id,\n                \"values\": doc.embedding,\n                \"metadata\": {\n                    \"content\": doc.content[:40000],  # Pinecone metadata limit\n                    \"source\": doc.source,\n                    **{k: v for k, v in doc.metadata.items() if isinstance(v, (str, int, float, bool))}\n                }\n            }\n            vectors.append(vector)\n        \n        # Upsert in batches\n        batch_size = 100\n        for i in range(0, len(vectors), batch_size):\n            batch = vectors[i:i + batch_size]\n            self.index.upsert(vectors=batch)\n    \n    async def search(self, query_embedding: List[float], top_k: int = 5, filter_dict: Optional[Dict] = None) -\u003e List[Dict]:\n        \"\"\"Search for similar documents in Pinecone\"\"\"\n        search_result = self.index.query(\n            vector=query_embedding,\n            top_k=top_k,\n            filter=filter_dict,\n            include_metadata=True\n        )\n        \n        results = []\n        for match in search_result.matches:\n            results.append({\n                \"id\": match.id,\n                \"score\": match.score,\n                \"content\": match.metadata.get(\"content\", \"\"),\n                \"metadata\": match.metadata,\n                \"source\": match.metadata.get(\"source\", \"\")\n            })\n        \n        return results\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e3. Query Processing and Retrieval\u003c/h3\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-python\"\u003e\n# retrieval_service.py\nimport asyncio\nfrom typing import List, Dict, Optional, Tuple\nfrom dataclasses import dataclass\nimport re\n\n@dataclass\nclass RetrievalResult:\n    content: str\n    score: float\n    source: str\n    metadata: Dict\n    chunk_id: str\n\nclass QueryProcessor:\n    def __init__(self):\n        self.query_transformations = [\n            self._expand_acronyms,\n            self._add_synonyms,\n            self._extract_entities\n        ]\n    \n    async def process_query(self, query: str) -\u003e Dict:\n        \"\"\"Process and enhance the user query\"\"\"\n        processed_query = {\n            'original': query,\n            'cleaned': self._clean_query(query),\n            'entities': [],\n            'intent': self._classify_intent(query),\n            'keywords': self._extract_keywords(query)\n        }\n        \n        # Apply query transformations\n        for transformation in self.query_transformations:\n            try:\n                processed_query = await transformation(processed_query)\n            except Exception as e:\n                print(f\"Query transformation failed: {e}\")\n        \n        return processed_query\n    \n    def _clean_query(self, query: str) -\u003e str:\n        \"\"\"Clean and normalize the query\"\"\"\n        # Remove extra whitespace\n        query = re.sub(r'\\s+', ' ', query.strip())\n        \n        # Handle common query patterns\n        query = re.sub(r'^(what is|what are|how to|explain)', '', query, flags=re.IGNORECASE)\n        \n        return query\n    \n    def _classify_intent(self, query: str) -\u003e str:\n        \"\"\"Classify the intent of the query\"\"\"\n        query_lower = query.lower()\n        \n        if any(word in query_lower for word in ['how', 'steps', 'process', 'procedure']):\n            return 'how_to'\n        elif any(word in query_lower for word in ['what', 'define', 'definition', 'explain']):\n            return 'definition'\n        elif any(word in query_lower for word in ['compare', 'difference', 'vs', 'versus']):\n            return 'comparison'\n        elif any(word in query_lower for word in ['list', 'examples', 'types']):\n            return 'enumeration'\n        else:\n            return 'general'\n    \n    def _extract_keywords(self, query: str) -\u003e List[str]:\n        \"\"\"Extract important keywords from the query\"\"\"\n        # Simple keyword extraction - in production, use more sophisticated NLP\n        stop_words = {'the', 'is', 'at', 'which', 'on', 'a', 'an', 'and', 'or', 'but', 'in', 'with', 'to', 'for', 'of', 'as', 'by'}\n        words = query.lower().split()\n        keywords = [word for word in words if word not in stop_words and len(word) \u003e 2]\n        return keywords\n    \n    async def _expand_acronyms(self, processed_query: Dict) -\u003e Dict:\n        \"\"\"Expand known acronyms in the query\"\"\"\n        acronym_map = {\n            'ai': 'artificial intelligence',\n            'ml': 'machine learning',\n            'nlp': 'natural language processing',\n            'api': 'application programming interface',\n            'ui': 'user interface',\n            'ux': 'user experience'\n        }\n        \n        expanded_query = processed_query['cleaned']\n        for acronym, expansion in acronym_map.items():\n            expanded_query = re.sub(rf'\\b{acronym}\\b', f\"{acronym} {expansion}\", expanded_query, flags=re.IGNORECASE)\n        \n        processed_query['expanded'] = expanded_query\n        return processed_query\n    \n    async def _add_synonyms(self, processed_query: Dict) -\u003e Dict:\n        \"\"\"Add synonyms to improve retrieval\"\"\"\n        # In production, use a proper thesaurus or word embedding similarity\n        synonym_map = {\n            'build': ['create', 'develop', 'construct'],\n            'implement': ['build', 'create', 'develop'],\n            'optimize': ['improve', 'enhance', 'tune'],\n            'issue': ['problem', 'error', 'bug']\n        }\n        \n        synonyms = []\n        for keyword in processed_query.get('keywords', []):\n            if keyword in synonym_map:\n                synonyms.extend(synonym_map[keyword])\n        \n        processed_query['synonyms'] = synonyms\n        return processed_query\n    \n    async def _extract_entities(self, processed_query: Dict) -\u003e Dict:\n        \"\"\"Extract entities from the query\"\"\"\n        # Simple entity extraction - in production, use NER models\n        query = processed_query['cleaned']\n        \n        # Extract potential technology names (capitalized words)\n        tech_entities = re.findall(r'\\b[A-Z][a-z]+(?:[A-Z][a-z]+)*\\b', query)\n        \n        processed_query['entities'] = tech_entities\n        return processed_query\n\nclass HybridRetriever:\n    def __init__(self, vector_store: VectorStore, embedding_service: EmbeddingService):\n        self.vector_store = vector_store\n        self.embedding_service = embedding_service\n        self.query_processor = QueryProcessor()\n    \n    async def retrieve(self, query: str, top_k: int = 5, filters: Optional[Dict] = None) -\u003e List[RetrievalResult]:\n        \"\"\"Retrieve relevant documents using hybrid approach\"\"\"\n        \n        # Process the query\n        processed_query = await self.query_processor.process_query(query)\n        \n        # Generate query embedding\n        query_embedding = await self.embedding_service.generate_single_embedding(query)\n        \n        # Perform vector search\n        vector_results = await self.vector_store.search(\n            query_embedding=query_embedding,\n            top_k=top_k * 2,  # Get more results for reranking\n            filter_dict=filters\n        )\n        \n        # Convert to RetrievalResult objects\n        results = []\n        for result in vector_results:\n            retrieval_result = RetrievalResult(\n                content=result['content'],\n                score=result['score'],\n                source=result['source'],\n                metadata=result['metadata'],\n                chunk_id=result['id']\n            )\n            results.append(retrieval_result)\n        \n        # Rerank results based on query intent and keywords\n        reranked_results = await self._rerank_results(results, processed_query)\n        \n        return reranked_results[:top_k]\n    \n    async def _rerank_results(self, results: List[RetrievalResult], processed_query: Dict) -\u003e List[RetrievalResult]:\n        \"\"\"Rerank results based on additional criteria\"\"\"\n        \n        # Simple reranking based on keyword matching\n        keywords = processed_query.get('keywords', [])\n        entities = processed_query.get('entities', [])\n        \n        for result in results:\n            content_lower = result.content.lower()\n            \n            # Boost score for keyword matches\n            keyword_matches = sum(1 for keyword in keywords if keyword in content_lower)\n            entity_matches = sum(1 for entity in entities if entity.lower() in content_lower)\n            \n            # Adjust score based on matches\n            boost_factor = 1 + (keyword_matches * 0.1) + (entity_matches * 0.15)\n            result.score *= boost_factor\n        \n        # Sort by adjusted score\n        results.sort(key=lambda x: x.score, reverse=True)\n        \n        return results\n\n# Advanced retrieval with query expansion\nclass AdvancedRetriever(HybridRetriever):\n    def __init__(self, vector_store: VectorStore, embedding_service: EmbeddingService, llm_client):\n        super().__init__(vector_store, embedding_service)\n        self.llm_client = llm_client\n    \n    async def retrieve_with_expansion(self, query: str, top_k: int = 5) -\u003e List[RetrievalResult]:\n        \"\"\"Retrieve with LLM-powered query expansion\"\"\"\n        \n        # Generate multiple query variations using LLM\n        expanded_queries = await self._generate_query_variations(query)\n        \n        all_results = []\n        \n        # Retrieve for each query variation\n        for expanded_query in expanded_queries:\n            results = await self.retrieve(expanded_query, top_k=top_k//2)\n            all_results.extend(results)\n        \n        # Deduplicate and rerank\n        unique_results = self._deduplicate_results(all_results)\n        \n        return unique_results[:top_k]\n    \n    async def _generate_query_variations(self, query: str) -\u003e List[str]:\n        \"\"\"Generate query variations using LLM\"\"\"\n        prompt = f\"\"\"\n        Given the following query, generate 3 alternative ways to ask the same question.\n        Focus on different phrasings and synonyms while maintaining the same intent.\n        \n        Original query: {query}\n        \n        Alternative queries:\n        1.\n        2.\n        3.\n        \"\"\"\n        \n        response = await self.llm_client.generate(prompt, max_tokens=200)\n        \n        # Parse the response to extract alternative queries\n        lines = response.strip().split('\\n')\n        variations = [query]  # Include original query\n        \n        for line in lines:\n            if line.strip() and any(line.startswith(f\"{i}.\") for i in range(1, 4)):\n                variation = line.split('.', 1)[1].strip()\n                if variation:\n                    variations.append(variation)\n        \n        return variations\n    \n    def _deduplicate_results(self, results: List[RetrievalResult]) -\u003e List[RetrievalResult]:\n        \"\"\"Remove duplicate results based on chunk_id\"\"\"\n        seen_ids = set()\n        unique_results = []\n        \n        for result in results:\n            if result.chunk_id not in seen_ids:\n                seen_ids.add(result.chunk_id)\n                unique_results.append(result)\n        \n        # Sort by score\n        unique_results.sort(key=lambda x: x.score, reverse=True)\n        \n        return unique_results\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e4. Context Assembly and LLM Integration\u003c/h3\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-python\"\u003e\n# rag_system.py\nimport asyncio\nfrom typing import List, Dict, Optional, Tuple\nfrom dataclasses import dataclass\nimport openai\nfrom datetime import datetime\n\n@dataclass\nclass RAGResponse:\n    answer: str\n    sources: List[Dict]\n    confidence: float\n    query: str\n    timestamp: datetime\n\nclass ContextAssembler:\n    def __init__(self, max_context_length: int = 4000):\n        self.max_context_length = max_context_length\n    \n    def assemble_context(self, query: str, retrieved_docs: List[RetrievalResult]) -\u003e str:\n        \"\"\"Assemble context from retrieved documents\"\"\"\n        \n        context_parts = []\n        current_length = 0\n        \n        # Add query context\n        query_context = f\"User Question: {query}\\n\\nRelevant Information:\\n\\n\"\n        context_parts.append(query_context)\n        current_length += len(query_context)\n        \n        # Add retrieved documents\n        for i, doc in enumerate(retrieved_docs):\n            doc_context = f\"Source {i+1} (Score: {doc.score:.3f}):\\n{doc.content}\\n\\n\"\n            \n            if current_length + len(doc_context) \u003e self.max_context_length:\n                break\n            \n            context_parts.append(doc_context)\n            current_length += len(doc_context)\n        \n        return \"\".join(context_parts)\n    \n    def create_system_prompt(self, domain: str = \"general\") -\u003e str:\n        \"\"\"Create system prompt for the RAG system\"\"\"\n        \n        base_prompt = \"\"\"You are a helpful AI assistant that answers questions based on the provided context. \n\nInstructions:\n1. Answer the question using ONLY the information provided in the context\n2. If the context doesn't contain enough information to answer the question, say so clearly\n3. Cite specific sources when making claims\n4. Be concise but comprehensive\n5. If there are conflicting information in the sources, acknowledge this\n6. Maintain a professional and helpful tone\n\nFormat your response as follows:\n- Provide a direct answer to the question\n- Include relevant details from the sources\n- End with a \"Sources:\" section listing the source numbers you referenced\n\"\"\"\n        \n        domain_prompts = {\n            \"technical\": base_prompt + \"\\n\\nFocus on technical accuracy and provide implementation details when relevant.\",\n            \"business\": base_prompt + \"\\n\\nFocus on business implications and strategic considerations.\",\n            \"medical\": base_prompt + \"\\n\\nEmphasize accuracy and include appropriate disclaimers about medical advice.\"\n        }\n        \n        return domain_prompts.get(domain, base_prompt)\n\nclass LLMClient:\n    def __init__(self, api_key: str, model: str = \"gpt-3.5-turbo\"):\n        self.client = openai.OpenAI(api_key=api_key)\n        self.model = model\n    \n    async def generate_response(self, system_prompt: str, user_prompt: str, temperature: float = 0.1) -\u003e str:\n        \"\"\"Generate response using OpenAI API\"\"\"\n        \n        messages = [\n            {\"role\": \"system\", \"content\": system_prompt},\n            {\"role\": \"user\", \"content\": user_prompt}\n        ]\n        \n        response = await self.client.chat.completions.create(\n            model=self.model,\n            messages=messages,\n            temperature=temperature,\n            max_tokens=1000\n        )\n        \n        return response.choices[0].message.content\n\nclass RAGSystem:\n    def __init__(\n        self,\n        retriever: HybridRetriever,\n        llm_client: LLMClient,\n        context_assembler: Optional[ContextAssembler] = None,\n        domain: str = \"general\"\n    ):\n        self.retriever = retriever\n        self.llm_client = llm_client\n        self.context_assembler = context_assembler or ContextAssembler()\n        self.domain = domain\n        self.conversation_history = []\n    \n    async def query(self, question: str, filters: Optional[Dict] = None, top_k: int = 5) -\u003e RAGResponse:\n        \"\"\"Process a query through the RAG system\"\"\"\n        \n        start_time = datetime.now()\n        \n        # Retrieve relevant documents\n        retrieved_docs = await self.retriever.retrieve(\n            query=question,\n            top_k=top_k,\n            filters=filters\n        )\n        \n        if not retrieved_docs:\n            return RAGResponse(\n                answer=\"I couldn't find any relevant information to answer your question.\",\n                sources=[],\n                confidence=0.0,\n                query=question,\n                timestamp=start_time\n            )\n        \n        # Assemble context\n        context = self.context_assembler.assemble_context(question, retrieved_docs)\n        \n        # Generate system prompt\n        system_prompt = self.context_assembler.create_system_prompt(self.domain)\n        \n        # Generate response\n        response = await self.llm_client.generate_response(\n            system_prompt=system_prompt,\n            user_prompt=context\n        )\n        \n        # Calculate confidence based on retrieval scores\n        avg_score = sum(doc.score for doc in retrieved_docs) / len(retrieved_docs)\n        confidence = min(avg_score * 2, 1.0)  # Normalize to 0-1 range\n        \n        # Prepare sources\n        sources = []\n        for i, doc in enumerate(retrieved_docs):\n            sources.append({\n                \"id\": i + 1,\n                \"content\": doc.content[:200] + \"...\" if len(doc.content) \u003e 200 else doc.content,\n                \"source\": doc.source,\n                \"score\": doc.score,\n                \"metadata\": doc.metadata\n            })\n        \n        rag_response = RAGResponse(\n            answer=response,\n            sources=sources,\n            confidence=confidence,\n            query=question,\n            timestamp=start_time\n        )\n        \n        # Store in conversation history\n        self.conversation_history.append({\n            \"query\": question,\n            \"response\": rag_response,\n            \"timestamp\": start_time\n        })\n        \n        return rag_response\n    \n    async def conversational_query(self, question: str, **kwargs) -\u003e RAGResponse:\n        \"\"\"Handle conversational queries with context from previous interactions\"\"\"\n        \n        # Enhance query with conversation context\n        if self.conversation_history:\n            recent_context = self._get_recent_context()\n            enhanced_question = f\"Previous context: {recent_context}\\n\\nCurrent question: {question}\"\n        else:\n            enhanced_question = question\n        \n        return await self.query(enhanced_question, **kwargs)\n    \n    def _get_recent_context(self, max_history: int = 3) -\u003e str:\n        \"\"\"Get recent conversation context\"\"\"\n        recent_history = self.conversation_history[-max_history:]\n        \n        context_parts = []\n        for item in recent_history:\n            context_parts.append(f\"Q: {item['query']}\\nA: {item['response'].answer[:100]}...\")\n        \n        return \"\\n\\n\".join(context_parts)\n    \n    def clear_history(self):\n        \"\"\"Clear conversation history\"\"\"\n        self.conversation_history = []\n\n# Advanced RAG with self-reflection\nclass SelfReflectiveRAG(RAGSystem):\n    async def query_with_reflection(self, question: str, **kwargs) -\u003e RAGResponse:\n        \"\"\"Query with self-reflection to improve answer quality\"\"\"\n        \n        # Initial response\n        initial_response = await self.query(question, **kwargs)\n        \n        # Self-reflection prompt\n        reflection_prompt = f\"\"\"\n        Question: {question}\n        \n        Initial Answer: {initial_response.answer}\n        \n        Please evaluate this answer and consider:\n        1. Is the answer complete and accurate based on the sources?\n        2. Are there any important aspects missing?\n        3. Could the answer be clearer or more helpful?\n        \n        If improvements are needed, provide a better answer. If the answer is good as-is, respond with \"APPROVED\".\n        \"\"\"\n        \n        reflection = await self.llm_client.generate_response(\n            system_prompt=\"You are an expert reviewer evaluating AI-generated answers for quality and completeness.\",\n            user_prompt=reflection_prompt\n        )\n        \n        if reflection.strip() != \"APPROVED\":\n            # Use reflection as improved answer\n            initial_response.answer = reflection\n            initial_response.confidence *= 0.9  # Slightly reduce confidence for reflected answers\n        \n        return initial_response\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e5. Evaluation and Optimization\u003c/h3\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-python\"\u003e\n# evaluation.py\nimport asyncio\nimport json\nfrom typing import List, Dict, Tuple\nfrom dataclasses import dataclass\nimport numpy as np\nfrom sklearn.metrics.pairwise import cosine_similarity\n\n@dataclass\nclass EvaluationMetric:\n    name: str\n    score: float\n    details: Dict\n\nclass RAGEvaluator:\n    def __init__(self, rag_system: RAGSystem, embedding_service: EmbeddingService):\n        self.rag_system = rag_system\n        self.embedding_service = embedding_service\n    \n    async def evaluate_retrieval(self, test_queries: List[Dict]) -\u003e List[EvaluationMetric]:\n        \"\"\"Evaluate retrieval quality\"\"\"\n        \n        metrics = []\n        \n        for test_case in test_queries:\n            query = test_case['query']\n            expected_docs = test_case.get('relevant_docs', [])\n            \n            # Retrieve documents\n            retrieved_docs = await self.rag_system.retriever.retrieve(query, top_k=10)\n            retrieved_ids = [doc.chunk_id for doc in retrieved_docs]\n            \n            # Calculate precision@k and recall@k\n            for k in [1, 3, 5]:\n                precision_k = self._calculate_precision_at_k(retrieved_ids[:k], expected_docs)\n                recall_k = self._calculate_recall_at_k(retrieved_ids[:k], expected_docs)\n                \n                metrics.append(EvaluationMetric(\n                    name=f\"precision@{k}\",\n                    score=precision_k,\n                    details={\"query\": query, \"k\": k}\n                ))\n                \n                metrics.append(EvaluationMetric(\n                    name=f\"recall@{k}\",\n                    score=recall_k,\n                    details={\"query\": query, \"k\": k}\n                ))\n        \n        return metrics\n    \n    async def evaluate_generation(self, test_queries: List[Dict]) -\u003e List[EvaluationMetric]:\n        \"\"\"Evaluate generation quality\"\"\"\n        \n        metrics = []\n        \n        for test_case in test_queries:\n            query = test_case['query']\n            expected_answer = test_case.get('expected_answer', '')\n            \n            # Generate response\n            response = await self.rag_system.query(query)\n            \n            # Calculate semantic similarity\n            if expected_answer:\n                similarity = await self._calculate_semantic_similarity(\n                    response.answer, expected_answer\n                )\n                \n                metrics.append(EvaluationMetric(\n                    name=\"semantic_similarity\",\n                    score=similarity,\n                    details={\"query\": query, \"generated\": response.answer, \"expected\": expected_answer}\n                ))\n            \n            # Calculate faithfulness (how well the answer is grounded in sources)\n            faithfulness = await self._calculate_faithfulness(response)\n            \n            metrics.append(EvaluationMetric(\n                name=\"faithfulness\",\n                score=faithfulness,\n                details={\"query\": query, \"answer\": response.answer}\n            ))\n        \n        return metrics\n    \n    def _calculate_precision_at_k(self, retrieved: List[str], relevant: List[str]) -\u003e float:\n        \"\"\"Calculate precision@k\"\"\"\n        if not retrieved:\n            return 0.0\n        \n        relevant_retrieved = len(set(retrieved) \u0026 set(relevant))\n        return relevant_retrieved / len(retrieved)\n    \n    def _calculate_recall_at_k(self, retrieved: List[str], relevant: List[str]) -\u003e float:\n        \"\"\"Calculate recall@k\"\"\"\n        if not relevant:\n            return 0.0\n        \n        relevant_retrieved = len(set(retrieved) \u0026 set(relevant))\n        return relevant_retrieved / len(relevant)\n    \n    async def _calculate_semantic_similarity(self, text1: str, text2: str) -\u003e float:\n        \"\"\"Calculate semantic similarity between two texts\"\"\"\n        embeddings = await self.embedding_service.generate_embeddings([text1, text2])\n        \n        similarity = cosine_similarity([embeddings[0]], [embeddings[1]])[0][0]\n        return float(similarity)\n    \n    async def _calculate_faithfulness(self, response: RAGResponse) -\u003e float:\n        \"\"\"Calculate how faithful the answer is to the sources\"\"\"\n        if not response.sources:\n            return 0.0\n        \n        # Simple faithfulness calculation based on content overlap\n        answer_words = set(response.answer.lower().split())\n        source_words = set()\n        \n        for source in response.sources:\n            source_words.update(source['content'].lower().split())\n        \n        if not answer_words:\n            return 0.0\n        \n        overlap = len(answer_words \u0026 source_words)\n        faithfulness = overlap / len(answer_words)\n        \n        return min(faithfulness, 1.0)\n\n# Performance optimization\nclass RAGOptimizer:\n    def __init__(self, rag_system: RAGSystem):\n        self.rag_system = rag_system\n    \n    async def optimize_chunk_size(self, test_queries: List[Dict], chunk_sizes: List[int]) -\u003e int:\n        \"\"\"Find optimal chunk size through evaluation\"\"\"\n        \n        best_chunk_size = chunk_sizes[0]\n        best_score = 0.0\n        \n        for chunk_size in chunk_sizes:\n            # Recreate document processor with new chunk size\n            # This would require reprocessing documents\n            print(f\"Testing chunk size: {chunk_size}\")\n            \n            # Evaluate with current chunk size\n            evaluator = RAGEvaluator(self.rag_system, self.rag_system.retriever.embedding_service)\n            metrics = await evaluator.evaluate_generation(test_queries)\n            \n            # Calculate average score\n            avg_score = np.mean([m.score for m in metrics if m.name == \"semantic_similarity\"])\n            \n            if avg_score \u003e best_score:\n                best_score = avg_score\n                best_chunk_size = chunk_size\n        \n        return best_chunk_size\n    \n    async def optimize_retrieval_parameters(self, test_queries: List[Dict]) -\u003e Dict:\n        \"\"\"Optimize retrieval parameters\"\"\"\n        \n        best_params = {\"top_k\": 5}\n        best_score = 0.0\n        \n        # Test different top_k values\n        for top_k in [3, 5, 7, 10]:\n            total_score = 0.0\n            \n            for test_case in test_queries:\n                response = await self.rag_system.query(test_case['query'], top_k=top_k)\n                # Use confidence as proxy for quality\n                total_score += response.confidence\n            \n            avg_score = total_score / len(test_queries)\n            \n            if avg_score \u003e best_score:\n                best_score = avg_score\n                best_params[\"top_k\"] = top_k\n        \n        return best_params\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2 class=\"text-2xl font-bold text-gray-900 mb-4 mt-10\"\u003eProduction Deployment\u003c/h2\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e1. API Service Implementation\u003c/h3\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-python\"\u003e\n# api_service.py\nfrom fastapi import FastAPI, HTTPException, Depends\nfrom pydantic import BaseModel\nfrom typing import List, Optional, Dict\nimport asyncio\nimport logging\n\napp = FastAPI(title=\"RAG System API\", version=\"1.0.0\")\n\nclass QueryRequest(BaseModel):\n    question: str\n    filters: Optional[Dict] = None\n    top_k: int = 5\n    domain: str = \"general\"\n\nclass QueryResponse(BaseModel):\n    answer: str\n    sources: List[Dict]\n    confidence: float\n    query: str\n    timestamp: str\n\nclass DocumentUpload(BaseModel):\n    content: str\n    metadata: Dict\n    source: str\n\n# Global RAG system instance\nrag_system = None\n\n@app.on_event(\"startup\")\nasync def startup_event():\n    global rag_system\n    \n    # Initialize RAG system components\n    embedding_service = EmbeddingService()\n    vector_store = QdrantVectorStore()\n    await vector_store.initialize_collection(dimension=384)\n    \n    retriever = HybridRetriever(vector_store, embedding_service)\n    llm_client = LLMClient(api_key=\"your-openai-key\")\n    \n    rag_system = RAGSystem(retriever, llm_client)\n    \n    logging.info(\"RAG system initialized successfully\")\n\n@app.post(\"/query\", response_model=QueryResponse)\nasync def query_endpoint(request: QueryRequest):\n    \"\"\"Query the RAG system\"\"\"\n    try:\n        response = await rag_system.query(\n            question=request.question,\n            filters=request.filters,\n            top_k=request.top_k\n        )\n        \n        return QueryResponse(\n            answer=response.answer,\n            sources=response.sources,\n            confidence=response.confidence,\n            query=response.query,\n            timestamp=response.timestamp.isoformat()\n        )\n    \n    except Exception as e:\n        logging.error(f\"Query failed: {e}\")\n        raise HTTPException(status_code=500, detail=str(e))\n\n@app.post(\"/documents\")\nasync def upload_document(document: DocumentUpload):\n    \"\"\"Upload a new document to the knowledge base\"\"\"\n    try:\n        # Process document\n        processor = DocumentProcessor()\n        doc = Document(\n            content=document.content,\n            metadata=document.metadata,\n            source=document.source,\n            chunk_id=processor._generate_chunk_id(Path(document.source), 0, document.content)\n        )\n        \n        # Generate embedding\n        embedding = await rag_system.retriever.embedding_service.generate_single_embedding(doc.content)\n        doc.embedding = embedding\n        \n        # Store in vector database\n        await rag_system.retriever.vector_store.add_documents([doc])\n        \n        return {\"message\": \"Document uploaded successfully\", \"chunk_id\": doc.chunk_id}\n    \n    except Exception as e:\n        logging.error(f\"Document upload failed: {e}\")\n        raise HTTPException(status_code=500, detail=str(e))\n\n@app.get(\"/health\")\nasync def health_check():\n    \"\"\"Health check endpoint\"\"\"\n    return {\"status\": \"healthy\", \"timestamp\": datetime.utcnow().isoformat()}\n\nif __name__ == \"__main__\":\n    import uvicorn\n    uvicorn.run(app, host=\"0.0.0.0\", port=8000)\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch3 class=\"text-xl font-semibold text-gray-900 mb-3 mt-8\"\u003e2. Docker Deployment\u003c/h3\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-dockerfile\"\u003e\n# Dockerfile\nFROM python:3.11-slim\n\nWORKDIR /app\n\n# Install system dependencies\nRUN apt-get update \u0026\u0026 apt-get install -y \\\n    gcc \\\n    g++ \\\n    \u0026\u0026 rm -rf /var/lib/apt/lists/*\n\n# Copy requirements\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\n# Download spaCy model\nRUN python -m spacy download en_core_web_sm\n\n# Copy application code\nCOPY . .\n\n# Expose port\nEXPOSE 8000\n\n# Run the application\nCMD [\"uvicorn\", \"api_service:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003cpre class=\"bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6\"\u003e\u003ccode class=\"language-yaml\"\u003e\n# docker-compose.yml\nversion: '3.8'\n\nservices:\n  rag-api:\n    build: .\n    ports:\n      - \"8000:8000\"\n    environment:\n      - OPENAI_API_KEY=${OPENAI_API_KEY}\n      - QDRANT_HOST=qdrant\n      - QDRANT_PORT=6333\n    depends_on:\n      - qdrant\n    volumes:\n      - ./data:/app/data\n\n  qdrant:\n    image: qdrant/qdrant:v1.7.0\n    ports:\n      - \"6333:6333\"\n    volumes:\n      - qdrant_data:/qdrant/storage\n\n  nginx:\n    image: nginx:alpine\n    ports:\n      - \"80:80\"\n    volumes:\n      - ./nginx.conf:/etc/nginx/nginx.conf\n    depends_on:\n      - rag-api\n\nvolumes:\n  qdrant_data:\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003ch2 class=\"text-2xl font-bold text-gray-900 mb-4 mt-10\"\u003eConclusion\u003c/h2\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003eBuilding effective RAG systems requires careful attention to each component of the pipeline, from document processing and embedding generation to retrieval optimization and response generation. The implementation outlined in this guide provides a solid foundation for creating production-ready RAG applications.\u003c/p\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eKey Success Factors:\u003c/strong\u003e\u003c/p\u003e\n\n\u003col class=\"list-decimal pl-6 my-4 space-y-2\"\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eQuality Document Processing\u003c/strong\u003e - Proper chunking and metadata extraction\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eEffective Retrieval\u003c/strong\u003e - Hybrid approaches combining vector and keyword search\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eContext Assembly\u003c/strong\u003e - Intelligent context construction within token limits\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eContinuous Evaluation\u003c/strong\u003e - Regular assessment and optimization of system performance\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eProduction Readiness\u003c/strong\u003e - Scalable deployment with monitoring and error handling\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eExpected Benefits:\u003c/strong\u003e\u003c/p\u003e\n\n\u003cul class=\"list-disc pl-6 my-4 space-y-2\"\u003e\n\u003cli class=\"text-gray-700\"\u003e70-90% accuracy in domain-specific question answering\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003eSignificant reduction in hallucination compared to standalone LLMs\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003eAbility to work with proprietary and up-to-date information\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003eTransparent and traceable AI responses with source citations\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003eScalable architecture supporting thousands of concurrent users\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eCommon Challenges and Solutions:\u003c/strong\u003e\u003c/p\u003e\n\n\u003cul class=\"list-disc pl-6 my-4 space-y-2\"\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eChunk Size Optimization\u003c/strong\u003e - Use evaluation-driven optimization\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eRetrieval Quality\u003c/strong\u003e - Implement hybrid retrieval with reranking\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eContext Length Limits\u003c/strong\u003e - Smart context assembly and summarization\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eLatency Optimization\u003c/strong\u003e - Caching, async processing, and efficient vector search\u003c/li\u003e\n\u003cli class=\"text-gray-700\"\u003e\u003cstrong class=\"font-semibold text-gray-900\"\u003eAccuracy Validation\u003c/strong\u003e - Comprehensive evaluation frameworks\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003eRAG systems represent a powerful approach to building AI applications that are both knowledgeable and grounded in factual information. With proper implementation and optimization, they can provide significant value across a wide range of use cases.\u003c/p\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003e---\u003c/p\u003e\n\n\u003cp class=\"text-gray-700 leading-relaxed mb-4\"\u003e\u003cem class=\"italic\"\u003eReady to build your own RAG system? Our AI solutions experts can help you design and implement a custom RAG system tailored to your specific needs and data. \u003ca href=\"/contact\" class=\"text-primary-600 hover:text-primary-700 transition-colors underline\"\u003eContact us\u003c/a\u003e to get started.\u003c/em\u003e\u003c/p\u003e"])</script><script>self.__next_f.push([1,"2:[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/d5dbd49fb37d0aa9.css\",\"precedence\":\"next\",\"crossOrigin\":\"\"}]],[\"$\",\"$L3\",null,{\"buildId\":\"YNMQYYN7aMUrPmG3ibpj4\",\"assetPrefix\":\"\",\"initialCanonicalUrl\":\"/blog/rag-systems-implementation/\",\"initialTree\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"rag-systems-implementation\",\"d\"],{\"children\":[\"__PAGE__?{\\\"slug\\\":\\\"rag-systems-implementation\\\"}\",{}]}]}]},\"$undefined\",\"$undefined\",true],\"initialHead\":[false,\"$L4\"],\"globalErrorComponent\":\"$5\",\"children\":[null,[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"script\",null,{\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"Organization\\\",\\\"name\\\":\\\"Samshodan\\\",\\\"description\\\":\\\"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.\\\",\\\"url\\\":\\\"https://yourusername.github.io/samshodan-website\\\",\\\"logo\\\":\\\"https://yourusername.github.io/samshodan-website/logo.png\\\",\\\"contactPoint\\\":{\\\"@type\\\":\\\"ContactPoint\\\",\\\"telephone\\\":\\\"+1-555-123-4567\\\",\\\"contactType\\\":\\\"customer service\\\",\\\"email\\\":\\\"hello@samshodan.com\\\"},\\\"address\\\":{\\\"@type\\\":\\\"PostalAddress\\\",\\\"addressLocality\\\":\\\"Global\\\",\\\"addressCountry\\\":\\\"Remote\\\"},\\\"sameAs\\\":[\\\"https://linkedin.com/company/samshodan\\\",\\\"https://github.com/samshodan\\\"],\\\"foundingDate\\\":\\\"2014\\\",\\\"numberOfEmployees\\\":\\\"25-50\\\",\\\"industry\\\":\\\"Information Technology\\\",\\\"services\\\":[\\\"AI Chatbot Development\\\",\\\"API Portal Development\\\",\\\"Application Development\\\",\\\"AI Chatbot Development\\\",\\\"API Portal Solutions\\\",\\\"Developer Tools\\\"]}\"}}],[\"$\",\"script\",null,{\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"WebSite\\\",\\\"name\\\":\\\"Samshodan\\\",\\\"url\\\":\\\"https://yourusername.github.io/samshodan-website\\\",\\\"description\\\":\\\"Next-Generation Solutions for Modern Business\\\",\\\"publisher\\\":{\\\"@type\\\":\\\"Organization\\\",\\\"name\\\":\\\"Samshodan\\\"},\\\"potentialAction\\\":{\\\"@type\\\":\\\"SearchAction\\\",\\\"target\\\":\\\"https://yourusername.github.io/samshodan-website/search?q={search_term_string}\\\",\\\"query-input\\\":\\\"required name=search_term_string\\\"}}\"}}],[\"$\",\"script\",null,{\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"SoftwareApplication\\\",\\\"name\\\":\\\"Ultron AI Chatbot\\\",\\\"description\\\":\\\"Intelligent conversational AI powered by RAG agents with configurable backend LLM models including AWS Bedrock, OpenAI, and ChatGPT.\\\",\\\"url\\\":\\\"https://yourusername.github.io/samshodan-website/products/ultron\\\",\\\"applicationCategory\\\":\\\"BusinessApplication\\\",\\\"operatingSystem\\\":\\\"Web-based\\\",\\\"offers\\\":{\\\"@type\\\":\\\"Offer\\\",\\\"price\\\":\\\"Contact for pricing\\\",\\\"priceCurrency\\\":\\\"USD\\\"},\\\"provider\\\":{\\\"@type\\\":\\\"Organization\\\",\\\"name\\\":\\\"Samshodan\\\"},\\\"featureList\\\":[\\\"RAG (Retrieval-Augmented Generation) agents\\\",\\\"Multi-LLM backend support\\\",\\\"Configurable conversation flows\\\",\\\"Real-time analytics\\\",\\\"Enterprise security\\\"]}\"}}],[\"$\",\"script\",null,{\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"SoftwareApplication\\\",\\\"name\\\":\\\"Specly API Portal\\\",\\\"description\\\":\\\"Comprehensive developer portal for cataloging APIs, managing teams, and organizing development resources in structured folders.\\\",\\\"url\\\":\\\"https://yourusername.github.io/samshodan-website/products/specly\\\",\\\"applicationCategory\\\":\\\"DeveloperApplication\\\",\\\"operatingSystem\\\":\\\"Web-based\\\",\\\"offers\\\":{\\\"@type\\\":\\\"Offer\\\",\\\"price\\\":\\\"Contact for pricing\\\",\\\"priceCurrency\\\":\\\"USD\\\"},\\\"provider\\\":{\\\"@type\\\":\\\"Organization\\\",\\\"name\\\":\\\"Samshodan\\\"},\\\"featureList\\\":[\\\"API specification management\\\",\\\"Team collaboration tools\\\",\\\"Interactive documentation\\\",\\\"Version control\\\",\\\"Code generation\\\"]}\"}}]]}],[\"$\",\"body\",null,{\"className\":\"antialiased\",\"children\":[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"loading\":\"$undefined\",\"loadingStyles\":\"$undefined\",\"loadingScripts\":\"$undefined\",\"hasLoading\":false,\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":\"404\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],\"notFoundStyles\":[],\"childProp\":{\"current\":[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\"],\"loading\":\"$undefined\",\"loadingStyles\":\"$undefined\",\"loadingScripts\":\"$undefined\",\"hasLoading\":false,\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"childProp\":{\"current\":[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\",[\"slug\",\"rag-systems-implementation\",\"d\"],\"children\"],\"loading\":\"$undefined\",\"loadingStyles\":\"$undefined\",\"loadingScripts\":\"$undefined\",\"hasLoading\":false,\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"childProp\":{\"current\":[\"$L8\",[\"$\",\"main\",null,{\"children\":[[\"$\",\"$L9\",null,{}],[\"$\",\"article\",null,{\"className\":\"pt-32 pb-16\",\"children\":[\"$\",\"div\",null,{\"className\":\"container-max px-4 sm:px-6 lg:px-8\",\"children\":[[\"$\",\"nav\",null,{\"className\":\"mb-8\",\"children\":[\"$\",\"$La\",null,{\"href\":\"/blog\",\"className\":\"inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-2\",\"children\":[[\"$\",\"path\",\"1l729n\",{\"d\":\"m12 19-7-7 7-7\"}],[\"$\",\"path\",\"x3x0zl\",{\"d\":\"M19 12H5\"}],\"$undefined\"]}],\"Back to Blog\"]}]}],[\"$\",\"header\",null,{\"className\":\"max-w-4xl mx-auto text-center mb-12\",\"children\":[[\"$\",\"div\",null,{\"className\":\"mb-4\",\"children\":[\"$\",\"span\",null,{\"className\":\"bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium\",\"children\":\"AI Solutions\"}]}],[\"$\",\"h1\",null,{\"className\":\"text-4xl md:text-5xl font-bold text-gray-900 mb-6\",\"children\":\"Building RAG Systems: A Complete Guide to Retrieval Augmented Generation\"}],[\"$\",\"p\",null,{\"className\":\"text-xl text-gray-600 mb-8\",\"children\":\"Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications.\"}],[\"$\",\"div\",null,{\"className\":\"flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-2\",\"children\":[[\"$\",\"path\",\"975kel\",{\"d\":\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"}],[\"$\",\"circle\",\"17ys0d\",{\"cx\":\"12\",\"cy\":\"7\",\"r\":\"4\"}],\"$undefined\"]}],[\"$\",\"span\",null,{\"children\":\"Samshodan Team\"}]]}],[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-2\",\"children\":[[\"$\",\"rect\",\"eu3xkr\",{\"width\":\"18\",\"height\":\"18\",\"x\":\"3\",\"y\":\"4\",\"rx\":\"2\",\"ry\":\"2\"}],[\"$\",\"line\",\"m3sa8f\",{\"x1\":\"16\",\"x2\":\"16\",\"y1\":\"2\",\"y2\":\"6\"}],[\"$\",\"line\",\"18kwsl\",{\"x1\":\"8\",\"x2\":\"8\",\"y1\":\"2\",\"y2\":\"6\"}],[\"$\",\"line\",\"xt86sb\",{\"x1\":\"3\",\"x2\":\"21\",\"y1\":\"10\",\"y2\":\"10\"}],\"$undefined\"]}],[\"$\",\"span\",null,{\"children\":\"January 11, 2024\"}]]}],[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-2\",\"children\":[[\"$\",\"circle\",\"1mglay\",{\"cx\":\"12\",\"cy\":\"12\",\"r\":\"10\"}],[\"$\",\"polyline\",\"68esgv\",{\"points\":\"12 6 12 12 16 14\"}],\"$undefined\"]}],[\"$\",\"span\",null,{\"children\":\"5 min read\"}]]}]]}]]}],[\"$\",\"div\",null,{\"className\":\"max-w-4xl mx-auto\",\"children\":[\"$\",\"div\",null,{\"className\":\"prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h1:text-3xl prose-h1:mb-6 prose-h1:mt-8 prose-h2:text-2xl prose-h2:mb-4 prose-h2:mt-10 prose-h3:text-xl prose-h3:mb-3 prose-h3:mt-8 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-700 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:my-6 prose-ol:my-6 prose-ul:pl-6 prose-ol:pl-6 prose-li:text-gray-700 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:pl-6 prose-blockquote:italic prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto prose-pre:my-6\",\"dangerouslySetInnerHTML\":{\"__html\":\"$b\"}}]}],[\"$\",\"div\",null,{\"className\":\"max-w-4xl mx-auto mt-12 pt-8 border-t border-gray-200\",\"children\":[\"$\",\"div\",null,{\"className\":\"flex flex-wrap gap-2\",\"children\":[[\"$\",\"$La\",\"0\",{\"href\":\"/blog?tag=RAG\",\"className\":\"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":12,\"height\":12,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"path\",\"14b2ls\",{\"d\":\"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z\"}],[\"$\",\"path\",\"7u93v4\",{\"d\":\"M7 7h.01\"}],\"$undefined\"]}],\"RAG\"]}],[\"$\",\"$La\",\"1\",{\"href\":\"/blog?tag=AI\",\"className\":\"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":12,\"height\":12,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"path\",\"14b2ls\",{\"d\":\"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z\"}],[\"$\",\"path\",\"7u93v4\",{\"d\":\"M7 7h.01\"}],\"$undefined\"]}],\"AI\"]}],[\"$\",\"$La\",\"2\",{\"href\":\"/blog?tag=LLM\",\"className\":\"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":12,\"height\":12,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"path\",\"14b2ls\",{\"d\":\"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z\"}],[\"$\",\"path\",\"7u93v4\",{\"d\":\"M7 7h.01\"}],\"$undefined\"]}],\"LLM\"]}],[\"$\",\"$La\",\"3\",{\"href\":\"/blog?tag=Vector%20Databases\",\"className\":\"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":12,\"height\":12,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"path\",\"14b2ls\",{\"d\":\"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z\"}],[\"$\",\"path\",\"7u93v4\",{\"d\":\"M7 7h.01\"}],\"$undefined\"]}],\"Vector Databases\"]}],[\"$\",\"$La\",\"4\",{\"href\":\"/blog?tag=Machine%20Learning\",\"className\":\"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":12,\"height\":12,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"path\",\"14b2ls\",{\"d\":\"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z\"}],[\"$\",\"path\",\"7u93v4\",{\"d\":\"M7 7h.01\"}],\"$undefined\"]}],\"Machine Learning\"]}],[\"$\",\"$La\",\"5\",{\"href\":\"/blog?tag=NLP\",\"className\":\"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":12,\"height\":12,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"path\",\"14b2ls\",{\"d\":\"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z\"}],[\"$\",\"path\",\"7u93v4\",{\"d\":\"M7 7h.01\"}],\"$undefined\"]}],\"NLP\"]}]]}]}]]}]}],[\"$\",\"section\",null,{\"className\":\"py-16 bg-gray-50\",\"children\":[\"$\",\"div\",null,{\"className\":\"container-max px-4 sm:px-6 lg:px-8\",\"children\":[[\"$\",\"h2\",null,{\"className\":\"text-3xl font-bold text-gray-900 mb-12 text-center\",\"children\":\"Related Articles\"}],[\"$\",\"div\",null,{\"className\":\"grid md:grid-cols-2 lg:grid-cols-3 gap-8\",\"children\":[[\"$\",\"article\",\"2024-03-15-future-of-ai-in-enterprise-applications\",{\"className\":\"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden\",\"children\":[[\"$\",\"div\",null,{\"className\":\"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative\",\"children\":[[\"$\",\"div\",null,{\"className\":\"text-white text-4xl\",\"children\":\"📝\"}],[\"$\",\"div\",null,{\"className\":\"absolute top-4 left-4\",\"children\":[\"$\",\"span\",null,{\"className\":\"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium\",\"children\":\"AI Engineering\"}]}]]}],[\"$\",\"div\",null,{\"className\":\"p-6\",\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-xl font-bold text-gray-900 mb-3\",\"children\":[\"$\",\"$La\",null,{\"href\":\"/blog/2024-03-15-future-of-ai-in-enterprise-applications\",\"className\":\"hover:text-primary-600 transition-colors\",\"children\":\"The Future of AI in Enterprise Applications\"}]}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 mb-4 line-clamp-3\",\"children\":\"Exploring how artificial intelligence is transforming business processes and creating new opportunities for innovation across various industries.\"}],[\"$\",\"div\",null,{\"className\":\"flex items-center justify-between text-sm text-gray-500 mb-4\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"rect\",\"eu3xkr\",{\"width\":\"18\",\"height\":\"18\",\"x\":\"3\",\"y\":\"4\",\"rx\":\"2\",\"ry\":\"2\"}],[\"$\",\"line\",\"m3sa8f\",{\"x1\":\"16\",\"x2\":\"16\",\"y1\":\"2\",\"y2\":\"6\"}],[\"$\",\"line\",\"18kwsl\",{\"x1\":\"8\",\"x2\":\"8\",\"y1\":\"2\",\"y2\":\"6\"}],[\"$\",\"line\",\"xt86sb\",{\"x1\":\"3\",\"x2\":\"21\",\"y1\":\"10\",\"y2\":\"10\"}],\"$undefined\"]}],[\"$\",\"span\",null,{\"children\":\"3/14/2024\"}]]}],[\"$\",\"span\",null,{\"children\":\"5 min read\"}]]}],[\"$\",\"$La\",null,{\"href\":\"/blog/2024-03-15-future-of-ai-in-enterprise-applications\",\"className\":\"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors\",\"children\":[\"Read More \",[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"ml-1\",\"children\":[[\"$\",\"path\",\"1ays0h\",{\"d\":\"M5 12h14\"}],[\"$\",\"path\",\"xquz4c\",{\"d\":\"m12 5 7 7-7 7\"}],\"$undefined\"]}]]}]]}]]}],[\"$\",\"article\",\"2024-02-28-rag-systems-enhancing-ai-real-time-data\",{\"className\":\"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden\",\"children\":[[\"$\",\"div\",null,{\"className\":\"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative\",\"children\":[[\"$\",\"div\",null,{\"className\":\"text-white text-4xl\",\"children\":\"📝\"}],[\"$\",\"div\",null,{\"className\":\"absolute top-4 left-4\",\"children\":[\"$\",\"span\",null,{\"className\":\"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium\",\"children\":\"AI Engineering\"}]}]]}],[\"$\",\"div\",null,{\"className\":\"p-6\",\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-xl font-bold text-gray-900 mb-3\",\"children\":[\"$\",\"$La\",null,{\"href\":\"/blog/2024-02-28-rag-systems-enhancing-ai-real-time-data\",\"className\":\"hover:text-primary-600 transition-colors\",\"children\":\"RAG Systems: Enhancing AI with Real-time Data\"}]}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 mb-4 line-clamp-3\",\"children\":\"Understanding Retrieval Augmented Generation and how it can improve AI applications by incorporating up-to-date information.\"}],[\"$\",\"div\",null,{\"className\":\"flex items-center justify-between text-sm text-gray-500 mb-4\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-1\",\"children\":[[\"$\",\"rect\",\"eu3xkr\",{\"width\":\"18\",\"height\":\"18\",\"x\":\"3\",\"y\":\"4\",\"rx\":\"2\",\"ry\":\"2\"}],[\"$\",\"line\",\"m3sa8f\",{\"x1\":\"16\",\"x2\":\"16\",\"y1\":\"2\",\"y2\":\"6\"}],[\"$\",\"line\",\"18kwsl\",{\"x1\":\"8\",\"x2\":\"8\",\"y1\":\"2\",\"y2\":\"6\"}],[\"$\",\"line\",\"xt86sb\",{\"x1\":\"3\",\"x2\":\"21\",\"y1\":\"10\",\"y2\":\"10\"}],\"$undefined\"]}],[\"$\",\"span\",null,{\"children\":\"2/27/2024\"}]]}],[\"$\",\"span\",null,{\"children\":\"8 min read\"}]]}],[\"$\",\"$La\",null,{\"href\":\"/blog/2024-02-28-rag-systems-enhancing-ai-real-time-data\",\"className\":\"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors\",\"children\":[\"Read More \",[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"ml-1\",\"children\":[[\"$\",\"path\",\"1ays0h\",{\"d\":\"M5 12h14\"}],[\"$\",\"path\",\"xquz4c\",{\"d\":\"m12 5 7 7-7 7\"}],\"$undefined\"]}]]}]]}]]}]]}]]}]}],[\"$\",\"footer\",null,{\"className\":\"bg-gray-900 text-white\",\"children\":[\"$\",\"div\",null,{\"className\":\"container-max section-padding\",\"children\":[[\"$\",\"div\",null,{\"className\":\"grid lg:grid-cols-3 gap-8 mb-12\",\"children\":[[\"$\",\"div\",null,{\"className\":\"lg:col-span-1\",\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-2xl font-bold mb-4\",\"children\":\"Samshodan\"}],[\"$\",\"p\",null,{\"className\":\"text-gray-300 mb-6 leading-relaxed\",\"children\":\"Next-generation AI-powered products for modern business. We create innovative technology solutions and developer tools that enhance productivity and drive innovation.\"}],[\"$\",\"div\",null,{\"className\":\"space-y-3\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-3 text-primary-400\",\"children\":[[\"$\",\"rect\",\"18n3k1\",{\"width\":\"20\",\"height\":\"16\",\"x\":\"2\",\"y\":\"4\",\"rx\":\"2\"}],[\"$\",\"path\",\"1ocrg3\",{\"d\":\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"}],\"$undefined\"]}],[\"$\",\"a\",null,{\"href\":\"mailto:hello@samshodan.com\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"hello@samshodan.com\"}]]}],[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":16,\"height\":16,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"mr-3 text-primary-400\",\"children\":[[\"$\",\"path\",\"2oe9fu\",{\"d\":\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\"}],[\"$\",\"circle\",\"ilqhr7\",{\"cx\":\"12\",\"cy\":\"10\",\"r\":\"3\"}],\"$undefined\"]}],[\"$\",\"span\",null,{\"className\":\"text-gray-300\",\"children\":\"Global Remote Team\"}]]}]]}]]}],[\"$\",\"div\",null,{\"children\":[[\"$\",\"h4\",null,{\"className\":\"text-lg font-semibold mb-4\",\"children\":\"Products\"}],[\"$\",\"ul\",null,{\"className\":\"space-y-3\",\"children\":[[\"$\",\"li\",\"0\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/products/ultron\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"Ultron AI Chatbot\"}]}],[\"$\",\"li\",\"1\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/products/specly\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"Specly API Portal\"}]}]]}]]}],[\"$\",\"div\",null,{\"children\":[[\"$\",\"h4\",null,{\"className\":\"text-lg font-semibold mb-4\",\"children\":\"Company\"}],[\"$\",\"ul\",null,{\"className\":\"space-y-3 mb-6\",\"children\":[[\"$\",\"li\",\"0\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/about\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"About Us\"}]}],[\"$\",\"li\",\"1\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/blog\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"Blog\"}]}],[\"$\",\"li\",\"2\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/contact\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"Contact\"}]}],[\"$\",\"li\",\"3\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/privacy\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"Privacy Policy\"}]}],[\"$\",\"li\",\"4\",{\"children\":[\"$\",\"a\",null,{\"href\":\"/terms\",\"className\":\"text-gray-300 hover:text-white transition-colors\",\"children\":\"Terms of Service\"}]}]]}],[\"$\",\"div\",null,{\"className\":\"flex space-x-4\",\"children\":[[\"$\",\"a\",\"0\",{\"href\":\"#\",\"className\":\"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200\",\"aria-label\":\"LinkedIn\",\"children\":[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":20,\"height\":20,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-linkedin\",\"children\":[[\"$\",\"path\",\"c2jq9f\",{\"d\":\"M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z\"}],[\"$\",\"rect\",\"mk3on5\",{\"width\":\"4\",\"height\":\"12\",\"x\":\"2\",\"y\":\"9\"}],[\"$\",\"circle\",\"bt5ra8\",{\"cx\":\"4\",\"cy\":\"4\",\"r\":\"2\"}],\"$undefined\"]}]}],[\"$\",\"a\",\"1\",{\"href\":\"#\",\"className\":\"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200\",\"aria-label\":\"GitHub\",\"children\":[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":20,\"height\":20,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-github\",\"children\":[[\"$\",\"path\",\"tonef\",{\"d\":\"M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4\"}],[\"$\",\"path\",\"9comsn\",{\"d\":\"M9 18c-4.51 2-5-2-7-2\"}],\"$undefined\"]}]}]]}]]}]]}],[\"$\",\"div\",null,{\"className\":\"border-t border-gray-800 pt-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"flex flex-col md:flex-row justify-between items-center\",\"children\":[[\"$\",\"p\",null,{\"className\":\"text-gray-400 text-sm\",\"children\":[\"© \",2025,\" Samshodan. All rights reserved.\"]}],[\"$\",\"p\",null,{\"className\":\"text-gray-400 text-sm mt-4 md:mt-0\",\"children\":\"Built with ❤️ for modern business\"}]]}]}]]}]}]]}],null],\"segment\":\"__PAGE__?{\\\"slug\\\":\\\"rag-systems-implementation\\\"}\"},\"styles\":null}],\"segment\":[\"slug\",\"rag-systems-implementation\",\"d\"]},\"styles\":null}],\"segment\":\"blog\"},\"styles\":null}]}]]}],null]}]]\n"])</script><script>self.__next_f.push([1,"4:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"Building RAG Systems: A Complete Guide to Retrieval Augmented Generation | Samshodan Blog\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications.\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Samshodan\"}],[\"$\",\"link\",\"5\",{\"rel\":\"manifest\",\"href\":\"/manifest.webmanifest\"}],[\"$\",\"meta\",\"6\",{\"name\":\"keywords\",\"content\":\"RAG, AI, LLM, Vector Databases, Machine Learning, NLP\"}],[\"$\",\"meta\",\"7\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"link\",\"8\",{\"rel\":\"canonical\",\"href\":\"/blog/rag-systems-implementation\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"Building RAG Systems: A Complete Guide to Retrieval Augmented Generation\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"Learn how to build powerful RAG systems that combine your proprietary data with large language models for accurate, contextual AI applications.\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:type\",\"content\":\"article\"}],[\"$\",\"meta\",\"12\",{\"property\":\"article:published_time\",\"content\":\"2024-01-12\"}],[\"$\",\"meta\",\"13\",{\"property\":\"article:author\",\"content\":\"Samshodan Team\"}],[\"$\",\"meta\",\"14\",{\"property\":\"article:tag\",\"content\":\"RAG\"}],[\"$\",\"meta\",\"15\",{\"property\":\"article:tag\",\"content\":\"AI\"}],[\"$\",\"meta\",\"16\",{\"property\":\"article:tag\",\"content\":\"LLM\"}],[\"$\",\"meta\",\"17\",{\"property\":\"article:tag\",\"content\":\"Vector Databases\"}],[\"$\",\"meta\",\"18\",{\"property\":\"article:tag\",\"content\":\"Machine Learning\"}],[\"$\",\"meta\",\"19\",{\"property\":\"article:tag\",\"content\":\"NLP\"}],[\"$\",\"meta\",\"20\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"21\",{\"name\":\"twitter:title\",\"content\":\"Samshodan - AI Products \u0026 Developer Tools\"}],[\"$\",\"meta\",\"22\",{\"name\":\"twitter:description\",\"content\":\"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation.\"}]]\n"])</script><script>self.__next_f.push([1,"8:null\n"])</script><script>self.__next_f.push([1,""])</script></body></html>

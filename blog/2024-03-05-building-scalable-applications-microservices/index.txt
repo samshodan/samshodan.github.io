@@ -1,0 +1,239 @@
+1:HL["/_next/static/css/d5dbd49fb37d0aa9.css","style",{"crossOrigin":""}]
+0:["YNMQYYN7aMUrPmG3ibpj4",[[["",{"children":["blog",{"children":[["slug","2024-03-05-building-scalable-applications-microservices","d"],{"children":["__PAGE__?{\"slug\":\"2024-03-05-building-scalable-applications-microservices\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/d5dbd49fb37d0aa9.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+4:I[6954,[],""]
+5:I[7264,[],""]
+7:I[3827,["350","static/chunks/350-ce2a8f3d46727efe.js","308","static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js"],""]
+8:I[8326,["350","static/chunks/350-ce2a8f3d46727efe.js","308","static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js"],""]
+9:T3e52,
+<h1 class="text-3xl font-bold text-gray-900 mb-6 mt-8">Building Scalable Applications with Microservices</h1>
+
+<p class="text-gray-700 leading-relaxed mb-4">Microservices architecture has become the gold standard for building scalable, maintainable applications. This architectural pattern breaks down monolithic applications into smaller, independent services that can be developed, deployed, and scaled independently.</p>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Understanding Microservices Architecture</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">What Are Microservices?</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Microservices are small, autonomous services that work together to form a complete application. Each service:</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Focuses on a single business capability</li>
+<li class="text-gray-700">Can be developed by a small team</li>
+<li class="text-gray-700">Communicates via well-defined APIs</li>
+<li class="text-gray-700">Can be deployed independently</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Monolith vs. Microservices</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Monolithic Architecture</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Single deployable unit</li>
+<li class="text-gray-700">Shared database</li>
+<li class="text-gray-700">Technology stack consistency</li>
+<li class="text-gray-700">Simple initial development</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Microservices Architecture</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Multiple deployable services</li>
+<li class="text-gray-700">Service-specific databases</li>
+<li class="text-gray-700">Technology diversity</li>
+<li class="text-gray-700">Complex orchestration</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Benefits of Microservices</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Scalability</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Independent Scaling</strong>: Scale only the services that need it</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Resource Optimization</strong>: Allocate resources based on service requirements</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Performance Isolation</strong>: Issues in one service don't affect others</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Technology Diversity</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Best Tool for the Job</strong>: Choose optimal technology for each service</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Innovation Freedom</strong>: Experiment with new technologies safely</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Legacy Integration</strong>: Gradually modernize without full rewrites</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Team Autonomy</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Independent Development</strong>: Teams can work on different services simultaneously</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Faster Deployment</strong>: Deploy services independently</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Ownership</strong>: Clear service ownership and responsibility</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">4. Fault Isolation</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Resilience</strong>: Failure in one service doesn't bring down the entire system</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Graceful Degradation</strong>: System continues to function with reduced capabilities</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Easier Debugging</strong>: Issues are isolated to specific services</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Design Principles</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Single Responsibility</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Each microservice should have one reason to change and focus on a single business capability.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Decentralized Governance</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Teams should have autonomy over their services, including technology choices and deployment decisions.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Failure Isolation</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Design services to handle failures gracefully and not cascade failures to other services.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">4. Data Ownership</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Each service should own its data and not share databases with other services.</p>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Implementation Strategies</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Service Decomposition</h3>
+<p class="text-gray-700 leading-relaxed mb-4">#### Domain-Driven Design (DDD)</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Bounded Contexts</strong>: Identify natural boundaries in your domain</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Aggregates</strong>: Group related entities together</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Ubiquitous Language</strong>: Use consistent terminology across teams</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Decomposition Patterns</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">By Business Capability</strong>: Organize around business functions</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">By Data</strong>: Separate services based on data ownership</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">By Team Structure</strong>: Align services with team boundaries</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Communication Patterns</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Synchronous Communication</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">REST APIs</strong>: Simple, widely understood</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">GraphQL</strong>: Flexible query language</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">gRPC</strong>: High-performance, type-safe</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Asynchronous Communication</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Message Queues</strong>: Reliable message delivery</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Event Streaming</strong>: Real-time data processing</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Publish-Subscribe</strong>: Loose coupling between services</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Data Management</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Database per Service</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Data Isolation</strong>: Each service owns its data</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Technology Choice</strong>: Use the best database for each service</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Independent Evolution</strong>: Schema changes don't affect other services</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">#### Data Consistency Patterns</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Eventual Consistency</strong>: Accept temporary inconsistency for better performance</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Saga Pattern</strong>: Manage distributed transactions</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Event Sourcing</strong>: Store events instead of current state</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Technology Stack</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Container Orchestration</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Docker</strong>: Containerization platform</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Kubernetes</strong>: Container orchestration</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Service Mesh</strong>: Inter-service communication management</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">API Gateway</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Request Routing</strong>: Direct requests to appropriate services</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Authentication</strong>: Centralized security</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Rate Limiting</strong>: Protect services from overload</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Monitoring</strong>: Centralized logging and metrics</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Monitoring and Observability</h3>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Distributed Tracing</strong>: Track requests across services</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Centralized Logging</strong>: Aggregate logs from all services</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Metrics Collection</strong>: Monitor service health and performance</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Alerting</strong>: Proactive issue detection</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Common Challenges and Solutions</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Distributed System Complexity</h3>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Challenge</strong>: Managing multiple services is complex</p>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Solutions</strong>:</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Use service mesh for communication management</li>
+<li class="text-gray-700">Implement comprehensive monitoring</li>
+<li class="text-gray-700">Automate deployment and scaling</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Data Consistency</h3>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Challenge</strong>: Maintaining consistency across services</p>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Solutions</strong>:</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Embrace eventual consistency</li>
+<li class="text-gray-700">Implement saga patterns for transactions</li>
+<li class="text-gray-700">Use event-driven architecture</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Network Latency</h3>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Challenge</strong>: Inter-service communication overhead</p>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Solutions</strong>:</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Optimize service boundaries</li>
+<li class="text-gray-700">Use caching strategies</li>
+<li class="text-gray-700">Implement circuit breakers</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">4. Testing Complexity</h3>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Challenge</strong>: Testing distributed systems</p>
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Solutions</strong>:</p>
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Contract testing between services</li>
+<li class="text-gray-700">End-to-end testing automation</li>
+<li class="text-gray-700">Chaos engineering practices</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Best Practices</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Start with a Monolith</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Begin with a well-structured monolith and extract services as you understand the domain better.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Design for Failure</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Assume services will fail and design resilience patterns like circuit breakers and retries.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Automate Everything</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Invest heavily in automation for deployment, testing, and monitoring.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">4. Monitor Extensively</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Implement comprehensive monitoring and observability from day one.</p>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">5. Secure by Design</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Implement security at every layer, including service-to-service communication.</p>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Migration Strategy</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Strangler Fig Pattern</h3>
+<p class="text-gray-700 leading-relaxed mb-4">Gradually replace monolith functionality with microservices:</p>
+<ol class="list-decimal pl-6 my-4 space-y-2">
+<li class="text-gray-700">Identify service boundaries</li>
+<li class="text-gray-700">Extract services incrementally</li>
+<li class="text-gray-700">Route traffic to new services</li>
+<li class="text-gray-700">Retire old functionality</li>
+</ul>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">Database Decomposition</h3>
+<ol class="list-decimal pl-6 my-4 space-y-2">
+<li class="text-gray-700">Start with shared database</li>
+<li class="text-gray-700">Separate schemas</li>
+<li class="text-gray-700">Extract to separate databases</li>
+<li class="text-gray-700">Implement data synchronization</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Conclusion</h2>
+
+<p class="text-gray-700 leading-relaxed mb-4">Microservices architecture offers significant benefits for scalable application development, but it comes with increased complexity. Success requires careful planning, proper tooling, and a commitment to best practices. Organizations should start small, learn from experience, and gradually evolve their architecture.</p>
+
+<p class="text-gray-700 leading-relaxed mb-4"><em class="italic">Ready to build scalable microservices? Our application development team can help you design and implement a microservices architecture tailored to your needs.</em></p>2:[null,["$","html",null,{"lang":"en","children":[["$","head",null,{"children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Samshodan\",\"description\":\"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.\",\"url\":\"https://yourusername.github.io/samshodan-website\",\"logo\":\"https://yourusername.github.io/samshodan-website/logo.png\",\"contactPoint\":{\"@type\":\"ContactPoint\",\"telephone\":\"+1-555-123-4567\",\"contactType\":\"customer service\",\"email\":\"hello@samshodan.com\"},\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Global\",\"addressCountry\":\"Remote\"},\"sameAs\":[\"https://linkedin.com/company/samshodan\",\"https://github.com/samshodan\"],\"foundingDate\":\"2014\",\"numberOfEmployees\":\"25-50\",\"industry\":\"Information Technology\",\"services\":[\"AI Chatbot Development\",\"API Portal Development\",\"Application Development\",\"AI Chatbot Development\",\"API Portal Solutions\",\"Developer Tools\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Samshodan\",\"url\":\"https://yourusername.github.io/samshodan-website\",\"description\":\"Next-Generation Solutions for Modern Business\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://yourusername.github.io/samshodan-website/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Ultron AI Chatbot\",\"description\":\"Intelligent conversational AI powered by RAG agents with configurable backend LLM models including AWS Bedrock, OpenAI, and ChatGPT.\",\"url\":\"https://yourusername.github.io/samshodan-website/products/ultron\",\"applicationCategory\":\"BusinessApplication\",\"operatingSystem\":\"Web-based\",\"offers\":{\"@type\":\"Offer\",\"price\":\"Contact for pricing\",\"priceCurrency\":\"USD\"},\"provider\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"featureList\":[\"RAG (Retrieval-Augmented Generation) agents\",\"Multi-LLM backend support\",\"Configurable conversation flows\",\"Real-time analytics\",\"Enterprise security\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Specly API Portal\",\"description\":\"Comprehensive developer portal for cataloging APIs, managing teams, and organizing development resources in structured folders.\",\"url\":\"https://yourusername.github.io/samshodan-website/products/specly\",\"applicationCategory\":\"DeveloperApplication\",\"operatingSystem\":\"Web-based\",\"offers\":{\"@type\":\"Offer\",\"price\":\"Contact for pricing\",\"priceCurrency\":\"USD\"},\"provider\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"featureList\":[\"API specification management\",\"Team collaboration tools\",\"Interactive documentation\",\"Version control\",\"Code generation\"]}"}}]]}],["$","body",null,{"className":"antialiased","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[],"childProp":{"current":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","blog","children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","blog","children",["slug","2024-03-05-building-scalable-applications-microservices","d"],"children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":["$L6",["$","main",null,{"children":[["$","$L7",null,{}],["$","article",null,{"className":"pt-32 pb-16","children":["$","div",null,{"className":"container-max px-4 sm:px-6 lg:px-8","children":[["$","nav",null,{"className":"mb-8","children":["$","$L8",null,{"href":"/blog","className":"inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","path","1l729n",{"d":"m12 19-7-7 7-7"}],["$","path","x3x0zl",{"d":"M19 12H5"}],"$undefined"]}],"Back to Blog"]}]}],["$","header",null,{"className":"max-w-4xl mx-auto text-center mb-12","children":[["$","div",null,{"className":"mb-4","children":["$","span",null,{"className":"bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium","children":"Application Development"}]}],["$","h1",null,{"className":"text-4xl md:text-5xl font-bold text-gray-900 mb-6","children":"Building Scalable Applications with Microservices"}],["$","p",null,{"className":"text-xl text-gray-600 mb-8","children":"Learn how to design and implement microservices architecture for better scalability, maintainability, and team productivity."}],["$","div",null,{"className":"flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","path","975kel",{"d":"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"}],["$","circle","17ys0d",{"cx":"12","cy":"7","r":"4"}],"$undefined"]}],["$","span",null,{"children":"Samshodan Team"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"March 4, 2024"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","circle","1mglay",{"cx":"12","cy":"12","r":"10"}],["$","polyline","68esgv",{"points":"12 6 12 12 16 14"}],"$undefined"]}],["$","span",null,{"children":"6 min read"}]]}]]}]]}],["$","div",null,{"className":"max-w-4xl mx-auto","children":["$","div",null,{"className":"prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h1:text-3xl prose-h1:mb-6 prose-h1:mt-8 prose-h2:text-2xl prose-h2:mb-4 prose-h2:mt-10 prose-h3:text-xl prose-h3:mb-3 prose-h3:mt-8 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-700 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:my-6 prose-ol:my-6 prose-ul:pl-6 prose-ol:pl-6 prose-li:text-gray-700 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:pl-6 prose-blockquote:italic prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto prose-pre:my-6","dangerouslySetInnerHTML":{"__html":"$9"}}]}],["$","div",null,{"className":"max-w-4xl mx-auto mt-12 pt-8 border-t border-gray-200","children":["$","div",null,{"className":"flex flex-wrap gap-2","children":[["$","$L8","0",{"href":"/blog?tag=Microservices","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Microservices"]}],["$","$L8","1",{"href":"/blog?tag=Scalability","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Scalability"]}],["$","$L8","2",{"href":"/blog?tag=Architecture","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Architecture"]}],["$","$L8","3",{"href":"/blog?tag=Software%20Design","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Software Design"]}]]}]}]]}]}],["$","section",null,{"className":"py-16 bg-gray-50","children":["$","div",null,{"className":"container-max px-4 sm:px-6 lg:px-8","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900 mb-12 text-center","children":"Related Articles"}],["$","div",null,{"className":"grid md:grid-cols-2 lg:grid-cols-3 gap-8","children":[["$","article","2024-03-10-modernizing-legacy-systems-strategic-approach",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Modernization"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/2024-03-10-modernizing-legacy-systems-strategic-approach","className":"hover:text-primary-600 transition-colors","children":"Modernizing Legacy Systems: A Strategic Approach"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Best practices and strategies for successfully migrating legacy applications to modern cloud-native architectures without disrupting business operations."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"3/9/2024"}]]}],["$","span",null,{"children":"7 min read"}]]}],["$","$L8",null,{"href":"/blog/2024-03-10-modernizing-legacy-systems-strategic-approach","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}],["$","article","2024-02-20-cloud-native-development-best-practices",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Development"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/2024-02-20-cloud-native-development-best-practices","className":"hover:text-primary-600 transition-colors","children":"Cloud-Native Development Best Practices"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Essential practices for building applications that fully leverage cloud computing capabilities and modern development methodologies."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"2/19/2024"}]]}],["$","span",null,{"children":"6 min read"}]]}],["$","$L8",null,{"href":"/blog/2024-02-20-cloud-native-development-best-practices","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}],["$","article","2024-02-15-api-first-design-building-for-future",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Development"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/2024-02-15-api-first-design-building-for-future","className":"hover:text-primary-600 transition-colors","children":"API-First Design: Building for the Future"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Why API-first design is crucial for modern applications and how it enables better integration and scalability."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"2/14/2024"}]]}],["$","span",null,{"children":"5 min read"}]]}],["$","$L8",null,{"href":"/blog/2024-02-15-api-first-design-building-for-future","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}]]}]]}]}],["$","footer",null,{"className":"bg-gray-900 text-white","children":["$","div",null,{"className":"container-max section-padding","children":[["$","div",null,{"className":"grid lg:grid-cols-3 gap-8 mb-12","children":[["$","div",null,{"className":"lg:col-span-1","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4","children":"Samshodan"}],["$","p",null,{"className":"text-gray-300 mb-6 leading-relaxed","children":"Next-generation AI-powered products for modern business. We create innovative technology solutions and developer tools that enhance productivity and drive innovation."}],["$","div",null,{"className":"space-y-3","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-3 text-primary-400","children":[["$","rect","18n3k1",{"width":"20","height":"16","x":"2","y":"4","rx":"2"}],["$","path","1ocrg3",{"d":"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"}],"$undefined"]}],["$","a",null,{"href":"mailto:hello@samshodan.com","className":"text-gray-300 hover:text-white transition-colors","children":"hello@samshodan.com"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-3 text-primary-400","children":[["$","path","2oe9fu",{"d":"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"}],["$","circle","ilqhr7",{"cx":"12","cy":"10","r":"3"}],"$undefined"]}],["$","span",null,{"className":"text-gray-300","children":"Global Remote Team"}]]}]]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"text-lg font-semibold mb-4","children":"Products"}],["$","ul",null,{"className":"space-y-3","children":[["$","li","0",{"children":["$","a",null,{"href":"/products/ultron","className":"text-gray-300 hover:text-white transition-colors","children":"Ultron AI Chatbot"}]}],["$","li","1",{"children":["$","a",null,{"href":"/products/specly","className":"text-gray-300 hover:text-white transition-colors","children":"Specly API Portal"}]}]]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"text-lg font-semibold mb-4","children":"Company"}],["$","ul",null,{"className":"space-y-3 mb-6","children":[["$","li","0",{"children":["$","a",null,{"href":"/about","className":"text-gray-300 hover:text-white transition-colors","children":"About Us"}]}],["$","li","1",{"children":["$","a",null,{"href":"/blog","className":"text-gray-300 hover:text-white transition-colors","children":"Blog"}]}],["$","li","2",{"children":["$","a",null,{"href":"/contact","className":"text-gray-300 hover:text-white transition-colors","children":"Contact"}]}],["$","li","3",{"children":["$","a",null,{"href":"/privacy","className":"text-gray-300 hover:text-white transition-colors","children":"Privacy Policy"}]}],["$","li","4",{"children":["$","a",null,{"href":"/terms","className":"text-gray-300 hover:text-white transition-colors","children":"Terms of Service"}]}]]}],["$","div",null,{"className":"flex space-x-4","children":[["$","a","0",{"href":"#","className":"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200","aria-label":"LinkedIn","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-linkedin","children":[["$","path","c2jq9f",{"d":"M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"}],["$","rect","mk3on5",{"width":"4","height":"12","x":"2","y":"9"}],["$","circle","bt5ra8",{"cx":"4","cy":"4","r":"2"}],"$undefined"]}]}],["$","a","1",{"href":"#","className":"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200","aria-label":"GitHub","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-github","children":[["$","path","tonef",{"d":"M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"}],["$","path","9comsn",{"d":"M9 18c-4.51 2-5-2-7-2"}],"$undefined"]}]}]]}]]}]]}],["$","div",null,{"className":"border-t border-gray-800 pt-8","children":["$","div",null,{"className":"flex flex-col md:flex-row justify-between items-center","children":[["$","p",null,{"className":"text-gray-400 text-sm","children":["© ",2025," Samshodan. All rights reserved."]}],["$","p",null,{"className":"text-gray-400 text-sm mt-4 md:mt-0","children":"Built with ❤️ for modern business"}]]}]}]]}]}]]}],null],"segment":"__PAGE__?{\"slug\":\"2024-03-05-building-scalable-applications-microservices\"}"},"styles":null}],"segment":["slug","2024-03-05-building-scalable-applications-microservices","d"]},"styles":null}],"segment":"blog"},"styles":null}]}]]}],null]
+3:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Building Scalable Applications with Microservices | Samshodan Blog"}],["$","meta","3",{"name":"description","content":"Learn how to design and implement microservices architecture for better scalability, maintainability, and team productivity."}],["$","meta","4",{"name":"author","content":"Samshodan"}],["$","link","5",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","6",{"name":"keywords","content":"Microservices, Scalability, Architecture, Software Design"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","link","8",{"rel":"canonical","href":"/blog/2024-03-05-building-scalable-applications-microservices"}],["$","meta","9",{"property":"og:title","content":"Building Scalable Applications with Microservices"}],["$","meta","10",{"property":"og:description","content":"Learn how to design and implement microservices architecture for better scalability, maintainability, and team productivity."}],["$","meta","11",{"property":"og:type","content":"article"}],["$","meta","12",{"property":"article:published_time","content":"2024-03-05"}],["$","meta","13",{"property":"article:author","content":"Samshodan Team"}],["$","meta","14",{"property":"article:tag","content":"Microservices"}],["$","meta","15",{"property":"article:tag","content":"Scalability"}],["$","meta","16",{"property":"article:tag","content":"Architecture"}],["$","meta","17",{"property":"article:tag","content":"Software Design"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:title","content":"Samshodan - AI Products & Developer Tools"}],["$","meta","20",{"name":"twitter:description","content":"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation."}]]
+6:null

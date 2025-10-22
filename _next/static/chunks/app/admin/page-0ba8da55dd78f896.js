@@ -1,0 +1,9 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[3],{6594:function(e,t,n){Promise.resolve().then(n.bind(n,5970))},5970:function(e,t,n){"use strict";n.r(t),n.d(t,{default:function(){return AdminPage}});var r=n(7437),o=n(2265);function AdminPage(){return(0,o.useEffect)(()=>{let e=document.createElement("script");e.src="https://identity.netlify.com/v1/netlify-identity-widget.js",document.head.appendChild(e);let t=document.createElement("script");return t.src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js",document.body.appendChild(t),e.onload=()=>{window.netlifyIdentity&&window.netlifyIdentity.on("init",e=>{e||window.netlifyIdentity.on("login",()=>{document.location.href="/admin/"})})},()=>{e.parentNode&&e.parentNode.removeChild(e),t.parentNode&&t.parentNode.removeChild(t)}},[]),(0,r.jsx)("div",{children:(0,r.jsx)("div",{id:"nc-root"})})}},622:function(e,t,n){"use strict";/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var r=n(2265),o=Symbol.for("react.element"),i=Symbol.for("react.fragment"),d=Object.prototype.hasOwnProperty,c=r.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,s={key:!0,ref:!0,__self:!0,__source:!0};function q(e,t,n){var r,i={},u=null,f=null;for(r in void 0!==n&&(u=""+n),void 0!==t.key&&(u=""+t.key),void 0!==t.ref&&(f=t.ref),t)d.call(t,r)&&!s.hasOwnProperty(r)&&(i[r]=t[r]);if(e&&e.defaultProps)for(r in t=e.defaultProps)void 0===i[r]&&(i[r]=t[r]);return{$$typeof:o,type:e,key:u,ref:f,props:i,_owner:c.current}}t.Fragment=i,t.jsx=q,t.jsxs=q},7437:function(e,t,n){"use strict";e.exports=n(622)}},function(e){e.O(0,[971,472,744],function(){return e(e.s=6594)}),_N_E=e.O()}]);

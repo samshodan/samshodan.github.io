@@ -1,0 +1,768 @@
+1:HL["/_next/static/css/d5dbd49fb37d0aa9.css","style",{"crossOrigin":""}]
+0:["YNMQYYN7aMUrPmG3ibpj4",[[["",{"children":["blog",{"children":[["slug","api-first-development","d"],{"children":["__PAGE__?{\"slug\":\"api-first-development\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/d5dbd49fb37d0aa9.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+4:I[6954,[],""]
+5:I[7264,[],""]
+7:I[3827,["350","static/chunks/350-ce2a8f3d46727efe.js","308","static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js"],""]
+8:I[8326,["350","static/chunks/350-ce2a8f3d46727efe.js","308","static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js"],""]
+9:T5b8b,
+<h1 class="text-3xl font-bold text-gray-900 mb-6 mt-8">API-First Development: Building Scalable Digital Ecosystems</h1>
+
+<p class="text-gray-700 leading-relaxed mb-4">In today's interconnected digital world, APIs (Application Programming Interfaces) have become the backbone of modern software architecture. API-first development is more than just a methodology—it's a strategic approach that puts APIs at the center of your development process, enabling greater flexibility, faster innovation, and seamless integration across platforms.</p>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">What is API-First Development?</h2>
+
+<p class="text-gray-700 leading-relaxed mb-4">API-first development means designing and building your API before implementing the underlying application logic or user interface. This approach treats the API as a first-class citizen in your architecture, ensuring that:</p>
+
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">APIs are designed for reusability</strong> across multiple applications and platforms</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Development teams can work in parallel</strong> on different components</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Integration becomes seamless</strong> with third-party services and partners</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Future scalability</strong> is built into the foundation</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">The Strategic Benefits</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Accelerated Development Cycles</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">With a well-designed API, multiple teams can work simultaneously:</p>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# API-First Development Timeline
+Week 1-2: API Design & Documentation
+Week 3-4: Parallel Development
+  - Frontend Team: UI/UX Implementation
+  - Backend Team: API Implementation  
+  - Mobile Team: Mobile App Development
+  - QA Team: Test Suite Development
+Week 5-6: Integration & Testing
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Enhanced Collaboration</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">API specifications serve as contracts between teams:</p>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# OpenAPI Specification Example
+openapi: 3.0.0
+info:
+  title: User Management API
+  version: 1.0.0
+  description: Comprehensive user management system
+
+paths:
+  /users:
+    get:
+      summary: List users
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Platform Agnostic Architecture</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4">APIs enable true omnichannel experiences:</p>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// Same API serving multiple platforms
+const userAPI = {
+  // Web application
+  web: 'https://api.example.com/v1/users',
+  
+  // Mobile application
+  mobile: 'https://api.example.com/v1/users',
+  
+  // IoT devices
+  iot: 'https://api.example.com/v1/users',
+  
+  // Third-party integrations
+  partners: 'https://api.example.com/v1/users'
+};
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">API Design Best Practices</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. RESTful Design Principles</h3>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Resource-Based URLs</strong></p>
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-http">
+# Good: Resource-based
+GET /api/v1/users/123
+PUT /api/v1/users/123
+DELETE /api/v1/users/123
+
+# Bad: Action-based
+GET /api/v1/getUser?id=123
+POST /api/v1/updateUser
+POST /api/v1/deleteUser
+</code></pre>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">HTTP Methods and Status Codes</strong></p>
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// Proper HTTP method usage
+const userController = {
+  // GET /users - List users (200)
+  async list(req, res) {
+    const users = await userService.findAll();
+    res.status(200).json({ users });
+  },
+  
+  // POST /users - Create user (201)
+  async create(req, res) {
+    const user = await userService.create(req.body);
+    res.status(201).json({ user });
+  },
+  
+  // PUT /users/:id - Update user (200)
+  async update(req, res) {
+    const user = await userService.update(req.params.id, req.body);
+    res.status(200).json({ user });
+  },
+  
+  // DELETE /users/:id - Delete user (204)
+  async delete(req, res) {
+    await userService.delete(req.params.id);
+    res.status(204).send();
+  }
+};
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Consistent Error Handling</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// Standardized error response format
+const errorResponse = {
+  error: {
+    code: 'VALIDATION_ERROR',
+    message: 'Invalid input data',
+    details: [
+      {
+        field: 'email',
+        message: 'Email format is invalid'
+      },
+      {
+        field: 'password',
+        message: 'Password must be at least 8 characters'
+      }
+    ],
+    timestamp: '2024-02-15T10:30:00Z',
+    requestId: 'req_123456789'
+  }
+};
+
+// Error handling middleware
+const errorHandler = (err, req, res, next) => {
+  const response = {
+    error: {
+      code: err.code || 'INTERNAL_ERROR',
+      message: err.message || 'An unexpected error occurred',
+      timestamp: new Date().toISOString(),
+      requestId: req.id
+    }
+  };
+  
+  if (err.details) {
+    response.error.details = err.details;
+  }
+  
+  res.status(err.statusCode || 500).json(response);
+};
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Versioning Strategy</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// URL versioning
+app.use('/api/v1', v1Routes);
+app.use('/api/v2', v2Routes);
+
+// Header versioning
+app.use((req, res, next) => {
+  const version = req.headers['api-version'] || 'v1';
+  req.apiVersion = version;
+  next();
+});
+
+// Backward compatibility
+const getUserV1 = (user) => ({
+  id: user.id,
+  name: user.fullName,
+  email: user.email
+});
+
+const getUserV2 = (user) => ({
+  id: user.id,
+  firstName: user.firstName,
+  lastName: user.lastName,
+  email: user.email,
+  profile: user.profile
+});
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Advanced API Patterns</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. GraphQL for Flexible Data Fetching</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-graphql">
+# GraphQL Schema
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  posts: [Post!]!
+  followers: [User!]!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  comments: [Comment!]!
+}
+
+type Query {
+  user(id: ID!): User
+  users(first: Int, after: String): UserConnection
+  posts(authorId: ID): [Post!]!
+}
+</code></pre>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// GraphQL Resolver
+const resolvers = {
+  Query: {
+    user: async (_, { id }) => {
+      return await userService.findById(id);
+    },
+    
+    users: async (_, { first, after }) => {
+      return await userService.findMany({ first, after });
+    }
+  },
+  
+  User: {
+    posts: async (user) => {
+      return await postService.findByAuthor(user.id);
+    },
+    
+    followers: async (user) => {
+      return await userService.findFollowers(user.id);
+    }
+  }
+};
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Real-time APIs with WebSockets</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// WebSocket API for real-time updates
+const WebSocket = require('ws');
+
+class RealtimeAPI {
+  constructor(server) {
+    this.wss = new WebSocket.Server({ server });
+    this.clients = new Map();
+    
+    this.wss.on('connection', (ws, req) => {
+      this.handleConnection(ws, req);
+    });
+  }
+  
+  handleConnection(ws, req) {
+    const clientId = this.generateClientId();
+    this.clients.set(clientId, ws);
+    
+    ws.on('message', (message) => {
+      this.handleMessage(clientId, JSON.parse(message));
+    });
+    
+    ws.on('close', () => {
+      this.clients.delete(clientId);
+    });
+  }
+  
+  broadcast(event, data) {
+    const message = JSON.stringify({ event, data });
+    
+    this.clients.forEach((ws) => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(message);
+      }
+    });
+  }
+  
+  sendToClient(clientId, event, data) {
+    const ws = this.clients.get(clientId);
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ event, data }));
+    }
+  }
+}
+
+// Usage
+const realtimeAPI = new RealtimeAPI(server);
+
+// Broadcast user updates
+userService.on('userUpdated', (user) => {
+  realtimeAPI.broadcast('user:updated', user);
+});
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. API Gateway Pattern</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// API Gateway with routing and middleware
+const express = require('express');
+const httpProxy = require('http-proxy-middleware');
+
+const gateway = express();
+
+// Authentication middleware
+const authenticate = async (req, res, next) => {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  
+  try {
+    const user = await authService.verifyToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};
+
+// Rate limiting middleware
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP'
+});
+
+// Service routing
+gateway.use('/api/users', 
+  limiter,
+  authenticate,
+  httpProxy({
+    target: 'http://user-service:3001',
+    changeOrigin: true,
+    pathRewrite: { '^/api/users': '' }
+  })
+);
+
+gateway.use('/api/orders',
+  limiter,
+  authenticate,
+  httpProxy({
+    target: 'http://order-service:3002',
+    changeOrigin: true,
+    pathRewrite: { '^/api/orders': '' }
+  })
+);
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">API Security Best Practices</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Authentication and Authorization</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// JWT-based authentication
+const jwt = require('jsonwebtoken');
+
+const generateToken = (user) => {
+  return jwt.sign(
+    { 
+      userId: user.id,
+      email: user.email,
+      roles: user.roles
+    },
+    process.env.JWT_SECRET,
+    { 
+      expiresIn: '24h',
+      issuer: 'api.example.com',
+      audience: 'example.com'
+    }
+  );
+};
+
+// Role-based authorization
+const authorize = (requiredRoles) => {
+  return (req, res, next) => {
+    const userRoles = req.user.roles;
+    const hasPermission = requiredRoles.some(role => 
+      userRoles.includes(role)
+    );
+    
+    if (!hasPermission) {
+      return res.status(403).json({ 
+        error: 'Insufficient permissions' 
+      });
+    }
+    
+    next();
+  };
+};
+
+// Usage
+app.get('/api/admin/users', 
+  authenticate,
+  authorize(['admin', 'moderator']),
+  userController.list
+);
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Input Validation and Sanitization</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+const Joi = require('joi');
+
+// Validation schemas
+const schemas = {
+  createUser: Joi.object({
+    firstName: Joi.string().min(2).max(50).required(),
+    lastName: Joi.string().min(2).max(50).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(8).pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+  }),
+  
+  updateUser: Joi.object({
+    firstName: Joi.string().min(2).max(50),
+    lastName: Joi.string().min(2).max(50),
+    email: Joi.string().email()
+  })
+};
+
+// Validation middleware
+const validate = (schema) => {
+  return (req, res, next) => {
+    const { error, value } = schema.validate(req.body);
+    
+    if (error) {
+      return res.status(400).json({
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Invalid input data',
+          details: error.details.map(detail => ({
+            field: detail.path.join('.'),
+            message: detail.message
+          }))
+        }
+      });
+    }
+    
+    req.body = value;
+    next();
+  };
+};
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. API Rate Limiting and Throttling</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+const Redis = require('redis');
+const redis = Redis.createClient();
+
+class RateLimiter {
+  constructor(options = {}) {
+    this.windowMs = options.windowMs || 15 * 60 * 1000; // 15 minutes
+    this.maxRequests = options.max || 100;
+    this.keyGenerator = options.keyGenerator || ((req) => req.ip);
+  }
+  
+  async isAllowed(req) {
+    const key = `rate_limit:${this.keyGenerator(req)}`;
+    const current = await redis.incr(key);
+    
+    if (current === 1) {
+      await redis.expire(key, Math.ceil(this.windowMs / 1000));
+    }
+    
+    return current <= this.maxRequests;
+  }
+  
+  middleware() {
+    return async (req, res, next) => {
+      const allowed = await this.isAllowed(req);
+      
+      if (!allowed) {
+        return res.status(429).json({
+          error: {
+            code: 'RATE_LIMIT_EXCEEDED',
+            message: 'Too many requests'
+          }
+        });
+      }
+      
+      next();
+    };
+  }
+}
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">API Documentation and Testing</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Interactive Documentation with Swagger</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'User Management API',
+      version: '1.0.0',
+      description: 'A comprehensive user management system'
+    },
+    servers: [
+      {
+        url: 'https://api.example.com/v1',
+        description: 'Production server'
+      }
+    ]
+  },
+  apis: ['./routes/*.js']
+};
+
+const specs = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Automated API Testing</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// Jest API tests
+describe('User API', () => {
+  let authToken;
+  
+  beforeAll(async () => {
+    const response = await request(app)
+      .post('/api/auth/login')
+      .send({
+        email: 'test@example.com',
+        password: 'password123'
+      });
+    
+    authToken = response.body.token;
+  });
+  
+  describe('GET /api/users', () => {
+    it('should return list of users', async () => {
+      const response = await request(app)
+        .get('/api/users')
+        .set('Authorization', `Bearer ${authToken}`)
+        .expect(200);
+      
+      expect(response.body).toHaveProperty('users');
+      expect(Array.isArray(response.body.users)).toBe(true);
+    });
+    
+    it('should return 401 without authentication', async () => {
+      await request(app)
+        .get('/api/users')
+        .expect(401);
+    });
+  });
+  
+  describe('POST /api/users', () => {
+    it('should create a new user', async () => {
+      const userData = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        password: 'SecurePass123'
+      };
+      
+      const response = await request(app)
+        .post('/api/users')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(userData)
+        .expect(201);
+      
+      expect(response.body.user).toHaveProperty('id');
+      expect(response.body.user.email).toBe(userData.email);
+    });
+  });
+});
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Performance Optimization</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Caching Strategies</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+const Redis = require('redis');
+const redis = Redis.createClient();
+
+class APICache {
+  constructor(defaultTTL = 300) { // 5 minutes default
+    this.defaultTTL = defaultTTL;
+  }
+  
+  generateKey(req) {
+    return `api:${req.method}:${req.originalUrl}:${JSON.stringify(req.query)}`;
+  }
+  
+  middleware(ttl = this.defaultTTL) {
+    return async (req, res, next) => {
+      if (req.method !== 'GET') {
+        return next();
+      }
+      
+      const key = this.generateKey(req);
+      const cached = await redis.get(key);
+      
+      if (cached) {
+        return res.json(JSON.parse(cached));
+      }
+      
+      // Override res.json to cache the response
+      const originalJson = res.json;
+      res.json = function(data) {
+        redis.setex(key, ttl, JSON.stringify(data));
+        return originalJson.call(this, data);
+      };
+      
+      next();
+    };
+  }
+}
+
+// Usage
+const cache = new APICache();
+app.get('/api/users', cache.middleware(600), userController.list);
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Pagination and Filtering</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+// Cursor-based pagination
+const paginateUsers = async (req, res) => {
+  const { 
+    limit = 20, 
+    cursor, 
+    sortBy = 'createdAt',
+    sortOrder = 'desc',
+    filter = {}
+  } = req.query;
+  
+  const query = {
+    ...filter,
+    ...(cursor && { [sortBy]: { $lt: cursor } })
+  };
+  
+  const users = await User.find(query)
+    .sort({ [sortBy]: sortOrder === 'desc' ? -1 : 1 })
+    .limit(parseInt(limit) + 1);
+  
+  const hasNextPage = users.length > limit;
+  const items = hasNextPage ? users.slice(0, -1) : users;
+  const nextCursor = hasNextPage ? items[items.length - 1][sortBy] : null;
+  
+  res.json({
+    users: items,
+    pagination: {
+      hasNextPage,
+      nextCursor,
+      limit: parseInt(limit)
+    }
+  });
+};
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Monitoring and Analytics</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. API Metrics and Logging</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-javascript">
+const prometheus = require('prom-client');
+
+// Metrics collection
+const httpRequestDuration = new prometheus.Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Duration of HTTP requests in seconds',
+  labelNames: ['method', 'route', 'status_code']
+});
+
+const httpRequestTotal = new prometheus.Counter({
+  name: 'http_requests_total',
+  help: 'Total number of HTTP requests',
+  labelNames: ['method', 'route', 'status_code']
+});
+
+// Metrics middleware
+const metricsMiddleware = (req, res, next) => {
+  const start = Date.now();
+  
+  res.on('finish', () => {
+    const duration = (Date.now() - start) / 1000;
+    const labels = {
+      method: req.method,
+      route: req.route?.path || req.path,
+      status_code: res.statusCode
+    };
+    
+    httpRequestDuration.observe(labels, duration);
+    httpRequestTotal.inc(labels);
+  });
+  
+  next();
+};
+
+app.use(metricsMiddleware);
+app.get('/metrics', (req, res) => {
+  res.set('Content-Type', prometheus.register.contentType);
+  res.end(prometheus.register.metrics());
+});
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Conclusion</h2>
+
+<p class="text-gray-700 leading-relaxed mb-4">API-first development is essential for building modern, scalable digital ecosystems. By prioritizing API design and treating APIs as products, organizations can:</p>
+
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Accelerate development</strong> through parallel team workflows</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Improve integration</strong> with internal and external systems  </li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Enable innovation</strong> through flexible, reusable components</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Future-proof architecture</strong> for emerging platforms and technologies</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Key Success Factors:</strong></p>
+<ol class="list-decimal pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Design APIs as products</strong> with clear contracts and documentation</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Implement robust security</strong> from the ground up</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Monitor and optimize</strong> API performance continuously</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Version APIs thoughtfully</strong> to maintain backward compatibility</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Test comprehensively</strong> with automated testing suites</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">The investment in API-first development pays dividends in faster time-to-market, better developer experience, and more flexible, scalable systems that can adapt to changing business needs.</p>
+
+<p class="text-gray-700 leading-relaxed mb-4">---</p>
+
+<p class="text-gray-700 leading-relaxed mb-4"><em class="italic">Ready to build scalable APIs that power your digital ecosystem? Our digital engineering team specializes in API-first development and modern software architecture. <a href="/contact" class="text-primary-600 hover:text-primary-700 transition-colors underline">Contact us</a> to discuss your project.</em></p>2:[null,["$","html",null,{"lang":"en","children":[["$","head",null,{"children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Samshodan\",\"description\":\"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.\",\"url\":\"https://yourusername.github.io/samshodan-website\",\"logo\":\"https://yourusername.github.io/samshodan-website/logo.png\",\"contactPoint\":{\"@type\":\"ContactPoint\",\"telephone\":\"+1-555-123-4567\",\"contactType\":\"customer service\",\"email\":\"hello@samshodan.com\"},\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Global\",\"addressCountry\":\"Remote\"},\"sameAs\":[\"https://linkedin.com/company/samshodan\",\"https://github.com/samshodan\"],\"foundingDate\":\"2014\",\"numberOfEmployees\":\"25-50\",\"industry\":\"Information Technology\",\"services\":[\"AI Chatbot Development\",\"API Portal Development\",\"Application Development\",\"AI Chatbot Development\",\"API Portal Solutions\",\"Developer Tools\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Samshodan\",\"url\":\"https://yourusername.github.io/samshodan-website\",\"description\":\"Next-Generation Solutions for Modern Business\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://yourusername.github.io/samshodan-website/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Ultron AI Chatbot\",\"description\":\"Intelligent conversational AI powered by RAG agents with configurable backend LLM models including AWS Bedrock, OpenAI, and ChatGPT.\",\"url\":\"https://yourusername.github.io/samshodan-website/products/ultron\",\"applicationCategory\":\"BusinessApplication\",\"operatingSystem\":\"Web-based\",\"offers\":{\"@type\":\"Offer\",\"price\":\"Contact for pricing\",\"priceCurrency\":\"USD\"},\"provider\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"featureList\":[\"RAG (Retrieval-Augmented Generation) agents\",\"Multi-LLM backend support\",\"Configurable conversation flows\",\"Real-time analytics\",\"Enterprise security\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Specly API Portal\",\"description\":\"Comprehensive developer portal for cataloging APIs, managing teams, and organizing development resources in structured folders.\",\"url\":\"https://yourusername.github.io/samshodan-website/products/specly\",\"applicationCategory\":\"DeveloperApplication\",\"operatingSystem\":\"Web-based\",\"offers\":{\"@type\":\"Offer\",\"price\":\"Contact for pricing\",\"priceCurrency\":\"USD\"},\"provider\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"featureList\":[\"API specification management\",\"Team collaboration tools\",\"Interactive documentation\",\"Version control\",\"Code generation\"]}"}}]]}],["$","body",null,{"className":"antialiased","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[],"childProp":{"current":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","blog","children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","blog","children",["slug","api-first-development","d"],"children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":["$L6",["$","main",null,{"children":[["$","$L7",null,{}],["$","article",null,{"className":"pt-32 pb-16","children":["$","div",null,{"className":"container-max px-4 sm:px-6 lg:px-8","children":[["$","nav",null,{"className":"mb-8","children":["$","$L8",null,{"href":"/blog","className":"inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","path","1l729n",{"d":"m12 19-7-7 7-7"}],["$","path","x3x0zl",{"d":"M19 12H5"}],"$undefined"]}],"Back to Blog"]}]}],["$","header",null,{"className":"max-w-4xl mx-auto text-center mb-12","children":[["$","div",null,{"className":"mb-4","children":["$","span",null,{"className":"bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium","children":"Digital Engineering"}]}],["$","h1",null,{"className":"text-4xl md:text-5xl font-bold text-gray-900 mb-6","children":"API-First Development: Building Scalable Digital Ecosystems"}],["$","p",null,{"className":"text-xl text-gray-600 mb-8","children":"Learn how API-first development accelerates innovation, improves collaboration, and creates more flexible, scalable software architectures."}],["$","div",null,{"className":"flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","path","975kel",{"d":"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"}],["$","circle","17ys0d",{"cx":"12","cy":"7","r":"4"}],"$undefined"]}],["$","span",null,{"children":"Samshodan Team"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"February 14, 2024"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","circle","1mglay",{"cx":"12","cy":"12","r":"10"}],["$","polyline","68esgv",{"points":"12 6 12 12 16 14"}],"$undefined"]}],["$","span",null,{"children":"5 min read"}]]}]]}]]}],["$","div",null,{"className":"max-w-4xl mx-auto","children":["$","div",null,{"className":"prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h1:text-3xl prose-h1:mb-6 prose-h1:mt-8 prose-h2:text-2xl prose-h2:mb-4 prose-h2:mt-10 prose-h3:text-xl prose-h3:mb-3 prose-h3:mt-8 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-700 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:my-6 prose-ol:my-6 prose-ul:pl-6 prose-ol:pl-6 prose-li:text-gray-700 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:pl-6 prose-blockquote:italic prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto prose-pre:my-6","dangerouslySetInnerHTML":{"__html":"$9"}}]}],["$","div",null,{"className":"max-w-4xl mx-auto mt-12 pt-8 border-t border-gray-200","children":["$","div",null,{"className":"flex flex-wrap gap-2","children":[["$","$L8","0",{"href":"/blog?tag=API%20Development","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"API Development"]}],["$","$L8","1",{"href":"/blog?tag=Software%20Architecture","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Software Architecture"]}],["$","$L8","2",{"href":"/blog?tag=REST","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"REST"]}],["$","$L8","3",{"href":"/blog?tag=GraphQL","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"GraphQL"]}],["$","$L8","4",{"href":"/blog?tag=API%20Design","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"API Design"]}]]}]}]]}]}],["$","section",null,{"className":"py-16 bg-gray-50","children":["$","div",null,{"className":"container-max px-4 sm:px-6 lg:px-8","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900 mb-12 text-center","children":"Related Articles"}],["$","div",null,{"className":"grid md:grid-cols-2 lg:grid-cols-3 gap-8","children":[["$","article","2024-02-15-api-first-design-building-for-future",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Development"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/2024-02-15-api-first-design-building-for-future","className":"hover:text-primary-600 transition-colors","children":"API-First Design: Building for the Future"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Why API-first design is crucial for modern applications and how it enables better integration and scalability."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"2/14/2024"}]]}],["$","span",null,{"children":"5 min read"}]]}],["$","$L8",null,{"href":"/blog/2024-02-15-api-first-design-building-for-future","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}],["$","article","microservices-architecture-guide",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Digital Engineering"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/microservices-architecture-guide","className":"hover:text-primary-600 transition-colors","children":"Microservices Architecture: A Complete Guide to Modern Software Design"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Discover how microservices architecture can transform your software development process, improve scalability, and accelerate deployment cycles."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"1/21/2024"}]]}],["$","span",null,{"children":"5 min read"}]]}],["$","$L8",null,{"href":"/blog/microservices-architecture-guide","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}]]}]]}]}],["$","footer",null,{"className":"bg-gray-900 text-white","children":["$","div",null,{"className":"container-max section-padding","children":[["$","div",null,{"className":"grid lg:grid-cols-3 gap-8 mb-12","children":[["$","div",null,{"className":"lg:col-span-1","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4","children":"Samshodan"}],["$","p",null,{"className":"text-gray-300 mb-6 leading-relaxed","children":"Next-generation AI-powered products for modern business. We create innovative technology solutions and developer tools that enhance productivity and drive innovation."}],["$","div",null,{"className":"space-y-3","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-3 text-primary-400","children":[["$","rect","18n3k1",{"width":"20","height":"16","x":"2","y":"4","rx":"2"}],["$","path","1ocrg3",{"d":"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"}],"$undefined"]}],["$","a",null,{"href":"mailto:hello@samshodan.com","className":"text-gray-300 hover:text-white transition-colors","children":"hello@samshodan.com"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-3 text-primary-400","children":[["$","path","2oe9fu",{"d":"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"}],["$","circle","ilqhr7",{"cx":"12","cy":"10","r":"3"}],"$undefined"]}],["$","span",null,{"className":"text-gray-300","children":"Global Remote Team"}]]}]]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"text-lg font-semibold mb-4","children":"Products"}],["$","ul",null,{"className":"space-y-3","children":[["$","li","0",{"children":["$","a",null,{"href":"/products/ultron","className":"text-gray-300 hover:text-white transition-colors","children":"Ultron AI Chatbot"}]}],["$","li","1",{"children":["$","a",null,{"href":"/products/specly","className":"text-gray-300 hover:text-white transition-colors","children":"Specly API Portal"}]}]]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"text-lg font-semibold mb-4","children":"Company"}],["$","ul",null,{"className":"space-y-3 mb-6","children":[["$","li","0",{"children":["$","a",null,{"href":"/about","className":"text-gray-300 hover:text-white transition-colors","children":"About Us"}]}],["$","li","1",{"children":["$","a",null,{"href":"/blog","className":"text-gray-300 hover:text-white transition-colors","children":"Blog"}]}],["$","li","2",{"children":["$","a",null,{"href":"/contact","className":"text-gray-300 hover:text-white transition-colors","children":"Contact"}]}],["$","li","3",{"children":["$","a",null,{"href":"/privacy","className":"text-gray-300 hover:text-white transition-colors","children":"Privacy Policy"}]}],["$","li","4",{"children":["$","a",null,{"href":"/terms","className":"text-gray-300 hover:text-white transition-colors","children":"Terms of Service"}]}]]}],["$","div",null,{"className":"flex space-x-4","children":[["$","a","0",{"href":"#","className":"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200","aria-label":"LinkedIn","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-linkedin","children":[["$","path","c2jq9f",{"d":"M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"}],["$","rect","mk3on5",{"width":"4","height":"12","x":"2","y":"9"}],["$","circle","bt5ra8",{"cx":"4","cy":"4","r":"2"}],"$undefined"]}]}],["$","a","1",{"href":"#","className":"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200","aria-label":"GitHub","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-github","children":[["$","path","tonef",{"d":"M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"}],["$","path","9comsn",{"d":"M9 18c-4.51 2-5-2-7-2"}],"$undefined"]}]}]]}]]}]]}],["$","div",null,{"className":"border-t border-gray-800 pt-8","children":["$","div",null,{"className":"flex flex-col md:flex-row justify-between items-center","children":[["$","p",null,{"className":"text-gray-400 text-sm","children":["© ",2025," Samshodan. All rights reserved."]}],["$","p",null,{"className":"text-gray-400 text-sm mt-4 md:mt-0","children":"Built with ❤️ for modern business"}]]}]}]]}]}]]}],null],"segment":"__PAGE__?{\"slug\":\"api-first-development\"}"},"styles":null}],"segment":["slug","api-first-development","d"]},"styles":null}],"segment":"blog"},"styles":null}]}]]}],null]
+3:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"API-First Development: Building Scalable Digital Ecosystems | Samshodan Blog"}],["$","meta","3",{"name":"description","content":"Learn how API-first development accelerates innovation, improves collaboration, and creates more flexible, scalable software architectures."}],["$","meta","4",{"name":"author","content":"Samshodan"}],["$","link","5",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","6",{"name":"keywords","content":"API Development, Software Architecture, REST, GraphQL, API Design"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","link","8",{"rel":"canonical","href":"/blog/api-first-development"}],["$","meta","9",{"property":"og:title","content":"API-First Development: Building Scalable Digital Ecosystems"}],["$","meta","10",{"property":"og:description","content":"Learn how API-first development accelerates innovation, improves collaboration, and creates more flexible, scalable software architectures."}],["$","meta","11",{"property":"og:type","content":"article"}],["$","meta","12",{"property":"article:published_time","content":"2024-02-15"}],["$","meta","13",{"property":"article:author","content":"Samshodan Team"}],["$","meta","14",{"property":"article:tag","content":"API Development"}],["$","meta","15",{"property":"article:tag","content":"Software Architecture"}],["$","meta","16",{"property":"article:tag","content":"REST"}],["$","meta","17",{"property":"article:tag","content":"GraphQL"}],["$","meta","18",{"property":"article:tag","content":"API Design"}],["$","meta","19",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","20",{"name":"twitter:title","content":"Samshodan - AI Products & Developer Tools"}],["$","meta","21",{"name":"twitter:description","content":"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation."}]]
+6:null

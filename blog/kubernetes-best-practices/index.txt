@@ -1,0 +1,1207 @@
+1:HL["/_next/static/css/d5dbd49fb37d0aa9.css","style",{"crossOrigin":""}]
+0:["YNMQYYN7aMUrPmG3ibpj4",[[["",{"children":["blog",{"children":[["slug","kubernetes-best-practices","d"],{"children":["__PAGE__?{\"slug\":\"kubernetes-best-practices\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/d5dbd49fb37d0aa9.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+4:I[6954,[],""]
+5:I[7264,[],""]
+7:I[3827,["350","static/chunks/350-ce2a8f3d46727efe.js","308","static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js"],""]
+8:I[8326,["350","static/chunks/350-ce2a8f3d46727efe.js","308","static/chunks/app/blog/%5Bslug%5D/page-e8f5a4b5256a1134.js"],""]
+9:T8533,
+<h1 class="text-3xl font-bold text-gray-900 mb-6 mt-8">Kubernetes Best Practices: Production-Ready Container Orchestration</h1>
+
+<p class="text-gray-700 leading-relaxed mb-4">Kubernetes has become the de facto standard for container orchestration, but running it successfully in production requires deep understanding of best practices, security considerations, and operational excellence. This comprehensive guide covers everything you need to know to run Kubernetes effectively at scale.</p>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Cluster Architecture and Design</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Multi-Zone High Availability Setup</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# High-availability cluster configuration
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+metadata:
+  name: production-cluster
+kubernetesVersion: v1.28.0
+controlPlaneEndpoint: "k8s-api.example.com:6443"
+networking:
+  serviceSubnet: "10.96.0.0/12"
+  podSubnet: "10.244.0.0/16"
+etcd:
+  external:
+    endpoints:
+    - "https://etcd1.example.com:2379"
+    - "https://etcd2.example.com:2379" 
+    - "https://etcd3.example.com:2379"
+    caFile: "/etc/kubernetes/pki/etcd/ca.crt"
+    certFile: "/etc/kubernetes/pki/apiserver-etcd-client.crt"
+    keyFile: "/etc/kubernetes/pki/apiserver-etcd-client.key"
+apiServer:
+  extraArgs:
+    audit-log-maxage: "30"
+    audit-log-maxbackup: "10"
+    audit-log-maxsize: "100"
+    audit-log-path: "/var/log/audit.log"
+    enable-admission-plugins: "NodeRestriction,PodSecurityPolicy,ResourceQuota"
+controllerManager:
+  extraArgs:
+    bind-address: "0.0.0.0"
+scheduler:
+  extraArgs:
+    bind-address: "0.0.0.0"
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Node Pool Strategy</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Node pool configuration for different workload types
+apiVersion: v1
+kind: Node
+metadata:
+  name: worker-node-compute
+  labels:
+    node-type: "compute-optimized"
+    workload: "cpu-intensive"
+    zone: "us-east-1a"
+spec:
+  taints:
+  - key: "workload"
+    value: "compute"
+    effect: "NoSchedule"
+
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: worker-node-memory
+  labels:
+    node-type: "memory-optimized"
+    workload: "memory-intensive"
+    zone: "us-east-1b"
+spec:
+  taints:
+  - key: "workload"
+    value: "memory"
+    effect: "NoSchedule"
+
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: worker-node-gpu
+  labels:
+    node-type: "gpu-enabled"
+    workload: "ml-training"
+    zone: "us-east-1c"
+spec:
+  taints:
+  - key: "nvidia.com/gpu"
+    value: "true"
+    effect: "NoSchedule"
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Resource Management and Optimization</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Resource Requests and Limits</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Proper resource configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-application
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-application
+  template:
+    metadata:
+      labels:
+        app: web-application
+    spec:
+      containers:
+      - name: web-app
+        image: myapp:v1.2.3
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        # Startup probe for slow-starting applications
+        startupProbe:
+          httpGet:
+            path: /health/startup
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        # Liveness probe to restart unhealthy containers
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        # Readiness probe to control traffic routing
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        # Environment variables
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: database-url
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: redis-url
+        # Volume mounts
+        volumeMounts:
+        - name: app-storage
+          mountPath: /app/data
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: app-storage
+        persistentVolumeClaim:
+          claimName: app-storage-pvc
+      - name: config-volume
+        configMap:
+          name: app-config
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Horizontal Pod Autoscaler (HPA)</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# HPA configuration with multiple metrics
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-application-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-application
+  minReplicas: 3
+  maxReplicas: 50
+  metrics:
+  # CPU-based scaling
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  # Memory-based scaling
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  # Custom metrics scaling
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "100"
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+      - type: Pods
+        value: 5
+        periodSeconds: 60
+      selectPolicy: Max
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. Vertical Pod Autoscaler (VPA)</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# VPA for automatic resource optimization
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: web-application-vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-application
+  updatePolicy:
+    updateMode: "Auto"  # Auto, Off, or Initial
+  resourcePolicy:
+    containerPolicies:
+    - containerName: web-app
+      minAllowed:
+        cpu: 100m
+        memory: 128Mi
+      maxAllowed:
+        cpu: 2
+        memory: 2Gi
+      controlledResources: ["cpu", "memory"]
+      controlledValues: RequestsAndLimits
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Security Best Practices</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Pod Security Standards</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Pod Security Policy (deprecated) replacement with Pod Security Standards
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production-apps
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+
+---
+# Security Context configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-application
+  namespace: production-apps
+spec:
+  template:
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: app
+        image: myapp:v1.2.3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_BIND_SERVICE
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+        - name: var-run-volume
+          mountPath: /var/run
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+      - name: var-run-volume
+        emptyDir: {}
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Network Policies</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Comprehensive network policy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: web-application-netpol
+  namespace: production-apps
+spec:
+  podSelector:
+    matchLabels:
+      app: web-application
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  # Allow traffic from ingress controller
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 8080
+  # Allow traffic from same namespace
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: production-apps
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  # Allow DNS resolution
+  - to: []
+    ports:
+    - protocol: UDP
+      port: 53
+  # Allow database access
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: database
+    ports:
+    - protocol: TCP
+      port: 5432
+  # Allow external API calls
+  - to: []
+    ports:
+    - protocol: TCP
+      port: 443
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">3. RBAC Configuration</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: web-application-sa
+  namespace: production-apps
+
+---
+# Role with minimal permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: production-apps
+  name: web-application-role
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+
+---
+# RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: web-application-rolebinding
+  namespace: production-apps
+subjects:
+- kind: ServiceAccount
+  name: web-application-sa
+  namespace: production-apps
+roleRef:
+  kind: Role
+  name: web-application-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ClusterRole for cross-namespace access (if needed)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: monitoring-reader
+rules:
+- apiGroups: [""]
+  resources: ["nodes", "nodes/metrics", "services", "endpoints", "pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Configuration Management</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. ConfigMaps and Secrets</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# ConfigMap for application configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: production-apps
+data:
+  app.properties: |
+    server.port=8080
+    logging.level.root=INFO
+    spring.profiles.active=production
+  redis.conf: |
+    maxmemory 256mb
+    maxmemory-policy allkeys-lru
+  nginx.conf: |
+    upstream backend {
+        server app1:8080;
+        server app2:8080;
+    }
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://backend;
+        }
+    }
+
+---
+# Secret for sensitive data
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secrets
+  namespace: production-apps
+type: Opaque
+data:
+  database-url: cG9zdGdyZXNxbDovL3VzZXI6cGFzc0BkYi5leGFtcGxlLmNvbS9teWRi
+  api-key: YWJjZGVmZ2hpams=
+  jwt-secret: c3VwZXJzZWNyZXRqd3RrZXk=
+
+---
+# External Secrets Operator configuration
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: vault-backend
+  namespace: production-apps
+spec:
+  provider:
+    vault:
+      server: "https://vault.example.com"
+      path: "secret"
+      version: "v2"
+      auth:
+        kubernetes:
+          mountPath: "kubernetes"
+          role: "production-apps"
+
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: vault-secret
+  namespace: production-apps
+spec:
+  refreshInterval: 15s
+  secretStoreRef:
+    name: vault-backend
+    kind: SecretStore
+  target:
+    name: app-secrets-vault
+    creationPolicy: Owner
+  data:
+  - secretKey: database-password
+    remoteRef:
+      key: database
+      property: password
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Helm Charts Best Practices</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# values.yaml for environment-specific configuration
+# Production values
+replicaCount: 3
+
+image:
+  repository: myapp
+  tag: "v1.2.3"
+  pullPolicy: IfNotPresent
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 50
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+  hosts:
+    - host: api.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: api-tls
+      hosts:
+        - api.example.com
+
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    path: /metrics
+
+security:
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+      - ALL
+</code></pre>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# templates/deployment.yaml with best practices
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "myapp.fullname" . }}
+  labels:
+    {{- include "myapp.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "myapp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      labels:
+        {{- include "myapp.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "myapp.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.security.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.security.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          envFrom:
+            - configMapRef:
+                name: {{ include "myapp.fullname" . }}-config
+            - secretRef:
+                name: {{ include "myapp.fullname" . }}-secret
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Monitoring and Observability</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Prometheus Monitoring Setup</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# ServiceMonitor for Prometheus
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: web-application-metrics
+  namespace: production-apps
+  labels:
+    app: web-application
+spec:
+  selector:
+    matchLabels:
+      app: web-application
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+    honorLabels: true
+
+---
+# PrometheusRule for alerting
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: web-application-alerts
+  namespace: production-apps
+spec:
+  groups:
+  - name: web-application.rules
+    rules:
+    - alert: HighErrorRate
+      expr: |
+        (
+          rate(http_requests_total{job="web-application",status=~"5.."}[5m])
+          /
+          rate(http_requests_total{job="web-application"}[5m])
+        ) > 0.05
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High error rate detected"
+        description: "Error rate is {{ $value | humanizePercentage }} for {{ $labels.instance }}"
+    
+    - alert: HighLatency
+      expr: |
+        histogram_quantile(0.95, 
+          rate(http_request_duration_seconds_bucket{job="web-application"}[5m])
+        ) > 0.5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "High latency detected"
+        description: "95th percentile latency is {{ $value }}s for {{ $labels.instance }}"
+    
+    - alert: PodCrashLooping
+      expr: |
+        rate(kube_pod_container_status_restarts_total{namespace="production-apps"}[15m]) > 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Pod is crash looping"
+        description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is crash looping"
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Distributed Tracing</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Jaeger deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger
+  namespace: observability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jaeger
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+      - name: jaeger
+        image: jaegertracing/all-in-one:1.45
+        env:
+        - name: COLLECTOR_OTLP_ENABLED
+          value: "true"
+        ports:
+        - containerPort: 16686
+          name: ui
+        - containerPort: 14250
+          name: grpc
+        - containerPort: 4317
+          name: otlp-grpc
+        - containerPort: 4318
+          name: otlp-http
+
+---
+# OpenTelemetry Collector
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: otel-collector
+  namespace: observability
+spec:
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      containers:
+      - name: otel-collector
+        image: otel/opentelemetry-collector-contrib:0.80.0
+        command:
+        - "/otelcol-contrib"
+        - "--config=/conf/otel-collector-config.yaml"
+        volumeMounts:
+        - name: config
+          mountPath: /conf
+        env:
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      volumes:
+      - name: config
+        configMap:
+          name: otel-collector-config
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Deployment Strategies</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Blue-Green Deployment</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Blue-Green deployment with Argo Rollouts
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: web-application-rollout
+spec:
+  replicas: 5
+  strategy:
+    blueGreen:
+      activeService: web-application-active
+      previewService: web-application-preview
+      autoPromotionEnabled: false
+      scaleDownDelaySeconds: 30
+      prePromotionAnalysis:
+        templates:
+        - templateName: success-rate
+        args:
+        - name: service-name
+          value: web-application-preview
+      postPromotionAnalysis:
+        templates:
+        - templateName: success-rate
+        args:
+        - name: service-name
+          value: web-application-active
+  selector:
+    matchLabels:
+      app: web-application
+  template:
+    metadata:
+      labels:
+        app: web-application
+    spec:
+      containers:
+      - name: web-application
+        image: myapp:v1.2.3
+        ports:
+        - containerPort: 8080
+
+---
+# Analysis Template
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: success-rate
+    interval: 60s
+    count: 5
+    successCondition: result[0] >= 0.95
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus.monitoring.svc.cluster.local:9090
+        query: |
+          sum(rate(
+            http_requests_total{service="{{args.service-name}}",status!~"5.*"}[2m]
+          )) /
+          sum(rate(
+            http_requests_total{service="{{args.service-name}}"}[2m]
+          ))
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Canary Deployment</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Canary deployment with traffic splitting
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: web-application-canary
+spec:
+  replicas: 10
+  strategy:
+    canary:
+      steps:
+      - setWeight: 10
+      - pause: {duration: 2m}
+      - setWeight: 20
+      - pause: {duration: 2m}
+      - setWeight: 50
+      - pause: {duration: 2m}
+      - setWeight: 80
+      - pause: {duration: 2m}
+      canaryService: web-application-canary
+      stableService: web-application-stable
+      trafficRouting:
+        nginx:
+          stableIngress: web-application-stable
+          additionalIngressAnnotations:
+            canary-by-header: X-Canary
+      analysis:
+        templates:
+        - templateName: canary-success-rate
+        startingStep: 2
+        args:
+        - name: service-name
+          value: web-application-canary
+  selector:
+    matchLabels:
+      app: web-application
+  template:
+    metadata:
+      labels:
+        app: web-application
+    spec:
+      containers:
+      - name: web-application
+        image: myapp:v1.2.4
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Backup and Disaster Recovery</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Velero Backup Configuration</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Velero backup schedule
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-backup
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  template:
+    includedNamespaces:
+    - production-apps
+    - database
+    excludedResources:
+    - events
+    - events.events.k8s.io
+    storageLocation: default
+    volumeSnapshotLocations:
+    - default
+    ttl: 720h0m0s  # 30 days
+
+---
+# Backup with hooks for database consistency
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: database-consistent-backup
+  namespace: velero
+spec:
+  includedNamespaces:
+  - database
+  hooks:
+    resources:
+    - name: postgres-backup-hook
+      includedNamespaces:
+      - database
+      labelSelector:
+        matchLabels:
+          app: postgresql
+      pre:
+      - exec:
+          container: postgresql
+          command:
+          - /bin/bash
+          - -c
+          - "pg_dump -U postgres mydb > /tmp/backup.sql"
+      post:
+      - exec:
+          container: postgresql
+          command:
+          - /bin/bash
+          - -c
+          - "rm -f /tmp/backup.sql"
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Disaster Recovery Procedures</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-bash">
+#!/bin/bash
+# Disaster recovery script
+
+set -e
+
+BACKUP_NAME="disaster-recovery-$(date +%Y%m%d-%H%M%S)"
+NAMESPACE="production-apps"
+
+echo "Starting disaster recovery process..."
+
+# 1. Create emergency backup
+echo "Creating emergency backup..."
+velero backup create $BACKUP_NAME \
+  --include-namespaces $NAMESPACE \
+  --wait
+
+# 2. Verify backup completion
+echo "Verifying backup..."
+velero backup describe $BACKUP_NAME
+
+# 3. Scale down applications
+echo "Scaling down applications..."
+kubectl scale deployment --all --replicas=0 -n $NAMESPACE
+
+# 4. Restore from latest good backup
+echo "Restoring from backup..."
+LATEST_BACKUP=$(velero backup get --output json | jq -r '.items[0].metadata.name')
+velero restore create restore-$BACKUP_NAME \
+  --from-backup $LATEST_BACKUP \
+  --wait
+
+# 5. Verify restoration
+echo "Verifying restoration..."
+kubectl get pods -n $NAMESPACE
+kubectl get services -n $NAMESPACE
+
+# 6. Run health checks
+echo "Running health checks..."
+./scripts/health-check.sh
+
+echo "Disaster recovery completed successfully!"
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Performance Optimization</h2>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">1. Resource Optimization</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Cluster Autoscaler configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+      - image: k8s.gcr.io/autoscaling/cluster-autoscaler:v1.27.0
+        name: cluster-autoscaler
+        command:
+        - ./cluster-autoscaler
+        - --v=4
+        - --stderrthreshold=info
+        - --cloud-provider=aws
+        - --skip-nodes-with-local-storage=false
+        - --expander=least-waste
+        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/production-cluster
+        - --balance-similar-node-groups
+        - --scale-down-enabled=true
+        - --scale-down-delay-after-add=10m
+        - --scale-down-unneeded-time=10m
+        - --scale-down-utilization-threshold=0.5
+
+---
+# Pod Disruption Budget
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web-application-pdb
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: web-application
+
+---
+# Priority Classes
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+value: 1000
+globalDefault: false
+description: "High priority class for critical applications"
+
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: low-priority
+value: 100
+globalDefault: false
+description: "Low priority class for batch jobs"
+</code></pre>
+
+<h3 class="text-xl font-semibold text-gray-900 mb-3 mt-8">2. Node Affinity and Anti-Affinity</h3>
+
+<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6"><code class="language-yaml">
+# Advanced scheduling configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-application-ha
+spec:
+  replicas: 6
+  template:
+    spec:
+      # Pod anti-affinity to spread across nodes
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - web-application
+            topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - web-application
+              topologyKey: topology.kubernetes.io/zone
+        # Node affinity for specific instance types
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node.kubernetes.io/instance-type
+                operator: In
+                values:
+                - m5.large
+                - m5.xlarge
+                - c5.large
+                - c5.xlarge
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            preference:
+              matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                - us-east-1a
+                - us-east-1b
+      # Tolerations for tainted nodes
+      tolerations:
+      - key: "workload"
+        operator: "Equal"
+        value: "web"
+        effect: "NoSchedule"
+      # Topology spread constraints
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: web-application
+</code></pre>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-4 mt-10">Conclusion</h2>
+
+<p class="text-gray-700 leading-relaxed mb-4">Running Kubernetes successfully in production requires attention to numerous details across security, reliability, performance, and operations. The best practices outlined in this guide provide a solid foundation for building and operating production-ready Kubernetes clusters.</p>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Key Takeaways:</strong></p>
+
+<ol class="list-decimal pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Security First</strong> - Implement Pod Security Standards, Network Policies, and RBAC from day one</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Resource Management</strong> - Properly configure requests, limits, and autoscaling</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Observability</strong> - Comprehensive monitoring, logging, and tracing are essential</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Deployment Safety</strong> - Use progressive deployment strategies with automated rollbacks</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Disaster Recovery</strong> - Regular backups and tested recovery procedures</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Performance Optimization</strong> - Right-size resources and optimize scheduling</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Expected Benefits:</strong></p>
+
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Improved Reliability</strong>: 99.9%+ uptime with proper configuration</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Better Security</strong>: Reduced attack surface and compliance adherence</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Cost Optimization</strong>: 20-40% cost reduction through right-sizing and autoscaling</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Faster Deployments</strong>: Automated, safe deployment processes</li>
+<li class="text-gray-700"><strong class="font-semibold text-gray-900">Operational Excellence</strong>: Reduced manual intervention and faster incident response</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4"><strong class="font-semibold text-gray-900">Common Pitfalls to Avoid:</strong></p>
+
+<ul class="list-disc pl-6 my-4 space-y-2">
+<li class="text-gray-700">Running containers as root</li>
+<li class="text-gray-700">Missing resource requests and limits</li>
+<li class="text-gray-700">Inadequate monitoring and alerting</li>
+<li class="text-gray-700">Lack of network segmentation</li>
+<li class="text-gray-700">Poor backup and recovery planning</li>
+<li class="text-gray-700">Insufficient testing of deployment processes</li>
+</ul>
+
+<p class="text-gray-700 leading-relaxed mb-4">Remember, Kubernetes is a powerful platform, but with great power comes great responsibility. Following these best practices will help you harness Kubernetes' capabilities while maintaining security, reliability, and performance at scale.</p>
+
+<p class="text-gray-700 leading-relaxed mb-4">---</p>
+
+<p class="text-gray-700 leading-relaxed mb-4"><em class="italic">Ready to optimize your Kubernetes infrastructure? Our cloud engineering experts can help you implement these best practices and build a production-ready Kubernetes platform. <a href="/contact" class="text-primary-600 hover:text-primary-700 transition-colors underline">Contact us</a> to get started.</em></p>2:[null,["$","html",null,{"lang":"en","children":[["$","head",null,{"children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Samshodan\",\"description\":\"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.\",\"url\":\"https://yourusername.github.io/samshodan-website\",\"logo\":\"https://yourusername.github.io/samshodan-website/logo.png\",\"contactPoint\":{\"@type\":\"ContactPoint\",\"telephone\":\"+1-555-123-4567\",\"contactType\":\"customer service\",\"email\":\"hello@samshodan.com\"},\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Global\",\"addressCountry\":\"Remote\"},\"sameAs\":[\"https://linkedin.com/company/samshodan\",\"https://github.com/samshodan\"],\"foundingDate\":\"2014\",\"numberOfEmployees\":\"25-50\",\"industry\":\"Information Technology\",\"services\":[\"AI Chatbot Development\",\"API Portal Development\",\"Application Development\",\"AI Chatbot Development\",\"API Portal Solutions\",\"Developer Tools\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Samshodan\",\"url\":\"https://yourusername.github.io/samshodan-website\",\"description\":\"Next-Generation Solutions for Modern Business\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":\"https://yourusername.github.io/samshodan-website/search?q={search_term_string}\",\"query-input\":\"required name=search_term_string\"}}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Ultron AI Chatbot\",\"description\":\"Intelligent conversational AI powered by RAG agents with configurable backend LLM models including AWS Bedrock, OpenAI, and ChatGPT.\",\"url\":\"https://yourusername.github.io/samshodan-website/products/ultron\",\"applicationCategory\":\"BusinessApplication\",\"operatingSystem\":\"Web-based\",\"offers\":{\"@type\":\"Offer\",\"price\":\"Contact for pricing\",\"priceCurrency\":\"USD\"},\"provider\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"featureList\":[\"RAG (Retrieval-Augmented Generation) agents\",\"Multi-LLM backend support\",\"Configurable conversation flows\",\"Real-time analytics\",\"Enterprise security\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Specly API Portal\",\"description\":\"Comprehensive developer portal for cataloging APIs, managing teams, and organizing development resources in structured folders.\",\"url\":\"https://yourusername.github.io/samshodan-website/products/specly\",\"applicationCategory\":\"DeveloperApplication\",\"operatingSystem\":\"Web-based\",\"offers\":{\"@type\":\"Offer\",\"price\":\"Contact for pricing\",\"priceCurrency\":\"USD\"},\"provider\":{\"@type\":\"Organization\",\"name\":\"Samshodan\"},\"featureList\":[\"API specification management\",\"Team collaboration tools\",\"Interactive documentation\",\"Version control\",\"Code generation\"]}"}}]]}],["$","body",null,{"className":"antialiased","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[],"childProp":{"current":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","blog","children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","blog","children",["slug","kubernetes-best-practices","d"],"children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","childProp":{"current":["$L6",["$","main",null,{"children":[["$","$L7",null,{}],["$","article",null,{"className":"pt-32 pb-16","children":["$","div",null,{"className":"container-max px-4 sm:px-6 lg:px-8","children":[["$","nav",null,{"className":"mb-8","children":["$","$L8",null,{"href":"/blog","className":"inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","path","1l729n",{"d":"m12 19-7-7 7-7"}],["$","path","x3x0zl",{"d":"M19 12H5"}],"$undefined"]}],"Back to Blog"]}]}],["$","header",null,{"className":"max-w-4xl mx-auto text-center mb-12","children":[["$","div",null,{"className":"mb-4","children":["$","span",null,{"className":"bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium","children":"Cloud Engineering"}]}],["$","h1",null,{"className":"text-4xl md:text-5xl font-bold text-gray-900 mb-6","children":"Kubernetes Best Practices: Production-Ready Container Orchestration"}],["$","p",null,{"className":"text-xl text-gray-600 mb-8","children":"Master Kubernetes with proven best practices for security, scalability, and reliability in production environments. Learn from real-world implementations."}],["$","div",null,{"className":"flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","path","975kel",{"d":"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"}],["$","circle","17ys0d",{"cx":"12","cy":"7","r":"4"}],"$undefined"]}],["$","span",null,{"children":"Samshodan Team"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"February 11, 2024"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-2","children":[["$","circle","1mglay",{"cx":"12","cy":"12","r":"10"}],["$","polyline","68esgv",{"points":"12 6 12 12 16 14"}],"$undefined"]}],["$","span",null,{"children":"5 min read"}]]}]]}]]}],["$","div",null,{"className":"max-w-4xl mx-auto","children":["$","div",null,{"className":"prose prose-lg prose-gray max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-h1:text-3xl prose-h1:mb-6 prose-h1:mt-8 prose-h2:text-2xl prose-h2:mb-4 prose-h2:mt-10 prose-h3:text-xl prose-h3:mb-3 prose-h3:mt-8 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:text-primary-700 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:my-6 prose-ol:my-6 prose-ul:pl-6 prose-ol:pl-6 prose-li:text-gray-700 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:pl-6 prose-blockquote:italic prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto prose-pre:my-6","dangerouslySetInnerHTML":{"__html":"$9"}}]}],["$","div",null,{"className":"max-w-4xl mx-auto mt-12 pt-8 border-t border-gray-200","children":["$","div",null,{"className":"flex flex-wrap gap-2","children":[["$","$L8","0",{"href":"/blog?tag=Kubernetes","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Kubernetes"]}],["$","$L8","1",{"href":"/blog?tag=Container%20Orchestration","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Container Orchestration"]}],["$","$L8","2",{"href":"/blog?tag=DevOps","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"DevOps"]}],["$","$L8","3",{"href":"/blog?tag=Cloud%20Native","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Cloud Native"]}],["$","$L8","4",{"href":"/blog?tag=Microservices","className":"inline-flex items-center bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm transition-colors","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":12,"height":12,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","path","14b2ls",{"d":"M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"}],["$","path","7u93v4",{"d":"M7 7h.01"}],"$undefined"]}],"Microservices"]}]]}]}]]}]}],["$","section",null,{"className":"py-16 bg-gray-50","children":["$","div",null,{"className":"container-max px-4 sm:px-6 lg:px-8","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900 mb-12 text-center","children":"Related Articles"}],["$","div",null,{"className":"grid md:grid-cols-2 lg:grid-cols-3 gap-8","children":[["$","article","2024-03-05-building-scalable-applications-microservices",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Development"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/2024-03-05-building-scalable-applications-microservices","className":"hover:text-primary-600 transition-colors","children":"Building Scalable Applications with Microservices"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Learn how to design and implement microservices architecture for better scalability, maintainability, and team productivity."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"3/4/2024"}]]}],["$","span",null,{"children":"6 min read"}]]}],["$","$L8",null,{"href":"/blog/2024-03-05-building-scalable-applications-microservices","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}],["$","article","2024-02-20-cloud-native-development-best-practices",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Development"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/2024-02-20-cloud-native-development-best-practices","className":"hover:text-primary-600 transition-colors","children":"Cloud-Native Development Best Practices"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Essential practices for building applications that fully leverage cloud computing capabilities and modern development methodologies."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"2/19/2024"}]]}],["$","span",null,{"children":"6 min read"}]]}],["$","$L8",null,{"href":"/blog/2024-02-20-cloud-native-development-best-practices","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}],["$","article","devops-automation-best-practices",{"className":"bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden","children":[["$","div",null,{"className":"h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center relative","children":[["$","div",null,{"className":"text-white text-4xl","children":"📝"}],["$","div",null,{"className":"absolute top-4 left-4","children":["$","span",null,{"className":"bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-medium","children":"Application Management Services"}]}]]}],["$","div",null,{"className":"p-6","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-3","children":["$","$L8",null,{"href":"/blog/devops-automation-best-practices","className":"hover:text-primary-600 transition-colors","children":"DevOps Automation Best Practices: Streamlining Development and Operations"}]}],["$","p",null,{"className":"text-gray-600 mb-4 line-clamp-3","children":"Discover proven DevOps automation strategies that accelerate delivery, improve reliability, and reduce operational overhead in modern software development."}],["$","div",null,{"className":"flex items-center justify-between text-sm text-gray-500 mb-4","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-1","children":[["$","rect","eu3xkr",{"width":"18","height":"18","x":"3","y":"4","rx":"2","ry":"2"}],["$","line","m3sa8f",{"x1":"16","x2":"16","y1":"2","y2":"6"}],["$","line","18kwsl",{"x1":"8","x2":"8","y1":"2","y2":"6"}],["$","line","xt86sb",{"x1":"3","x2":"21","y1":"10","y2":"10"}],"$undefined"]}],["$","span",null,{"children":"2/4/2024"}]]}],["$","span",null,{"children":"5 min read"}]]}],["$","$L8",null,{"href":"/blog/devops-automation-best-practices","className":"text-primary-600 font-medium inline-flex items-center hover:text-primary-700 transition-colors","children":["Read More ",["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"ml-1","children":[["$","path","1ays0h",{"d":"M5 12h14"}],["$","path","xquz4c",{"d":"m12 5 7 7-7 7"}],"$undefined"]}]]}]]}]]}]]}]]}]}],["$","footer",null,{"className":"bg-gray-900 text-white","children":["$","div",null,{"className":"container-max section-padding","children":[["$","div",null,{"className":"grid lg:grid-cols-3 gap-8 mb-12","children":[["$","div",null,{"className":"lg:col-span-1","children":[["$","h3",null,{"className":"text-2xl font-bold mb-4","children":"Samshodan"}],["$","p",null,{"className":"text-gray-300 mb-6 leading-relaxed","children":"Next-generation AI-powered products for modern business. We create innovative technology solutions and developer tools that enhance productivity and drive innovation."}],["$","div",null,{"className":"space-y-3","children":[["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-3 text-primary-400","children":[["$","rect","18n3k1",{"width":"20","height":"16","x":"2","y":"4","rx":"2"}],["$","path","1ocrg3",{"d":"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"}],"$undefined"]}],["$","a",null,{"href":"mailto:hello@samshodan.com","className":"text-gray-300 hover:text-white transition-colors","children":"hello@samshodan.com"}]]}],["$","div",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":16,"height":16,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"mr-3 text-primary-400","children":[["$","path","2oe9fu",{"d":"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"}],["$","circle","ilqhr7",{"cx":"12","cy":"10","r":"3"}],"$undefined"]}],["$","span",null,{"className":"text-gray-300","children":"Global Remote Team"}]]}]]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"text-lg font-semibold mb-4","children":"Products"}],["$","ul",null,{"className":"space-y-3","children":[["$","li","0",{"children":["$","a",null,{"href":"/products/ultron","className":"text-gray-300 hover:text-white transition-colors","children":"Ultron AI Chatbot"}]}],["$","li","1",{"children":["$","a",null,{"href":"/products/specly","className":"text-gray-300 hover:text-white transition-colors","children":"Specly API Portal"}]}]]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"text-lg font-semibold mb-4","children":"Company"}],["$","ul",null,{"className":"space-y-3 mb-6","children":[["$","li","0",{"children":["$","a",null,{"href":"/about","className":"text-gray-300 hover:text-white transition-colors","children":"About Us"}]}],["$","li","1",{"children":["$","a",null,{"href":"/blog","className":"text-gray-300 hover:text-white transition-colors","children":"Blog"}]}],["$","li","2",{"children":["$","a",null,{"href":"/contact","className":"text-gray-300 hover:text-white transition-colors","children":"Contact"}]}],["$","li","3",{"children":["$","a",null,{"href":"/privacy","className":"text-gray-300 hover:text-white transition-colors","children":"Privacy Policy"}]}],["$","li","4",{"children":["$","a",null,{"href":"/terms","className":"text-gray-300 hover:text-white transition-colors","children":"Terms of Service"}]}]]}],["$","div",null,{"className":"flex space-x-4","children":[["$","a","0",{"href":"#","className":"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200","aria-label":"LinkedIn","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-linkedin","children":[["$","path","c2jq9f",{"d":"M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"}],["$","rect","mk3on5",{"width":"4","height":"12","x":"2","y":"9"}],["$","circle","bt5ra8",{"cx":"4","cy":"4","r":"2"}],"$undefined"]}]}],["$","a","1",{"href":"#","className":"bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200","aria-label":"GitHub","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","width":20,"height":20,"viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":2,"strokeLinecap":"round","strokeLinejoin":"round","className":"lucide lucide-github","children":[["$","path","tonef",{"d":"M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"}],["$","path","9comsn",{"d":"M9 18c-4.51 2-5-2-7-2"}],"$undefined"]}]}]]}]]}]]}],["$","div",null,{"className":"border-t border-gray-800 pt-8","children":["$","div",null,{"className":"flex flex-col md:flex-row justify-between items-center","children":[["$","p",null,{"className":"text-gray-400 text-sm","children":["© ",2025," Samshodan. All rights reserved."]}],["$","p",null,{"className":"text-gray-400 text-sm mt-4 md:mt-0","children":"Built with ❤️ for modern business"}]]}]}]]}]}]]}],null],"segment":"__PAGE__?{\"slug\":\"kubernetes-best-practices\"}"},"styles":null}],"segment":["slug","kubernetes-best-practices","d"]},"styles":null}],"segment":"blog"},"styles":null}]}]]}],null]
+3:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Kubernetes Best Practices: Production-Ready Container Orchestration | Samshodan Blog"}],["$","meta","3",{"name":"description","content":"Master Kubernetes with proven best practices for security, scalability, and reliability in production environments. Learn from real-world implementations."}],["$","meta","4",{"name":"author","content":"Samshodan"}],["$","link","5",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","6",{"name":"keywords","content":"Kubernetes, Container Orchestration, DevOps, Cloud Native, Microservices"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","link","8",{"rel":"canonical","href":"/blog/kubernetes-best-practices"}],["$","meta","9",{"property":"og:title","content":"Kubernetes Best Practices: Production-Ready Container Orchestration"}],["$","meta","10",{"property":"og:description","content":"Master Kubernetes with proven best practices for security, scalability, and reliability in production environments. Learn from real-world implementations."}],["$","meta","11",{"property":"og:type","content":"article"}],["$","meta","12",{"property":"article:published_time","content":"2024-02-12"}],["$","meta","13",{"property":"article:author","content":"Samshodan Team"}],["$","meta","14",{"property":"article:tag","content":"Kubernetes"}],["$","meta","15",{"property":"article:tag","content":"Container Orchestration"}],["$","meta","16",{"property":"article:tag","content":"DevOps"}],["$","meta","17",{"property":"article:tag","content":"Cloud Native"}],["$","meta","18",{"property":"article:tag","content":"Microservices"}],["$","meta","19",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","20",{"name":"twitter:title","content":"Samshodan - AI Products & Developer Tools"}],["$","meta","21",{"name":"twitter:description","content":"We create innovative AI-powered products and developer tools that enhance productivity and drive innovation."}]]
+6:null
