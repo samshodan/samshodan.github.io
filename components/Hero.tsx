@@ -39,9 +39,8 @@ export default function Hero() {
             style={{ transitionDelay: '1.4s' }}
           >
             <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-              We deliver comprehensive digital transformation through AI-powered solutions, experience design, 
-              digital engineering, cloud infrastructure, e-commerce platforms, and managed application services 
-              that drive innovation and business growth.
+              We deliver next-generation AI-powered products and comprehensive digital solutions 
+              that drive innovation and business growth across industries.
             </p>
           </div>
 
@@ -81,8 +80,8 @@ export default function Hero() {
               <div className="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 hover:bg-primary-200 transition-all duration-300 hover:rotate-12 transform animate-float-delayed">
                 <Code className="text-primary-600" size={36} />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">End-to-End Solutions</h3>
-              <p className="text-gray-600">Complete digital transformation from strategy to implementation and support</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Product Excellence</h3>
+              <p className="text-gray-600">Thoughtfully designed products that integrate seamlessly into your workflow</p>
             </div>
 
             <div
@@ -93,8 +92,8 @@ export default function Hero() {
               <div className="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 hover:bg-primary-200 transition-all duration-300 hover:rotate-12 transform animate-float">
                 <Settings className="text-primary-600" size={36} />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Proven Results</h3>
-              <p className="text-gray-600">Measurable business outcomes with 99.9% uptime and expert 24/7 support</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Reliable Technology</h3>
+              <p className="text-gray-600">Built for scale with enterprise-grade reliability and performance</p>
             </div>
           </div>
 
@@ -107,15 +106,15 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-500 text-sm">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span>100+ Projects Delivered</span>
+                <span>AI-Powered Products</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span>99.9% Uptime SLA</span>
+                <span>Enterprise-Grade Security</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span>24/7 Expert Support</span>
+                <span>Developer-First Design</span>
               </div>
             </div>
           </div>

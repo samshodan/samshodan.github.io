@@ -4,12 +4,12 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Contact Samshodan - Get Started with AI Solutions & IT Consulting',
-  description: 'Contact Samshodan for AI chatbot solutions, API portal development, and IT consulting services. Schedule a consultation to transform your retail business.',
-  keywords: 'contact Samshodan, AI solutions consultation, IT consulting contact, retail technology consultation, schedule consultation, get quote',
+  title: 'Contact Samshodan - Get Started with AI Products & Developer Tools',
+  description: 'Contact Samshodan for AI chatbot solutions and API portal development. Schedule a consultation to explore our innovative products.',
+  keywords: 'contact Samshodan, AI products consultation, developer tools contact, AI chatbot consultation, schedule consultation, get quote',
   openGraph: {
-    title: 'Contact Samshodan - Get Started with AI Solutions & IT Consulting',
-    description: 'Contact Samshodan for AI chatbot solutions, API portal development, and IT consulting services.',
+    title: 'Contact Samshodan - Get Started with AI Products & Developer Tools',
+    description: 'Contact Samshodan for AI chatbot solutions and API portal development.',
     type: 'website',
   },
   alternates: {

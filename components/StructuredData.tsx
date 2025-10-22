@@ -3,7 +3,7 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Samshodan",
-    "description": "We empower businesses across industries with intelligent AI solutions, enhance developer productivity with cutting-edge tools, and deliver transformative IT consulting.",
+    "description": "We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.",
     "url": "https://yourusername.github.io/samshodan-website",
     "logo": "https://yourusername.github.io/samshodan-website/logo.png",
     "contactPoint": {
@@ -28,9 +28,9 @@ export default function StructuredData() {
       "AI Chatbot Development",
       "API Portal Development",
       "Application Development",
-      "Testing Services",
-      "Managed IT Services",
-      "IT Consulting"
+      "AI Chatbot Development",
+      "API Portal Solutions",
+      "Developer Tools"
     ]
   }
 

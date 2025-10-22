@@ -8,14 +8,6 @@ export default function Footer() {
       { name: 'Ultron AI Chatbot', href: '/products/ultron' },
       { name: 'Specly API Portal', href: '/products/specly' },
     ],
-    services: [
-      { name: 'Experience Transformation', href: '/services/experience-transformation' },
-      { name: 'Digital Engineering', href: '/services/digital-engineering' },
-      { name: 'Digital Commerce', href: '/services/digital-commerce' },
-      { name: 'Cloud Engineering', href: '/services/cloud-engineering' },
-      { name: 'Application Management Services', href: '/services/application-management-services' },
-      { name: 'AI Solutions', href: '/services/ai-solutions' },
-    ],
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Blog', href: '/blog' },
@@ -33,13 +25,13 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container-max section-padding">
-        <div className="grid lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <h3 className="text-2xl font-bold mb-4">Samshodan</h3>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Next-generation solutions for modern business. We deliver AI-powered technology,
-              developer tools, and comprehensive IT consulting across industries.
+              Next-generation AI-powered products for modern business. We create innovative 
+              technology solutions and developer tools that enhance productivity and drive innovation.
             </p>
 
             <div className="space-y-3">
@@ -61,20 +53,6 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Products</h4>
             <ul className="space-y-3">
               {footerLinks.products.map((link, index) => (
-                <li key={index}>
-                  <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Solutions</h4>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link, index) => (
                 <li key={index}>
                   <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
                     {link.name}

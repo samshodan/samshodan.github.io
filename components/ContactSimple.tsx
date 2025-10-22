@@ -151,12 +151,6 @@ Sent from Samshodan website contact form`
                     <option value="">Select a service</option>
                     <option value="Ultron AI Chatbot">Ultron AI Chatbot</option>
                     <option value="Specly API Portal">Specly API Portal</option>
-                    <option value="Experience Transformation">Experience Transformation</option>
-                    <option value="Digital Engineering">Digital Engineering</option>
-                    <option value="Digital Commerce">Digital Commerce</option>
-                    <option value="Cloud Engineering">Cloud Engineering</option>
-                    <option value="Application Management Services">Application Management Services</option>
-                    <option value="AI Solutions">AI Solutions</option>
                     <option value="General Consulting">General Consulting</option>
                   </select>
                 </div>
@@ -228,7 +222,7 @@ Sent from Samshodan website contact form`
               <ul className="space-y-3 text-primary-100">
                 <li className="flex items-start">
                   <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span>Retail domain expertise</span>
+                  <span>AI-powered innovation</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />

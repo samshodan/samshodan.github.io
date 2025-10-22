@@ -94,7 +94,7 @@ export default function PrivacyPage() {
                 We use the information we collect for the following purposes:
               </p>
               <ul className="list-disc pl-6 text-gray-700 mb-6 space-y-2">
-                <li><strong>Service Delivery:</strong> To provide, maintain, and improve our AI solutions, API portals, and IT consulting services</li>
+                <li><strong>Service Delivery:</strong> To provide, maintain, and improve our AI products and developer tools</li>
                 <li><strong>Communication:</strong> To respond to your inquiries, provide customer support, and send service-related communications</li>
                 <li><strong>Business Development:</strong> To understand your needs and develop customized solutions</li>
                 <li><strong>Marketing:</strong> To send you information about our products, services, and industry insights (with your consent)</li>

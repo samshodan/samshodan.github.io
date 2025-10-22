@@ -4,11 +4,11 @@ import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Terms of Service - Samshodan | Legal Terms & Conditions',
-  description: 'Samshodan\'s Terms of Service outline the legal terms and conditions for using our AI solutions, API portals, and IT consulting services.',
+  description: 'Samshodan\'s Terms of Service outline the legal terms and conditions for using our AI products and developer tools.',
   keywords: 'terms of service, terms and conditions, legal terms, service agreement, Samshodan terms',
   openGraph: {
     title: 'Terms of Service - Samshodan',
-    description: 'Legal terms and conditions for using Samshodan\'s AI solutions and IT consulting services.',
+    description: 'Legal terms and conditions for using Samshodan\'s AI products and developer tools.',
     type: 'website',
   },
   alternates: {
@@ -60,9 +60,9 @@ export default function TermsPage() {
               </p>
               <ul className="list-disc pl-6 text-gray-700 mb-6 space-y-2">
                 <li>Website visitors and browsers</li>
-                <li>Customers using our AI solutions (Ultron)</li>
+                <li>Users of our AI chatbot (Ultron)</li>
                 <li>Users of our API portal (Specly)</li>
-                <li>Clients of our IT consulting services</li>
+                <li>Customers of our products and services</li>
                 <li>Partners and vendors</li>
               </ul>
             </section>
@@ -90,13 +90,13 @@ export default function TermsPage() {
                 <li>Integration support and consulting</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">IT Consulting Services</h3>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">Product Support Services</h3>
               <ul className="list-disc pl-6 text-gray-700 mb-6 space-y-2">
-                <li>Application development and modernization</li>
-                <li>Software testing and quality assurance</li>
-                <li>Managed IT services and support</li>
-                <li>Technology strategy and architecture consulting</li>
-                <li>Retail domain expertise and solutions</li>
+                <li>Product documentation and guides</li>
+                <li>Technical support and troubleshooting</li>
+                <li>Product updates and maintenance</li>
+                <li>Integration assistance and consulting</li>
+                <li>Custom development and enhancements</li>
               </ul>
             </section>
 

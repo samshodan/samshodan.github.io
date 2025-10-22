@@ -17,18 +17,6 @@ export default function Header() {
         { name: 'Specly API Portal', href: '/products/specly' }
       ]
     },
-    { 
-      name: 'Solutions', 
-      href: '/services',
-      submenu: [
-        { name: 'Experience Transformation', href: '/services/experience-transformation' },
-        { name: 'Digital Engineering', href: '/services/digital-engineering' },
-        { name: 'Digital Commerce', href: '/services/digital-commerce' },
-        { name: 'Cloud Engineering', href: '/services/cloud-engineering' },
-        { name: 'Application Management Services', href: '/services/application-management-services' },
-        { name: 'AI Solutions', href: '/services/ai-solutions' }
-      ]
-    },
     { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
@@ -55,7 +43,7 @@ export default function Header() {
                   {item.name}
                 </a>
                 {item.submenu && (
-                  <div className={`absolute top-full left-0 mt-2 ${item.name === 'Solutions' ? 'w-80' : 'w-48'} bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50`}>
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="py-2">
                       {item.submenu.map((subItem) => (
                         <a

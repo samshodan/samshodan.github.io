@@ -175,12 +175,6 @@ export default function Contact() {
                     <option value="">Select a service</option>
                     <option value="ultron">Ultron AI Chatbot</option>
                     <option value="specly">Specly API Portal</option>
-                    <option value="experience-transformation">Experience Transformation</option>
-                    <option value="digital-engineering">Digital Engineering</option>
-                    <option value="digital-commerce">Digital Commerce</option>
-                    <option value="cloud-engineering">Cloud Engineering</option>
-                    <option value="application-management-services">Application Management Services</option>
-                    <option value="ai-solutions">AI Solutions</option>
                     <option value="consulting">General Consulting</option>
                   </select>
                 </div>
@@ -251,7 +245,7 @@ export default function Contact() {
               <ul className="space-y-3 text-primary-100">
                 <li className="flex items-start">
                   <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span>Retail domain expertise</span>
+                  <span>AI-powered innovation</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />

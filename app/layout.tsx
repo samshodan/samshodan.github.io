@@ -3,20 +3,20 @@ import './globals.css'
 import StructuredData from '@/components/StructuredData'
 
 export const metadata: Metadata = {
-  title: 'Samshodan - Next-Generation Solutions for Modern Business',
-  description: 'We empower businesses across industries with intelligent AI solutions, enhance developer productivity with cutting-edge tools, and deliver transformative IT consulting. Featuring Ultron AI chatbot and Specly API portal.',
+  title: 'Samshodan - AI Products & Developer Tools',
+  description: 'We create innovative AI-powered products and developer tools that enhance productivity and drive innovation. Featuring Ultron AI chatbot and Specly API portal.',
   keywords: 'AI chatbot, developer experience, IT consulting, retail solutions, API portal, RAG agents, application development',
   authors: [{ name: 'Samshodan' }],
   openGraph: {
-    title: 'Samshodan - Next-Generation Solutions for Modern Business',
-    description: 'We empower businesses across industries with intelligent AI solutions, enhance developer productivity with cutting-edge tools, and deliver transformative IT consulting.',
+    title: 'Samshodan - AI Products & Developer Tools',
+    description: 'We create innovative AI-powered products and developer tools that enhance productivity and drive innovation.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Samshodan - Next-Generation Solutions for Modern Business',
-    description: 'We empower businesses across industries with intelligent AI solutions, enhance developer productivity with cutting-edge tools, and deliver transformative IT consulting.',
+    title: 'Samshodan - AI Products & Developer Tools',
+    description: 'We create innovative AI-powered products and developer tools that enhance productivity and drive innovation.',
   },
   robots: {
     index: true,

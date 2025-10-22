@@ -4,12 +4,12 @@ import About from '@/components/About'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'About Samshodan - Retail Domain Experts & Technology Leaders',
-  description: 'Learn about Samshodan\'s mission, vision, and values. We specialize in retail domain solutions, developer experience, and IT consulting with 10+ years of experience.',
-  keywords: 'about Samshodan, retail domain experts, technology company, IT consulting company, developer experience, company mission, company values',
+  title: 'About Samshodan - AI Product Innovators & Developer Tool Creators',
+  description: 'Learn about Samshodan\'s mission, vision, and values. We create innovative AI-powered products and developer tools that enhance productivity and drive innovation.',
+  keywords: 'about Samshodan, AI products, developer tools, technology company, artificial intelligence, company mission, company values',
   openGraph: {
-    title: 'About Samshodan - Retail Domain Experts & Technology Leaders',
-    description: 'Learn about Samshodan\'s mission, vision, and values in retail domain solutions and IT consulting.',
+    title: 'About Samshodan - AI Product Innovators & Developer Tool Creators',
+    description: 'Learn about Samshodan\'s mission, vision, and values in AI product development and developer tools.',
     type: 'website',
   },
   alternates: {
