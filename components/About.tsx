@@ -1,12 +1,26 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 export default function About() {
     const [isVisible, setIsVisible] = useState(false)
+    const sectionRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        setIsVisible(true)
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true)
+                }
+            },
+            { threshold: 0.2 }
+        )
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current)
+        }
+
+        return () => observer.disconnect()
     }, [])
 
     const values = [
@@ -29,7 +43,7 @@ export default function About() {
     ]
 
     return (
-        <section id="about" className="section-padding bg-white">
+        <section id="about" className="section-padding bg-white" ref={sectionRef}>
             <div className="container-max">
                 <div className="text-center mb-16">
                     <h2

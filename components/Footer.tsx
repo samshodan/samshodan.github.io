@@ -10,7 +10,7 @@ export default function Footer() {
     ],
     company: [
       { name: 'About Us', href: '/about' },
-      { name: 'Blog', href: '/blog' },
+      // { name: 'Blog', href: '/blog' },
       { name: 'Contact', href: '/contact' },
       { name: 'Privacy Policy', href: '/privacy' },
       { name: 'Terms of Service', href: '/terms' },
@@ -25,16 +25,20 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container-max section-padding">
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
-          {/* Company Info */}
-          <div className="lg:col-span-1">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Company Info - Column 1 */}
+          <div>
             <h3 className="text-2xl font-bold mb-4">Samshodan</h3>
             <p className="text-gray-300 mb-6 leading-relaxed">
               Next-generation AI-powered products for modern business. We create innovative 
               technology solutions and developer tools that enhance productivity and drive innovation.
             </p>
+          </div>
 
-            <div className="space-y-3">
+          {/* Contact & Social - Column 2 */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Contact</h4>
+            <div className="space-y-3 mb-6">
               <div className="flex items-center">
                 <Mail className="mr-3 text-primary-400" size={16} />
                 <a href="mailto:hello@samshodan.com" className="text-gray-300 hover:text-white transition-colors">
@@ -46,9 +50,26 @@ export default function Footer() {
                 <span className="text-gray-300">Global Remote Team</span>
               </div>
             </div>
+
+            {/* Social Links */}
+            <div>
+              <h5 className="text-sm font-semibold mb-3 text-gray-400">Follow Us</h5>
+              <div className="flex space-x-3">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className="bg-gray-800 hover:bg-primary-600 w-9 h-9 rounded-lg flex items-center justify-center transition-colors duration-200"
+                    aria-label={social.name}
+                  >
+                    <social.icon size={18} />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Products */}
+          {/* Products - Column 3 */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Products</h4>
             <ul className="space-y-3">
@@ -62,10 +83,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
-          <div>
+          {/* Company - Column 4 */}
+          <div className="lg:text-right">
             <h4 className="text-lg font-semibold mb-4">Company</h4>
-            <ul className="space-y-3 mb-6">
+            <ul className="space-y-3">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
                   <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
@@ -74,20 +95,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="bg-gray-800 hover:bg-primary-600 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200"
-                  aria-label={social.name}
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 

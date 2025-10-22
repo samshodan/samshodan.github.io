@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
+// import { useState } from 'react'
+import { Mail, MapPin, CheckCircle } from 'lucide-react'
 
 export default function Contact() {
+  // Form state commented out until form setup is complete
+  /*
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,7 +16,10 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  */
 
+  // Form handlers commented out until form setup is complete
+  /*
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -63,6 +68,7 @@ export default function Contact() {
       [e.target.name]: e.target.value
     })
   }
+  */
 
   const contactInfo = [
     {
@@ -92,7 +98,8 @@ export default function Contact() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Contact Form - Commented out until form setup is complete */}
+          {/* 
           <div className="bg-white rounded-2xl p-8 shadow-sm">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
             
@@ -214,53 +221,53 @@ export default function Contact() {
               </button>
             </form>
           </div>
+          */}
 
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="bg-primary-100 w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                      <info.icon className="text-primary-600" size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{info.label}</h4>
-                      {info.href !== '#' ? (
-                        <a href={info.href} className="text-gray-600 hover:text-primary-600 transition-colors">
-                          {info.value}
-                        </a>
-                      ) : (
-                        <span className="text-gray-600">{info.value}</span>
-                      )}
-                    </div>
+          {/* Contact Information - Column 1 */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+            <div className="space-y-6">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="flex items-start">
+                  <div className="bg-primary-100 w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <info.icon className="text-primary-600" size={20} />
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">{info.label}</h4>
+                    {info.href !== '#' ? (
+                      <a href={info.href} className="text-gray-600 hover:text-primary-600 transition-colors">
+                        {info.value}
+                      </a>
+                    ) : (
+                      <span className="text-gray-600">{info.value}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="bg-primary-600 rounded-2xl p-8 text-white">
-              <h4 className="text-xl font-bold mb-4">Why Choose Samshodan?</h4>
-              <ul className="space-y-3 text-primary-100">
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span>AI-powered innovation</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span>Cutting-edge AI solutions</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span>Comprehensive IT services</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
-                  <span>Dedicated support team</span>
-                </li>
-              </ul>
-            </div>
+          {/* Why Choose Samshodan - Column 2 */}
+          <div className="bg-primary-600 rounded-2xl p-8 text-white">
+            <h4 className="text-xl font-bold mb-4">Why Choose Samshodan?</h4>
+            <ul className="space-y-3 text-primary-100">
+              <li className="flex items-start">
+                <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                <span>AI-powered innovation</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                <span>Cutting-edge AI solutions</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                <span>Comprehensive IT services</span>
+              </li>
+              <li className="flex items-start">
+                <CheckCircle className="mr-3 mt-0.5 flex-shrink-0" size={16} />
+                <span>Dedicated support team</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

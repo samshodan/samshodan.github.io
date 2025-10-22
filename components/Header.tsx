@@ -17,7 +17,7 @@ export default function Header() {
         { name: 'Specly API Portal', href: '/products/specly' }
       ]
     },
-    { name: 'Blog', href: '/blog' },
+    // { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ]

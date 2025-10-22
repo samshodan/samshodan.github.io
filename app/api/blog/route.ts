@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getAllPosts, getCategories } from '../../../lib/blog-server'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   try {
     const posts = getAllPosts()
