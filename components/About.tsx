@@ -26,19 +26,19 @@ export default function About() {
     const values = [
         {
             title: 'Innovation First',
-            description: 'We stay at the forefront of AI and technology, constantly pushing boundaries to create groundbreaking products.'
+            description: 'We stay at the forefront of technology, leveraging modern tools and practices to deliver cutting-edge solutions.'
         },
         {
-            title: 'User-Centric Design',
-            description: 'Every product we build is designed with the user in mind, focusing on intuitive experiences and real-world impact.'
+            title: 'Client-Centric',
+            description: 'Every solution we build is tailored to your unique business needs, focusing on real-world impact and measurable results.'
         },
         {
             title: 'Quality Excellence',
-            description: 'We maintain the highest standards in product development, from code quality to user experience.'
+            description: 'We maintain the highest standards in software development, from architecture design to code quality and security.'
         },
         {
-            title: 'Open Innovation',
-            description: 'We believe in building products that integrate seamlessly with existing workflows and enhance productivity.'
+            title: 'Strategic Partnership',
+            description: 'We work as your technology partner, providing strategic guidance and solutions that align with your business goals.'
         }
     ]
 
@@ -58,9 +58,9 @@ export default function About() {
                             }`}
                         style={{ transitionDelay: '0.4s' }}
                     >
-                        At Samshodan, we&apos;re building the future with AI-powered products and developer tools.
-                        We create innovative technology solutions that enhance productivity, streamline workflows,
-                        and unlock new possibilities for businesses and developers.
+                        Samshodan delivers innovative AI-powered products and expert IT consulting services.
+                        We help businesses transform through cutting-edge technology solutions, strategic guidance,
+                        and modern development practices.
                     </p>
                 </div>
 
@@ -75,9 +75,9 @@ export default function About() {
                     >
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
                         <p className="text-gray-600 leading-relaxed">
-                            To build the future by creating innovative AI-powered products and developer tools 
-                            that accelerate innovation and enhance productivity. We focus on delivering exceptional 
-                            technology solutions that drive measurable impact and competitive advantage.
+                            To empower businesses through innovative AI-powered products and expert IT consulting.
+                            We deliver cutting-edge technology solutions that accelerate digital transformation,
+                            enhance operational efficiency, and drive measurable business impact.
                         </p>
                     </div>
 
@@ -88,9 +88,9 @@ export default function About() {
                     >
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
                         <p className="text-gray-600 leading-relaxed">
-                            To be the leading creator of AI-powered products and developer tools,
-                            recognized for our innovation in artificial intelligence and our
-                            commitment to building technology that transforms how people work and interact with AI.
+                            To be a trusted technology partner recognized for excellence in AI innovation,
+                            product development, and IT consulting. We strive to help businesses navigate digital 
+                            transformation through innovative products and strategic guidance.
                         </p>
                     </div>
                 </div>

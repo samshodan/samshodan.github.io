@@ -180,8 +180,9 @@ export default function Contact() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select a service</option>
-                    <option value="ultron">Ultron AI Chatbot</option>
-                    <option value="specly">Specly API Portal</option>
+                    <option value="cloud">Cloud Solutions</option>
+                    <option value="ai">AI Integration</option>
+                    <option value="enterprise">Enterprise Development</option>
                     <option value="consulting">General Consulting</option>
                   </select>
                 </div>

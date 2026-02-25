@@ -3,9 +3,9 @@ import './globals.css'
 import StructuredData from '@/components/StructuredData'
 
 export const metadata: Metadata = {
-  title: 'Samshodan - AI Products & Developer Tools',
-  description: 'We create innovative AI-powered products and developer tools that enhance productivity and drive innovation. Featuring Ultron AI chatbot and Specly API portal.',
-  keywords: 'AI chatbot, developer experience, IT consulting, retail solutions, API portal, RAG agents, application development',
+  title: 'Samshodan - AI Products & IT Consulting Services',
+  description: 'Innovative AI-powered products and expert IT consulting services. We deliver cutting-edge technology solutions including cloud services, AI integration, and custom software development.',
+  keywords: 'AI products, IT consulting, software development, cloud solutions, AI integration, enterprise development, custom software, technology consulting',
   authors: [{ name: 'Samshodan' }],
   openGraph: {
     title: 'Samshodan - AI Products & Developer Tools',

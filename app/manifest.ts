@@ -4,9 +4,9 @@ export const dynamic = 'force-static'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Samshodan - AI Products & Developer Tools',
+    name: 'Samshodan - AI Products & IT Consulting',
     short_name: 'Samshodan',
-    description: 'Leading creator of AI-powered products and developer tools including Ultron AI chatbot and Specly API portal.',
+    description: 'Innovative AI-powered products and expert IT consulting services for modern businesses.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

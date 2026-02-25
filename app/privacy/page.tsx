@@ -32,7 +32,7 @@ export default function PrivacyPage() {
               Privacy Policy
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Last updated: January 1, 2024
+              Last updated: January 1, 2026
             </p>
             <p className="text-lg text-gray-700">
               At Samshodan, we are committed to protecting your privacy and ensuring the security of your personal information. 
@@ -194,7 +194,7 @@ export default function PrivacyPage() {
               </ul>
 
               <p className="text-gray-700 mb-6">
-                To exercise any of these rights, please contact us at <a href="mailto:privacy@samshodan.com" className="text-primary-600 hover:text-primary-700">privacy@samshodan.com</a>.
+                To exercise any of these rights, please contact us at <a href="mailto:hello@samshodan.com" className="text-primary-600 hover:text-primary-700">hello@samshodan.com</a>.
               </p>
             </section>
 
@@ -290,13 +290,7 @@ export default function PrivacyPage() {
               <div className="bg-gray-50 rounded-lg p-6 mb-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">Samshodan Privacy Team</h3>
                 <p className="text-gray-700 mb-2">
-                  <strong>Email:</strong> <a href="mailto:privacy@samshodan.com" className="text-primary-600 hover:text-primary-700">privacy@samshodan.com</a>
-                </p>
-                <p className="text-gray-700 mb-2">
-                  <strong>General Contact:</strong> <a href="mailto:hello@samshodan.com" className="text-primary-600 hover:text-primary-700">hello@samshodan.com</a>
-                </p>
-                <p className="text-gray-700 mb-2">
-                  <strong>Phone:</strong> <a href="tel:+15551234567" className="text-primary-600 hover:text-primary-700">+1 (555) 123-4567</a>
+                  <strong>Email:</strong> <a href="mailto:hello@samshodan.com" className="text-primary-600 hover:text-primary-700">hello@samshodan.com</a>
                 </p>
                 <p className="text-gray-700">
                   <strong>Response Time:</strong> We will respond to your inquiry within 30 days

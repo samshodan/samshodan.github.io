@@ -44,12 +44,6 @@ Sent from Samshodan website contact form`
       href: 'mailto:hello@samshodan.com'
     },
     {
-      icon: Phone,
-      label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
-    },
-    {
       icon: MapPin,
       label: 'Location',
       value: 'Global Remote Team',
@@ -138,8 +132,9 @@ Sent from Samshodan website contact form`
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select a service</option>
-                    <option value="ultron">Ultron AI Chatbot</option>
-                    <option value="specly">Specly API Portal</option>
+                    <option value="cloud">Cloud Solutions</option>
+                    <option value="ai">AI Integration</option>
+                    <option value="enterprise">Enterprise Development</option>
                     <option value="consulting">General Consulting</option>
                   </select>
                 </div>

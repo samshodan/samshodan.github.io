@@ -39,8 +39,8 @@ export default function Hero() {
             style={{ transitionDelay: '1.4s' }}
           >
             <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto">
-              We deliver next-generation AI-powered products and comprehensive digital solutions 
-              that drive innovation and business growth across industries.
+              We deliver innovative AI-powered products and expert IT consulting services 
+              that transform businesses through cutting-edge technology and strategic guidance.
             </p>
           </div>
 
@@ -50,7 +50,7 @@ export default function Hero() {
             style={{ transitionDelay: '1.8s' }}
           >
             <Link href="/products" className="btn-primary inline-flex items-center justify-center group hover:scale-105 transition-transform duration-200">
-              Explore Products
+              Explore Services
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-200" size={20} />
             </Link>
             <Link href="/contact" className="btn-secondary inline-flex items-center justify-center hover:scale-105 transition-transform duration-200">
@@ -68,8 +68,8 @@ export default function Hero() {
               <div className="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 hover:bg-primary-200 transition-all duration-300 hover:rotate-12 transform animate-float">
                 <Bot className="text-primary-600" size={36} />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Innovation-Driven</h3>
-              <p className="text-gray-600">Cutting-edge AI and modern technologies that give you competitive advantage</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Technology Excellence</h3>
+              <p className="text-gray-600">Cutting-edge solutions and modern technologies that give you competitive advantage</p>
             </div>
 
             <div
@@ -80,8 +80,8 @@ export default function Hero() {
               <div className="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 hover:bg-primary-200 transition-all duration-300 hover:rotate-12 transform animate-float-delayed">
                 <Code className="text-primary-600" size={36} />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Product Excellence</h3>
-              <p className="text-gray-600">Thoughtfully designed products that integrate seamlessly into your workflow</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Custom Solutions</h3>
+              <p className="text-gray-600">Tailored software development that integrates seamlessly into your business</p>
             </div>
 
             <div
@@ -110,11 +110,11 @@ export default function Hero() {
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span>Enterprise-Grade Security</span>
+                <span>IT Consulting</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                <span>Developer-First Design</span>
+                <span>Custom Development</span>
               </div>
             </div>
           </div>

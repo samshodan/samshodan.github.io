@@ -8,7 +8,6 @@ export default function StructuredData() {
     "logo": "https://yourusername.github.io/samshodan-website/logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+1-555-123-4567",
       "contactType": "customer service",
       "email": "hello@samshodan.com"
     },

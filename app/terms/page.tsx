@@ -32,7 +32,7 @@ export default function TermsPage() {
               Terms of Service
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Last updated: January 1, 2024
+              Last updated: January 1, 2026
             </p>
             <p className="text-lg text-gray-700">
               These Terms of Service (&quot;Terms&quot;) govern your use of Samshodan&apos;s website, products, and services. 
@@ -397,13 +397,7 @@ export default function TermsPage() {
               <div className="bg-gray-50 rounded-lg p-6 mb-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">Samshodan Legal Department</h3>
                 <p className="text-gray-700 mb-2">
-                  <strong>Email:</strong> <a href="mailto:legal@samshodan.com" className="text-primary-600 hover:text-primary-700">legal@samshodan.com</a>
-                </p>
-                <p className="text-gray-700 mb-2">
-                  <strong>General Contact:</strong> <a href="mailto:hello@samshodan.com" className="text-primary-600 hover:text-primary-700">hello@samshodan.com</a>
-                </p>
-                <p className="text-gray-700 mb-2">
-                  <strong>Phone:</strong> <a href="tel:+15551234567" className="text-primary-600 hover:text-primary-700">+1 (555) 123-4567</a>
+                  <strong>Email:</strong> <a href="mailto:hello@samshodan.com" className="text-primary-600 hover:text-primary-700">hello@samshodan.com</a>
                 </p>
                 <p className="text-gray-700">
                   <strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM EST

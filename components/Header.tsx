@@ -9,14 +9,7 @@ export default function Header() {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { 
-      name: 'Products', 
-      href: '/products',
-      submenu: [
-        { name: 'Ultron AI Chatbot', href: '/products/ultron' },
-        { name: 'Specly API Portal', href: '/products/specly' }
-      ]
-    },
+    { name: 'Services', href: '/products' },
     // { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },

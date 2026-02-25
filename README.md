@@ -202,7 +202,6 @@ This project is licensed under the MIT License.
 
 For support or questions about this website, please contact:
 - Email: hello@samshodan.com
-- Phone: +1 (555) 123-4567
 
 ---
 

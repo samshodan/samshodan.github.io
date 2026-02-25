@@ -4,12 +4,12 @@ import Products from '@/components/Products'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Products - Ultron AI Chatbot & Specly API Portal | Samshodan',
-  description: 'Discover Samshodan\'s innovative products: Ultron AI Chatbot with RAG agents and configurable LLM backends (Bedrock, OpenAI, ChatGPT), and Specly API specification portal for developers.',
-  keywords: 'Ultron AI chatbot, Specly API portal, RAG agents, LLM backends, AWS Bedrock, OpenAI, ChatGPT, API management, developer tools',
+  title: 'Services - AI Products & IT Consulting | Samshodan',
+  description: 'Discover our innovative AI-powered products and expert IT consulting services including cloud solutions, AI integration, and custom software development.',
+  keywords: 'AI products, IT consulting, software development, cloud solutions, AI integration, enterprise development, custom software',
   openGraph: {
-    title: 'Products - Ultron AI Chatbot & Specly API Portal | Samshodan',
-    description: 'Discover Samshodan\'s innovative products: Ultron AI Chatbot with RAG agents and Specly API specification portal.',
+    title: 'Services - AI Products & IT Consulting | Samshodan',
+    description: 'Innovative AI-powered products and expert IT consulting services to accelerate your digital transformation.',
     type: 'website',
   },
   alternates: {

@@ -5,8 +5,7 @@ export default function Footer() {
 
   const footerLinks = {
     products: [
-      { name: 'Ultron AI Chatbot', href: '/products/ultron' },
-      { name: 'Specly API Portal', href: '/products/specly' },
+      { name: 'Services', href: '/products' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
@@ -30,8 +29,8 @@ export default function Footer() {
           <div>
             <h3 className="text-2xl font-bold mb-4">Samshodan</h3>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Next-generation AI-powered products for modern business. We create innovative 
-              technology solutions and developer tools that enhance productivity and drive innovation.
+              Innovative AI-powered products and expert IT consulting services. We help businesses transform 
+              through cutting-edge technology solutions, strategic guidance, and modern development practices.
             </p>
           </div>
 
