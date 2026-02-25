@@ -3,7 +3,7 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Samshodan",
-    "description": "We create innovative AI-powered products and developer tools that enhance productivity and drive innovation across industries.",
+    "description": "Innovative AI-powered products and expert IT consulting services for modern businesses.",
     "url": "https://yourusername.github.io/samshodan-website",
     "logo": "https://yourusername.github.io/samshodan-website/logo.png",
     "contactPoint": {
@@ -24,12 +24,11 @@ export default function StructuredData() {
     "numberOfEmployees": "25-50",
     "industry": "Information Technology",
     "services": [
-      "AI Chatbot Development",
-      "API Portal Development",
-      "Application Development",
-      "AI Chatbot Development",
-      "API Portal Solutions",
-      "Developer Tools"
+      "IT Consulting",
+      "Cloud Solutions",
+      "AI Integration",
+      "Custom Software Development",
+      "Enterprise Development"
     ]
   }
 
@@ -50,58 +49,6 @@ export default function StructuredData() {
     }
   }
 
-  const softwareApplicationUltron = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Ultron AI Chatbot",
-    "description": "Intelligent conversational AI powered by RAG agents with configurable backend LLM models including AWS Bedrock, OpenAI, and ChatGPT.",
-    "url": "https://yourusername.github.io/samshodan-website/products/ultron",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web-based",
-    "offers": {
-      "@type": "Offer",
-      "price": "Contact for pricing",
-      "priceCurrency": "USD"
-    },
-    "provider": {
-      "@type": "Organization",
-      "name": "Samshodan"
-    },
-    "featureList": [
-      "RAG (Retrieval-Augmented Generation) agents",
-      "Multi-LLM backend support",
-      "Configurable conversation flows",
-      "Real-time analytics",
-      "Enterprise security"
-    ]
-  }
-
-  const softwareApplicationSpecly = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Specly API Portal",
-    "description": "Comprehensive developer portal for cataloging APIs, managing teams, and organizing development resources in structured folders.",
-    "url": "https://yourusername.github.io/samshodan-website/products/specly",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Web-based",
-    "offers": {
-      "@type": "Offer",
-      "price": "Contact for pricing",
-      "priceCurrency": "USD"
-    },
-    "provider": {
-      "@type": "Organization",
-      "name": "Samshodan"
-    },
-    "featureList": [
-      "API specification management",
-      "Team collaboration tools",
-      "Interactive documentation",
-      "Version control",
-      "Code generation"
-    ]
-  }
-
   return (
     <>
       <script
@@ -111,14 +58,6 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationUltron) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSpecly) }}
       />
     </>
   )
