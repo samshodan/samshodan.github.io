@@ -1,0 +1,60 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# Uncomment below to enable drafts
+# publish_mode: editorial_workflow
+
+media_folder: public/images/uploads # Media files will be stored in the repo under public/images/uploads
+public_folder: /images/uploads # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog" # Used in the UI
+    folder: "content/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "Samshodan Team" }
+      - { label: "Category", name: "category", widget: "select", options: ["Experience Transformation", "Digital Engineering", "Digital Commerce", "Cloud Engineering", "Application Management Services", "AI Solutions"] }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Read Time", name: "readTime", widget: "string", default: "5 min read" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Contact Page"
+        name: "contact"
+        file: "content/pages/contact.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "settings"
+    label: "Settings"
+    files:
+      - label: "Site Settings"
+        name: "site"
+        file: "content/settings/site.yml"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Site Description", name: "description", widget: "text" }
+          - { label: "Site URL", name: "url", widget: "string" }
+          - { label: "Contact Email", name: "email", widget: "string" }
+          - { label: "Social Media", name: "social", widget: "object", fields: [
+              { label: "LinkedIn", name: "linkedin", widget: "string", required: false },
+              { label: "Twitter", name: "twitter", widget: "string", required: false },
+              { label: "GitHub", name: "github", widget: "string", required: false }
+            ]}
