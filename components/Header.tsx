@@ -28,29 +28,13 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <div key={item.name} className="relative group">
-                <a
-                  href={item.href}
-                  className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
-                >
-                  {item.name}
-                </a>
-                {item.submenu && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="py-2">
-                      {item.submenu.map((subItem) => (
-                        <a
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200 whitespace-nowrap"
-                        >
-                          {subItem.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200"
+              >
+                {item.name}
+              </a>
             ))}
             <Link href="/contact" className="btn-primary">
               Get Started
@@ -73,29 +57,14 @@ export default function Header() {
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
               {navigation.map((item) => (
-                <div key={item.name}>
-                  <a
-                    href={item.href}
-                    className="text-gray-700 hover:text-primary-600 font-medium block"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                  {item.submenu && (
-                    <div className="ml-4 mt-2 space-y-2">
-                      {item.submenu.map((subItem) => (
-                        <a
-                          key={subItem.name}
-                          href={subItem.href}
-                          className="text-gray-600 hover:text-primary-600 text-sm block"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {subItem.name}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-700 hover:text-primary-600 font-medium block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
               ))}
               <Link href="/contact" className="btn-primary w-fit">
                 Get Started
